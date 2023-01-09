@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/NikolosHGW/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.2",
     "parcel": "^2.8.2",
     "parcel-transformer-hbs": "^1.0.4"
   }
