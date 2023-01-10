@@ -1,10 +1,10 @@
-import indexFunction from './index.hbs';
+import { LoginPage } from '../pages/LoginPage/index';
 import './index.scss';
 
 const root = document.querySelector('#root');
 
 const loginPage = () => {
-  root.innerHTML = indexFunction();
+  root.innerHTML = LoginPage();
 };
 
 const testPage = () => {
