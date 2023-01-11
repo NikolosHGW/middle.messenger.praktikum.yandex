@@ -7,7 +7,7 @@
   position: relative;
   max-width: 280px;
   width: 100%;
-  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  font-family: var(--font-family);
 }
 
 .label__input {
@@ -26,7 +26,7 @@
 }
 
 .label__input_type_error {
-  border-bottom-color: red;
+  border-bottom-color: var(--color-red);
 }
 
 .label__input-error {
@@ -34,7 +34,7 @@
   top: 32px;
   @include mixins.middle-font;
   font-size: 12px;
-  color: red;
+  color: var(--color-red);
   visibility: hidden;
 }
 
