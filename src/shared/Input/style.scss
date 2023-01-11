@@ -1,3 +1,8 @@
+%input-font {
+  font-weight: 500;
+  line-height: 1;
+}
+
 .label {
   display: flex;
   flex-direction: column;
@@ -11,11 +16,10 @@
   margin: 0;
   padding: 0;
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
-  padding-bottom: 10px;
-  font-weight: 400;
+  border-bottom: 1px solid var(--color-primary);
+  padding-bottom: 7px;
+  @extend %input-font;
   font-size: 14px;
-  line-height: 1.21;
   box-sizing: border-box;
 }
 
@@ -30,9 +34,8 @@
 .label__input-error {
   position: absolute;
   top: 32px;
-  font-weight: 400;
+  @extend %input-font;
   font-size: 12px;
-  line-height: 1.25;
   color: #ff0000;
   visibility: hidden;
 }

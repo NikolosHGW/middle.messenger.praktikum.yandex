@@ -1,11 +1,9 @@
 import { LoginPage } from '../pages/LoginPage/LoginPage';
-import { Input } from '../shared/Input/Input';
 import './index.scss';
 
 const root = document.querySelector('#root');
 
 const loginPage = () => {
-  console.log('qq!', LoginPage());
   root.innerHTML = LoginPage();
 };
 
@@ -16,7 +14,6 @@ const testPage = () => {
 const routes = {
   '/': loginPage,
   '/test': testPage,
-  '/input': () => root.innerHTML = Input(),
 };
 
 const router = () => {
