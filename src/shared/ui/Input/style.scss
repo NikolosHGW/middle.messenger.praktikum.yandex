@@ -1,14 +1,11 @@
-%input-font {
-  font-weight: 500;
-  line-height: 1;
-}
+@use '../mixins.scss';
 
 .label {
   display: flex;
   flex-direction: column;
   padding: 0;
   position: relative;
-  max-width: 358px;
+  max-width: 280px;
   width: 100%;
 }
 
@@ -18,8 +15,8 @@
   border: 0;
   border-bottom: 1px solid var(--color-primary);
   padding-bottom: 7px;
-  @extend %input-font;
-  font-size: 14px;
+  @include mixins.middle-font;
+  font-size: 13px;
   box-sizing: border-box;
 }
 
@@ -28,15 +25,15 @@
 }
 
 .label__input_type_error {
-  border-bottom-color: #FF0000;
+  border-bottom-color: red;
 }
 
 .label__input-error {
   position: absolute;
   top: 32px;
-  @extend %input-font;
+  @include mixins.middle-font;
   font-size: 12px;
-  color: #ff0000;
+  color: red;
   visibility: hidden;
 }
 
