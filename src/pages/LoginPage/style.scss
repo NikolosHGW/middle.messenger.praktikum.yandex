@@ -5,3 +5,15 @@
   justify-content: center;
   align-items: center;
 }
+
+.label {
+  padding-bottom: 32px;
+}
+
+.label:last-of-type {
+  padding-bottom: 169px;
+}
+
+.form__text-button {
+  margin: 14px 0 30px;
+}

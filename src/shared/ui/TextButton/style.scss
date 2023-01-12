@@ -1,0 +1,26 @@
+@use '../mixins.scss';
+
+.text-button {
+  border: 0;
+  color: var(--color-primary);
+  padding: 0;
+  @include mixins.middle-font;
+  font-size: 11px;
+  outline: 0;
+  cursor: pointer;
+  transition: opacity .4s linear;
+  font-family: var(--font-family);
+  background-color: rgba($color: var(--color-primary), $alpha: 1.0);
+}
+
+.text-button:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 520px) {
+  .text-button {
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
