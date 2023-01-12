@@ -5,6 +5,7 @@ const Input = (
   props = {
     inputId: 'name-input',
     placeholder: 'Логин',
+    inputName: 'name'
   }
 ) => ui(props);
 

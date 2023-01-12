@@ -5,10 +5,10 @@ import { Form } from '../../entities/Form';
 import './style.scss';
 import { TextButton } from '../../shared/ui/TextButton';
 
-const inputs = Input({ inputId: 'login-input', placeholder: 'Логин' })
-  + Input({  inputId: 'password-input', placeholder: 'Пароль' });
+const inputs = Input({ inputId: 'login-input', placeholder: 'Логин', inputName: 'login' })
+  + Input({  inputId: 'password-input', placeholder: 'Пароль', inputName: 'password' });
 
-const buttons = Button() + TextButton({
+const buttons = Button({ text: 'Войти' }) + TextButton({
   text: 'Нет аккаунта?',
   buttonType: 'button',
   ariaLabel: 'without account',
