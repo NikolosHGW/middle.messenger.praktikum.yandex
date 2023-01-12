@@ -1,4 +1,4 @@
-.login {
+.auth {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -6,12 +6,12 @@
   align-items: center;
 }
 
-.login .label {
+.auth .label {
   padding-bottom: 32px;
 }
 
-.login .label:last-of-type {
-  padding-bottom: 169px;
+.auth .label:last-of-type {
+  padding-bottom: 62px;
 }
 
 .form__text-button {

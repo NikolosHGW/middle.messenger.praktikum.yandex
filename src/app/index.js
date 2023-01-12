@@ -1,3 +1,4 @@
+import { AuthPage } from '../pages/AuthPage';
 import { LoginPage } from '../pages/LoginPage';
 import './index.scss';
 
@@ -7,13 +8,13 @@ const loginPage = () => {
   root.innerHTML = LoginPage();
 };
 
-const testPage = () => {
-  root.innerHTML = '<div>Hello Test Page!</div>';
+const authPage = () => {
+  root.innerHTML = AuthPage();
 };
 
 const routes = {
   '/': loginPage,
-  '/test': testPage,
+  '/auth': authPage,
 };
 
 const router = () => {

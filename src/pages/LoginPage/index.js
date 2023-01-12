@@ -18,7 +18,7 @@ const buttons = Button({ text: 'Войти' }) + TextButton({
 const form = Form(
   {
     title: 'Вход',
-    formName: 'authForm',
+    formName: 'login',
     Inputs: inputs,
     Buttons: buttons,
   }

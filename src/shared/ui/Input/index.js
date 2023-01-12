@@ -2,11 +2,17 @@ import ui from './ui.hbs';
 import './style.scss';
 
 const Input = (
-  props = {
+  {
+    inputId = 'name-input',
+    placeholder = 'Логин',
+    inputName = 'name',
+    inputType = 'text',
+  } = {
     inputId: 'name-input',
     placeholder: 'Логин',
-    inputName: 'name'
+    inputName: 'name',
+    inputType: 'text',
   }
-) => ui(props);
+) => ui({ inputId, placeholder, inputName, inputType });
 
 export { Input };
