@@ -10,7 +10,7 @@ const TextButton = (
     isRed: false
   }
 ) => {
-  const className = isRed ? 'text-button_color_red' : 'text-button'
+  const className = isRed ? 'text-button text-button_color_red' : 'text-button'
 
   return ui({ text, className });
 };
