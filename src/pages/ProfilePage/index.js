@@ -1,7 +1,7 @@
 import ui from './ui.hbs';
 import './style.scss';
-import { EditInput } from '../../shared/ui/EditInput';
+import { TextButton } from '../../shared/ui/TextButton';
 
-const ProfilePage = (props) => ui({ Input: EditInput() });
+const ProfilePage = (props) => ui({ Button: TextButton() });
 
 export { ProfilePage };

@@ -1,13 +1,18 @@
-import ui from '../Button/ui.hbs';
+import ui from './ui.hbs';
 import './style.scss';
 
 const TextButton = (
-  props = {
-    text: 'Авторизоваться',
-    buttonType: 'button',
-    ariaLabel: 'login',
-    classButton: 'text-button',
+  {
+    text = 'Нет аккаунта?',
+    isRed = false,
+  } = {
+    text: 'Нет аккаунта?',
+    isRed: false
   }
-) => ui(props);
+) => {
+  const className = isRed ? 'text-button_color_red' : 'text-button'
+
+  return ui({ text, className });
+};
 
 export { TextButton };
