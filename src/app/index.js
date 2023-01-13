@@ -1,5 +1,6 @@
 import { AuthPage } from '../pages/AuthPage';
 import { LoginPage } from '../pages/LoginPage';
+import { MessagesPage } from '../pages/MessagesPage';
 import './index.scss';
 
 const root = document.querySelector('#root');
@@ -12,9 +13,14 @@ const authPage = () => {
   root.innerHTML = AuthPage();
 };
 
+const messagesPage = () => {
+  root.innerHTML = MessagesPage();
+};
+
 const routes = {
   '/': loginPage,
   '/auth': authPage,
+  '/messages': messagesPage,
 };
 
 const router = () => {
