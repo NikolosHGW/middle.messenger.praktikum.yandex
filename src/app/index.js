@@ -1,4 +1,5 @@
 import { AuthPage } from '../pages/AuthPage';
+import { EditProfilePage } from '../pages/EditProfilePage';
 import { LoginPage } from '../pages/LoginPage';
 import { MessagesPage } from '../pages/MessagesPage';
 import { ProfilePage } from '../pages/ProfilePage';
@@ -22,11 +23,16 @@ const profilePage = () => {
   root.innerHTML = ProfilePage();
 };
 
+const editProfilePage = () => {
+  root.innerHTML = EditProfilePage();
+};
+
 const routes = {
   '/': loginPage,
   '/auth': authPage,
   '/messages': messagesPage,
   '/profile': profilePage,
+  '/edit': editProfilePage,
 };
 
 const router = () => {
