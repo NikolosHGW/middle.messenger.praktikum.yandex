@@ -3,6 +3,7 @@ import { EditPasswordPage } from '../pages/EditPasswordPage';
 import { EditProfilePage } from '../pages/EditProfilePage';
 import { LoginPage } from '../pages/LoginPage';
 import { MessagesPage } from '../pages/MessagesPage';
+import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
 import './index.scss';
 
@@ -32,6 +33,14 @@ const editPasswordPage = () => {
   root.innerHTML = EditPasswordPage();
 };
 
+const notFoundPage = () => {
+  root.innerHTML = ErrorPage({ title: '404', subtitle: 'Не туда попали' });
+};
+
+const serverErrorPage = () => {
+  root.innerHTML = ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' });
+};
+
 const routes = {
   '/': loginPage,
   '/auth': authPage,
@@ -39,6 +48,8 @@ const routes = {
   '/profile': profilePage,
   '/edit': editProfilePage,
   '/password': editPasswordPage,
+  '/not-found': notFoundPage,
+  '/error': serverErrorPage,
 };
 
 const router = () => {
