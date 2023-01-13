@@ -12,9 +12,9 @@ const inputs = EditInput({ inputId: 'email-input', placeholder: 'Почта', in
   + EditInput({ inputId: 'display-name-input', placeholder: 'Имя в чате', inputName: 'display_name', inputType: 'phone', spanText: 'Имя в чате' })
   + EditInput({ inputId: 'phone-input', placeholder: 'Телефон', inputName: 'phone', inputType: 'phone', spanText: 'Телефон' });
 
-const buttons = TextButton({ text: 'Изменить Данные' })
-  + TextButton({ text: 'Изменить пароль' })
-  + TextButton({ text: 'Выйти', isRed: true });
+const buttons = TextButton({ text: 'Изменить Данные', href: 'edit' })
+  + TextButton({ text: 'Изменить пароль', href: 'password' })
+  + TextButton({ text: 'Выйти', isRed: true, href: 'messages' });
 
 const ProfilePage = () => ui({
   ProfileContainer: ProfileContainer({

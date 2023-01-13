@@ -2,8 +2,8 @@ import ui from './ui.hbs';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { Form } from '../../entities/Form';
-import './style.scss';
 import { TextButton } from '../../shared/ui/TextButton';
+import './style.scss';
 
 const inputs = Input({ inputId: 'login-input', placeholder: 'Логин', inputName: 'login' })
   + Input({  inputId: 'password-input', placeholder: 'Пароль', inputName: 'password' });
@@ -13,6 +13,7 @@ const buttons = Button({ text: 'Войти' }) + TextButton({
   buttonType: 'button',
   ariaLabel: 'without account',
   classButton: 'text-button form__text-button',
+  href: 'auth',
 });
 
 const form = Form(
