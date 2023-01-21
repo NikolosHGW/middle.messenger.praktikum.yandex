@@ -5,12 +5,24 @@ import { EditInput } from '../../shared/ui/EditInput';
 import { TextButton } from '../../shared/ui/TextButton';
 import './style.scss';
 
-const inputs = EditInput({ inputId: 'email-input', placeholder: 'Почта', inputName: 'email', inputType: 'email', spanText: 'Почта' })
-  + EditInput({ inputId: 'login-input', placeholder: 'Логин', inputName: 'login', spanText: 'Логин' })
-  + EditInput({ inputId: 'name-input', placeholder: 'Имя', inputName: 'first_name', spanText: 'Имя' })
-  + EditInput({ inputId: 'second-name-input', placeholder: 'Фамилия', inputName: 'second_name', spanText: 'Фамилия' })
-  + EditInput({ inputId: 'display-name-input', placeholder: 'Имя в чате', inputName: 'display_name', inputType: 'phone', spanText: 'Имя в чате' })
-  + EditInput({ inputId: 'phone-input', placeholder: 'Телефон', inputName: 'phone', inputType: 'phone', spanText: 'Телефон' });
+const inputs = EditInput({
+  inputId: 'email-input', placeholder: 'Почта', inputName: 'email', inputType: 'email', spanText: 'Почта',
+})
+  + EditInput({
+    inputId: 'login-input', placeholder: 'Логин', inputName: 'login', spanText: 'Логин',
+  })
+  + EditInput({
+    inputId: 'name-input', placeholder: 'Имя', inputName: 'first_name', spanText: 'Имя',
+  })
+  + EditInput({
+    inputId: 'second-name-input', placeholder: 'Фамилия', inputName: 'second_name', spanText: 'Фамилия',
+  })
+  + EditInput({
+    inputId: 'display-name-input', placeholder: 'Имя в чате', inputName: 'display_name', inputType: 'phone', spanText: 'Имя в чате',
+  })
+  + EditInput({
+    inputId: 'phone-input', placeholder: 'Телефон', inputName: 'phone', inputType: 'phone', spanText: 'Телефон',
+  });
 
 const buttons = TextButton({ text: 'Изменить Данные', href: 'edit' })
   + TextButton({ text: 'Изменить пароль', href: 'password' })
@@ -23,7 +35,7 @@ const ProfilePage = () => ui({
     formName: 'profile',
     Inputs: inputs,
     Buttons: buttons,
-  })
+  }),
 });
 
 export { ProfilePage };

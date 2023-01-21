@@ -10,35 +10,35 @@ import './index.scss';
 const root = document.querySelector('#root');
 
 const loginPage = () => {
-  root.innerHTML = LoginPage();
+  root!.innerHTML = LoginPage();
 };
 
 const authPage = () => {
-  root.innerHTML = AuthPage();
+  root!.innerHTML = AuthPage();
 };
 
 const messagesPage = () => {
-  root.innerHTML = MessagesPage();
+  root!.innerHTML = MessagesPage();
 };
 
 const profilePage = () => {
-  root.innerHTML = ProfilePage();
+  root!.innerHTML = ProfilePage();
 };
 
 const editProfilePage = () => {
-  root.innerHTML = EditProfilePage();
+  root!.innerHTML = EditProfilePage();
 };
 
 const editPasswordPage = () => {
-  root.innerHTML = EditPasswordPage();
+  root!.innerHTML = EditPasswordPage();
 };
 
 const notFoundPage = () => {
-  root.innerHTML = ErrorPage({ title: '404', subtitle: 'Не туда попали' });
+  root!.innerHTML = ErrorPage({ title: '404', subtitle: 'Не туда попали' });
 };
 
 const serverErrorPage = () => {
-  root.innerHTML = ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' });
+  root!.innerHTML = ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' });
 };
 
 const routes = {

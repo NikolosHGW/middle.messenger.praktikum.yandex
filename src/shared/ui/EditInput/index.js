@@ -14,7 +14,9 @@ const EditInput = (
     inputName: 'name',
     inputType: 'text',
     spanText: 'Логин',
-  }
-) => ui({ inputId, placeholder, inputName, inputType, spanText });
+  },
+) => ui({
+  inputId, placeholder, inputName, inputType, spanText,
+});
 
 export { EditInput };

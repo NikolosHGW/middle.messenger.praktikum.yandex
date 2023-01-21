@@ -1,5 +1,5 @@
 import ui from './ui.hbs';
-import { Avatar } from '../../shared/ui/Avatar'
+import { Avatar } from '../../shared/ui/Avatar';
 import { Button } from '../../shared/ui/Button';
 import { Input } from '../../shared/ui/Input';
 import './style.scss';
@@ -11,7 +11,7 @@ const ProfileContainer = (
     formName: 'profile',
     Inputs: Input(),
     Buttons: Button(),
-  }
+  },
 ) => ui(props);
 
 export { ProfileContainer };

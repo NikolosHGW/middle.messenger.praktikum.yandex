@@ -8,8 +8,8 @@ const Form = (
     title: 'Вход',
     formName: 'authForm',
     Inputs: Input(),
-    Buttons: Button()
-  }
+    Buttons: Button(),
+  },
 ) => ui(props);
 
 export { Form };

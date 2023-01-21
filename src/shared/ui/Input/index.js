@@ -12,7 +12,9 @@ const Input = (
     placeholder: 'Логин',
     inputName: 'name',
     inputType: 'text',
-  }
-) => ui({ inputId, placeholder, inputName, inputType });
+  },
+) => ui({
+  inputId, placeholder, inputName, inputType,
+});
 
 export { Input };

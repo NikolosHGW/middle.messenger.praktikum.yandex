@@ -12,7 +12,9 @@ const Button = (
     buttonType: 'button',
     ariaLabel: 'login',
     classButton: 'button',
-  }
-) => ui({ text, buttonType, ariaLabel, classButton });
+  },
+) => ui({
+  text, buttonType, ariaLabel, classButton,
+});
 
 export { Button };

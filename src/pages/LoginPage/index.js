@@ -6,7 +6,7 @@ import { TextButton } from '../../shared/ui/TextButton';
 import './style.scss';
 
 const inputs = Input({ inputId: 'login-input', placeholder: 'Логин', inputName: 'login' })
-  + Input({  inputId: 'password-input', placeholder: 'Пароль', inputName: 'password' });
+  + Input({ inputId: 'password-input', placeholder: 'Пароль', inputName: 'password' });
 
 const buttons = Button({ text: 'Войти' }) + TextButton({
   text: 'Нет аккаунта?',
@@ -22,7 +22,7 @@ const form = Form(
     formName: 'login',
     Inputs: inputs,
     Buttons: buttons,
-  }
+  },
 );
 
 const LoginPage = () => ui({ Form: form });
