@@ -1,0 +1,43 @@
+@use '../mixins.scss';
+
+.label {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: relative;
+  max-width: 280px;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.label__input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-primary);
+  padding-bottom: 7px;
+  @include mixins.middle-font;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.label__input:focus {
+  outline: 0;
+}
+
+.label__input_type_error {
+  border-bottom-color: var(--color-red);
+}
+
+.label__input-error {
+  position: absolute;
+  top: 32px;
+  @include mixins.middle-font;
+  font-size: 12px;
+  color: var(--color-red);
+  visibility: hidden;
+}
+
+.label__input-error_active {
+  visibility: visible;
+}

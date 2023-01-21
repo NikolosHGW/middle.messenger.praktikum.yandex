@@ -1,0 +1,19 @@
+.auth {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth .label {
+  padding-bottom: 32px;
+}
+
+.auth .label:last-of-type {
+  padding-bottom: 62px;
+}
+
+.auth .form__text-button {
+  margin: 14px 0 30px;
+}

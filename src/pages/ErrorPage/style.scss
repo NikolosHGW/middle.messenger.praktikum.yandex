@@ -1,0 +1,20 @@
+.not-found {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-family);
+}
+
+.not-found__heading {
+  margin: 0 0 20px;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.not-found__subtitle {
+  margin: 0 0 69px;
+}
