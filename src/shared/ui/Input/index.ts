@@ -1,7 +1,7 @@
 import ui from './ui.hbs';
 import './style.scss';
 
-const Input = (
+const InputTemplier = (
   {
     inputId = 'name-input',
     placeholder = 'Логин',
@@ -17,4 +17,4 @@ const Input = (
   inputId, placeholder, inputName, inputType,
 });
 
-export { Input };
+export { InputTemplier };

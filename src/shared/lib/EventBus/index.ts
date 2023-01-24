@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import { FuncVoid } from '../../utils/types/types';
 
 class EventBus {

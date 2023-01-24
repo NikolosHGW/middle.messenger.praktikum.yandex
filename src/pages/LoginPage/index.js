@@ -1,12 +1,13 @@
 import ui from './ui.hbs';
-import { Input } from '../../shared/ui/Input';
+import { InputTemplier } from '../../shared/ui/Input';
+import { InputTest } from '../../shared/ui/Input/Input';
 import { Button } from '../../shared/ui/Button';
 import { Form } from '../../entities/Form';
 import { TextButton } from '../../shared/ui/TextButton';
 import './style.scss';
 
-const inputs = Input({ inputId: 'login-input', placeholder: 'Логин', inputName: 'login' })
-  + Input({ inputId: 'password-input', placeholder: 'Пароль', inputName: 'password' });
+const inputs = InputTest.customRender()
+  + InputTemplier({ inputId: 'password-input', placeholder: 'Пароль', inputName: 'password' });
 
 const buttons = Button({ text: 'Войти' }) + TextButton({
   text: 'Нет аккаунта?',

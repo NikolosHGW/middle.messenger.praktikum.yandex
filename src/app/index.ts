@@ -6,11 +6,20 @@ import { MessagesPage } from '../pages/MessagesPage';
 import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
 import './index.scss';
+import { render } from '../shared/utils/render';
+import { InputTest } from '../shared/ui/Input/Input';
 
 const root = document.querySelector('#root');
 
 const loginPage = () => {
-  root!.innerHTML = LoginPage();
+  render('#root', InputTest);
+  console.log('Ты кто!?');
+  setTimeout(() => {
+    console.log('22QWeqwe!');
+    InputTest.setProps({
+      placeholder: 'Аааа прикол!!!',
+    });
+  }, 3000);
 };
 
 const authPage = () => {
