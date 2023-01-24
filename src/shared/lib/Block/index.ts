@@ -1,5 +1,6 @@
 import { v4 as makeUUID } from 'uuid';
 import { EventBus } from '../EventBus';
+import { BlockProps } from './types';
 
 class Block {
   static EVENTS = {
@@ -17,11 +18,11 @@ class Block {
 
   private id: string;
 
-  props: Record<string, string>;
+  props: BlockProps<Block>;
 
   children: Record<string, Block>;
 
-  constructor(tagName = 'div', props = {}, eventBus: EventBus = EventBus.getInstance()) {
+  constructor(tagName = 'div', props: BlockProps<Block> = {}, eventBus: EventBus = new EventBus()) {
     const { children, props: propsWithoutChildren } = Block.getChildren(props);
     this.meta = {
       tagName,
@@ -57,7 +58,7 @@ class Block {
     return { children, props };
   }
 
-  compile(templator: (props: {}) => string, props: Record<string, string>) {
+  compile(templator: (props: {}) => string, props: BlockProps<Block>) {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]: [key: string, child: Block]) => {
@@ -138,8 +139,8 @@ class Block {
   private render() {
     const block = this.customRender();
     this.htmlElement.innerHTML = '';
-
     this.htmlElement.appendChild(block);
+    this.setAttributes();
   }
 
   // Может переопределять пользователь, необязательно трогать
@@ -151,7 +152,7 @@ class Block {
     return this.htmlElement;
   }
 
-  makePropsProxy(props: {}): {} {
+  private makePropsProxy(props: {}): {} {
     const { eventBus } = this;
 
     return new Proxy(props, {
@@ -164,6 +165,16 @@ class Block {
         throw new Error('нет доступа');
       },
     });
+  }
+
+  private setAttributes() {
+    const { attributes } = this.props;
+
+    if (attributes) {
+      Object.entries(attributes).forEach(([key, value]) => {
+        this.htmlElement.setAttribute(key, value);
+      });
+    }
   }
 
   createDocumentElement(tagName: string) {

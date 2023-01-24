@@ -1,20 +1,13 @@
-import ui from './ui.hbs';
 import './style.scss';
+import { InputComponent } from './InputComponent';
 
-const InputTemplier = (
-  {
-    inputId = 'name-input',
-    placeholder = 'Логин',
-    inputName = 'name',
-    inputType = 'text',
-  } = {
-    inputId: 'name-input',
-    placeholder: 'Логин',
-    inputName: 'name',
-    inputType: 'text',
-  },
-) => ui({
+const Input = ({
+  inputId = 'name-input',
+  placeholder = 'Логин',
+  inputName = 'name',
+  inputType = 'text',
+}) => new InputComponent({
   inputId, placeholder, inputName, inputType,
 });
 
-export { InputTemplier };
+export { Input };
