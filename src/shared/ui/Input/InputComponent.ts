@@ -1,6 +1,9 @@
 import { Block } from '../../lib/Block';
 import { BlockProps } from '../../lib/Block/types';
-import { InputTemplate } from './model';
+import { InputProps } from './types';
+import ui from './ui.hbs';
+
+const inputTemplate = (props: InputProps) => ui(props);
 
 class InputComponent extends Block {
   constructor(props: BlockProps<Block>) {
@@ -9,7 +12,7 @@ class InputComponent extends Block {
   }
 
   customRender() {
-    return this.compile(InputTemplate, this.props);
+    return this.compile(inputTemplate, this.props);
   }
 }
 

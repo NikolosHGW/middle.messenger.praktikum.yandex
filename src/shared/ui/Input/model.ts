@@ -1,19 +1,12 @@
-import ui from './ui.hbs';
+import { InputComponent } from './InputComponent';
 
-const InputTemplate = (
-  {
-    inputId = 'name-input',
-    placeholder = 'Логин',
-    inputName = 'name',
-    inputType = 'text',
-  } = {
-    inputId: 'name-input',
-    placeholder: 'Логин',
-    inputName: 'name',
-    inputType: 'text',
-  },
-) => ui({
+const Input = ({
+  inputId = 'name-input',
+  placeholder = 'Логин',
+  inputName = 'name',
+  inputType = 'text',
+}) => new InputComponent({
   inputId, placeholder, inputName, inputType,
 });
 
-export { InputTemplate };
+export { Input };
