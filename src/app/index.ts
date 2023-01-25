@@ -7,12 +7,11 @@ import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
 import './index.scss';
 import { render } from '../shared/utils/render';
-import { Input } from '../shared/ui/Input';
 
 const root = document.querySelector('#root');
 
 const loginPage = () => {
-  render('#root', Input({ inputId: 'login-input', placeholder: 'ЛогинОПА!', inputName: 'login' }));
+  render('#root', LoginPage());
 };
 
 const authPage = () => {
