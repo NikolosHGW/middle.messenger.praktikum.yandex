@@ -5,8 +5,9 @@ const Input = ({
   placeholder = 'Логин',
   inputName = 'name',
   inputType = 'text',
-}) => new InputComponent({
-  inputId, placeholder, inputName, inputType,
+  className = 'label',
+} = {}) => new InputComponent({
+  inputId, placeholder, inputName, inputType, attributes: { class: className },
 });
 
 export { Input };
