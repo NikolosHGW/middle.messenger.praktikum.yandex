@@ -1,12 +1,20 @@
-import { Form } from '../../entities/Form/model';
+import { Form } from '../../entities/Form';
 import { LoginPageComponent } from './LoginPageComponent';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
 
-const loginInput = () => Input({ inputId: 'login-input', placeholder: 'Логин', inputName: 'login' });
+const loginInput = () => Input({
+  inputId: 'login-input',
+  placeholder: 'Логин',
+  inputName: 'login',
+});
 
-const passwordInput = () => Input({ inputId: 'password-input', placeholder: 'Пароль', inputName: 'password' });
+const passwordInput = () => Input({
+  inputId: 'password-input',
+  placeholder: 'Пароль',
+  inputName: 'password',
+});
 
 const buttonLogin = () => Button({ text: 'Войти' });
 

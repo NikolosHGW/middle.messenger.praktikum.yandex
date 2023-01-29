@@ -15,7 +15,7 @@ const loginPage = () => {
 };
 
 const authPage = () => {
-  root!.innerHTML = AuthPage();
+  render('#root', AuthPage());
 };
 
 const messagesPage = () => {
