@@ -1,6 +1,6 @@
 import { v4 as makeUUID } from 'uuid';
 import { EventBus } from '../EventBus';
-import { BlockProps } from './types';
+import { BlockProps, ExtendRecord, Options } from './types';
 
 class Block {
   static EVENTS = {
@@ -22,12 +22,23 @@ class Block {
 
   children: Record<string, Block>;
 
-  constructor(tagName = 'div', props: BlockProps<Block> = {}, eventBus: EventBus = new EventBus()) {
+  attributes?: Record<string, string>;
+
+  childrenWithList?: ExtendRecord<Array<Block>>;
+
+  constructor(
+    tagName = 'div',
+    props: BlockProps<Block> = {},
+    options: Options<Block> = {},
+    eventBus: EventBus = new EventBus(),
+  ) {
     const { children, props: propsWithoutChildren } = Block.getChildren(props);
     this.meta = {
       tagName,
       propsWithoutChildren,
     };
+
+    this.saveOptions(options);
 
     this.id = makeUUID();
 
@@ -39,6 +50,16 @@ class Block {
 
     this.registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
+  }
+
+  private saveOptions(options: Options<Block>) {
+    const { attributes, childrenWithList } = options;
+    if (attributes) {
+      this.attributes = { ...attributes };
+    }
+    if (childrenWithList) {
+      this.childrenWithList = { ...childrenWithList };
+    }
   }
 
   private static getChildren(propsAndChildren: {}) {
@@ -60,16 +81,30 @@ class Block {
 
   compile(templator: (props: {}) => string, props: BlockProps<Block>) {
     const propsAndStubs = { ...props };
+    const childrenBlocks: Block[] = [];
 
     Object.entries(this.children).forEach(([key, child]: [key: string, child: Block]) => {
       propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
+      childrenBlocks.push(child);
     });
+
+    if (this.childrenWithList) {
+      Object.entries(this.childrenWithList).forEach((
+        [key, childs]: [key: string, childs: Block[]],
+      ) => {
+        const resultString = childs.reduce((prev, child) => {
+          childrenBlocks.push(child);
+          return `${prev}<div data-id="${child.id}"></div>`;
+        }, '');
+        propsAndStubs[key] = resultString;
+      });
+    }
 
     const fragment = (this.createDocumentElement('template') as HTMLTemplateElement);
 
     fragment.innerHTML = templator(propsAndStubs);
 
-    Object.values(this.children).forEach((child) => {
+    childrenBlocks.forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
 
       stub!.replaceWith(child.getContent());
@@ -168,10 +203,8 @@ class Block {
   }
 
   private setAttributes() {
-    const { attributes } = this.props;
-
-    if (attributes) {
-      Object.entries(attributes).forEach(([key, value]) => {
+    if (this.attributes) {
+      Object.entries(this.attributes).forEach(([key, value]) => {
         this.htmlElement.setAttribute(key, value);
       });
     }

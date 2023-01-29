@@ -5,9 +5,8 @@ import { LoginPagePropsType, TemplateType } from './types';
 const loginPageTemplate: TemplateType = ({ Form }) => ui({ Form });
 
 class LoginPageComponent extends Block {
-  constructor(props: LoginPagePropsType) {
-    props.attributes = { class: 'login' };
-    super('main', props);
+  constructor({ Form, attributes = { class: 'login' } }: LoginPagePropsType) {
+    super('main', { Form }, { attributes });
   }
 
   customRender() {
