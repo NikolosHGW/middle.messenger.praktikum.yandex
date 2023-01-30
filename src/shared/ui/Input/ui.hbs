@@ -1,6 +1,9 @@
+{{#if withEditSpan}}
+  <span class="edit-label__span">{{{spanText}}}</span>
+{{/if}}
 <input
   id="{{{inputId}}}"
-  class="label__input"
+  class="{{{inputClassName}}}"
   type="{{{inputType}}}"
   name="{{{inputName}}}"
   required
@@ -8,4 +11,4 @@
   maxlength="40"
   placeholder="{{{placeholder}}}"
 >
-<span class="label__input-error"></span>
+<span class="{{{errorSpanClassName}}}"></span>

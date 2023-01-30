@@ -6,8 +6,20 @@ const Input = ({
   inputName = 'name',
   inputType = 'text',
   className = 'label',
+  inputClassName = 'label__input',
+  errorSpanClassName = 'label__input-error',
+  withEditSpan = false,
+  spanText = '',
 } = {}) => new InputComponent({
-  inputId, placeholder, inputName, inputType, attributes: { class: className },
+  inputId,
+  placeholder,
+  inputName,
+  inputType,
+  inputClassName,
+  errorSpanClassName,
+  withEditSpan,
+  spanText,
+  attributes: { class: className },
 });
 
 export { Input };

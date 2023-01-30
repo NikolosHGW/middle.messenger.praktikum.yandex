@@ -7,5 +7,9 @@ export type InputProps = {
   placeholder: string,
   inputName: string,
   inputType: string,
-  attributes: InputAttributes
+  inputClassName: string,
+  errorSpanClassName: string,
+  withEditSpan: boolean,
+  spanText: string,
+  attributes: InputAttributes,
 };

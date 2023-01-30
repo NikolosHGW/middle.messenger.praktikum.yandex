@@ -10,8 +10,24 @@ class InputComponent extends Block {
     inputId,
     placeholder,
     inputName,
+    inputClassName,
+    errorSpanClassName,
+    withEditSpan,
+    spanText,
   }: InputProps) {
-    super('label', { inputId, placeholder, inputName }, { attributes });
+    super(
+      'label',
+      {
+        inputId,
+        placeholder,
+        inputName,
+        inputClassName,
+        errorSpanClassName,
+        withEditSpan,
+        spanText,
+      },
+      { attributes },
+    );
   }
 
   customRender() {
