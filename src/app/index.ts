@@ -35,11 +35,11 @@ const editPasswordPage = () => {
 };
 
 const notFoundPage = () => {
-  root!.innerHTML = ErrorPage({ title: '404', subtitle: 'Не туда попали' });
+  render('#root', ErrorPage({ title: '404', subtitle: 'Не туда попали' }));
 };
 
 const serverErrorPage = () => {
-  root!.innerHTML = ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' });
+  render('#root', ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' }));
 };
 
 const routes = {

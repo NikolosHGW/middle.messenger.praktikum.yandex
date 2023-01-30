@@ -2,7 +2,7 @@ import { Block } from '../../shared/lib/Block';
 import ui from './ui.hbs';
 import { EditPasswordPagePropsType, TemplateType } from './types';
 
-const EditPasswordPageTemplate: TemplateType = ({ ProfileContainer }) => ui({ ProfileContainer });
+const editPasswordPageTemplate: TemplateType = ({ ProfileContainer }) => ui({ ProfileContainer });
 
 class EditPasswordPageComponent extends Block {
   constructor({ ProfileContainer, attributes = { class: 'profile' } }: EditPasswordPagePropsType) {
@@ -10,7 +10,7 @@ class EditPasswordPageComponent extends Block {
   }
 
   customRender() {
-    return this.compile(EditPasswordPageTemplate, this.props);
+    return this.compile(editPasswordPageTemplate, this.props);
   }
 }
 
