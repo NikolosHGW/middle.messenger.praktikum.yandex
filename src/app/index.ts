@@ -27,7 +27,7 @@ const profilePage = () => {
 };
 
 const editProfilePage = () => {
-  root!.innerHTML = EditProfilePage();
+  render('#root', EditProfilePage());
 };
 
 const editPasswordPage = () => {
