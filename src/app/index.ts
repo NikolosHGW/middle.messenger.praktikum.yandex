@@ -23,7 +23,7 @@ const messagesPage = () => {
 };
 
 const profilePage = () => {
-  root!.innerHTML = ProfilePage();
+  render('#root', ProfilePage());
 };
 
 const editProfilePage = () => {

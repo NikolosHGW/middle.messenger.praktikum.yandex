@@ -1,26 +1,26 @@
 import ui from './ui.hbs';
 import { Avatar } from '../../shared/ui/Avatar';
 import { ProfileContainer } from '../../entities/ProfileContainer';
-import { EditInput } from '../../shared/ui/EditInput';
+import { Input } from '../../shared/ui/Input';
 import './style.scss';
 import { Button } from '../../shared/ui/Button';
 
-const inputs = EditInput({
+const inputs = Input({
   inputId: 'email-input', placeholder: 'Почта', inputName: 'email', inputType: 'email', spanText: 'Почта',
 })
-  + EditInput({
+  + Input({
     inputId: 'login-input', placeholder: 'Логин', inputName: 'login', spanText: 'Логин',
   })
-  + EditInput({
+  + Input({
     inputId: 'name-input', placeholder: 'Имя', inputName: 'first_name', spanText: 'Имя',
   })
-  + EditInput({
+  + Input({
     inputId: 'second-name-input', placeholder: 'Фамилия', inputName: 'second_name', spanText: 'Фамилия',
   })
-  + EditInput({
+  + Input({
     inputId: 'display-name-input', placeholder: 'Имя в чате', inputName: 'display_name', inputType: 'phone', spanText: 'Имя в чате',
   })
-  + EditInput({
+  + Input({
     inputId: 'phone-input', placeholder: 'Телефон', inputName: 'phone', inputType: 'phone', spanText: 'Телефон',
   });
 
