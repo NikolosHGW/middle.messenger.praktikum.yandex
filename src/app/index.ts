@@ -31,7 +31,7 @@ const editProfilePage = () => {
 };
 
 const editPasswordPage = () => {
-  root!.innerHTML = EditPasswordPage();
+  render('#root', EditPasswordPage());
 };
 
 const notFoundPage = () => {
