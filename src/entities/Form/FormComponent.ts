@@ -8,11 +8,24 @@ class FormComponent extends Block {
   constructor({
     title,
     formName,
+    headingClassName,
+    formClassName,
+    fieldsetClassName,
     inputs,
     buttons,
     attributes,
   }: FormProps) {
-    super('div', { title, formName }, { attributes, childrenWithList: { inputs, buttons } });
+    super(
+      'div',
+      {
+        title,
+        formName,
+        headingClassName,
+        formClassName,
+        fieldsetClassName,
+      },
+      { attributes, childrenWithList: { inputs, buttons } },
+    );
   }
 
   customRender() {
