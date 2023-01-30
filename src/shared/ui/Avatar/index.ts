@@ -1,4 +1,4 @@
-import Avatar from './ui.hbs';
 import './style.scss';
+import { Avatar } from './model';
 
 export { Avatar };
