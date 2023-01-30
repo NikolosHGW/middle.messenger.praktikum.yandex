@@ -11,6 +11,8 @@ const emailInput = () => Input({
   inputType: 'email',
   spanText: 'Почта',
   withEditSpan: true,
+  className: 'edit-label',
+  inputClassName: 'edit-label__input',
 });
 
 const loginInput = () => Input({
@@ -19,6 +21,8 @@ const loginInput = () => Input({
   inputName: 'login',
   spanText: 'Логин',
   withEditSpan: true,
+  className: 'edit-label',
+  inputClassName: 'edit-label__input',
 });
 
 const nameInput = () => Input({
@@ -27,6 +31,8 @@ const nameInput = () => Input({
   inputName: 'first_name',
   spanText: 'Имя',
   withEditSpan: true,
+  className: 'edit-label',
+  inputClassName: 'edit-label__input',
 });
 
 const secondNameInput = () => Input({
@@ -35,6 +41,8 @@ const secondNameInput = () => Input({
   inputName: 'second_name',
   spanText: 'Фамилия',
   withEditSpan: true,
+  className: 'edit-label',
+  inputClassName: 'edit-label__input',
 });
 
 const displayNameInput = () => Input({
@@ -44,6 +52,8 @@ const displayNameInput = () => Input({
   inputType: 'phone',
   spanText: 'Имя в чате',
   withEditSpan: true,
+  className: 'edit-label',
+  inputClassName: 'edit-label__input',
 });
 
 const phoneInput = () => Input({
@@ -53,13 +63,9 @@ const phoneInput = () => Input({
   inputType: 'phone',
   spanText: 'Телефон',
   withEditSpan: true,
+  className: 'edit-label',
+  inputClassName: 'edit-label__input',
 });
-
-// const secondPassword = () => Input({
-//   inputId: 'second-password-input',
-//   placeholder: 'Пароль (ещё раз)',
-//   inputName: 'password',
-// });
 
 const editTextButton = () => TextButton({
   text: 'Изменить Данные', href: 'edit',
@@ -70,12 +76,10 @@ const editPasswordTextButton = () => TextButton({
 });
 
 const exitPasswordTextButton = () => TextButton({
-  text: 'Выйти', href: 'messages',
+  text: 'Выйти',
+  href: 'messages',
+  className: 'text-button form__text-button text-button_color_red',
 });
-
-// const buttons = TextButton({ text: 'Изменить Данные', href: 'edit' })
-//   + TextButton({ text: 'Изменить пароль', href: 'password' })
-//   + TextButton({ text: 'Выйти', isRed: true, href: 'messages' });
 
 const inputs = [
   emailInput(),

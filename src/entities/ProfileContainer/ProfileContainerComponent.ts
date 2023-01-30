@@ -6,25 +6,19 @@ const profileContainerTemplate = (props: ProfileContainerProps) => ui(props);
 
 class ProfileContainerComponent extends Block {
   constructor({
+    avatar,
     title,
     formName,
-    headingClassNameForForm,
-    formClassNameForForm,
-    fieldsetClassNameForForm,
     inputs,
     buttons,
-    form,
     attributes,
   }: ProfileContainerProps) {
     super(
       'div',
       {
+        avatar,
         title,
         formName,
-        headingClassNameForForm,
-        formClassNameForForm,
-        fieldsetClassNameForForm,
-        form,
       },
       { attributes, childrenWithList: { inputs, buttons } },
     );
