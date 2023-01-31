@@ -5,7 +5,7 @@ export type TemplateProps = {
   lastMessage: string,
   avatar: AvatarComponent,
   time: string,
-  counter: AvatarComponent,
+  counter: string,
 }
 
 export type ChatProps = TemplateProps & {

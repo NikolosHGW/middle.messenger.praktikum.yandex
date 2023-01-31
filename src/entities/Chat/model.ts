@@ -7,7 +7,7 @@ const Chat = ({
   lastMessage = 'Друзья, у меня для вас особенный...',
   className = 'chat',
   time = '1 Мая 2023',
-  counter = Avatar({ className: 'avatar chat__counterDELETE' }),
+  counter = '3',
 } = {}) => new ChatComponent({
   avatar,
   title,

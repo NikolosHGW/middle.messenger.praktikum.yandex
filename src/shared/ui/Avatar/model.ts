@@ -4,7 +4,7 @@ const Avatar = ({
   text = '',
   type = 'submit',
   name = 'avatar',
-  className = 'avatar',
+  className = 'avatar avatar_big-size',
   ariaLabel = 'аватар',
 } = {}) => new AvatarComponent({
   text,

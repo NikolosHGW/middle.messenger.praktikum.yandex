@@ -49,8 +49,16 @@
   color: var(--color-secondary-gray);
 }
 
-.chat__counterDELETE {
+.chat__counter {
   width: 20px;
   height: 20px;
-  background-color: blue !important;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 12px;
+  color: var(--color-white);
+  background-color: var(--color-primary);
 }
