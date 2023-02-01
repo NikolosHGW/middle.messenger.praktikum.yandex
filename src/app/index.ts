@@ -7,7 +7,8 @@ import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
 import './index.scss';
 import { render } from '../shared/utils/render';
-import { Chat } from '../entities/Chat';
+// import { Chat } from '../entities/Chat';
+import { ChatList } from '../features/ChatList';
 
 const root = document.querySelector('#root');
 
@@ -20,7 +21,7 @@ const authPage = () => {
 };
 
 const messagesPage = () => {
-  render('#root', Chat());
+  render('#root', ChatList());
 };
 
 const profilePage = () => {
