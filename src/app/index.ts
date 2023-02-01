@@ -7,7 +7,7 @@ import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
 import './index.scss';
 import { render } from '../shared/utils/render';
-import { MessageFooter } from '../entities/MessageFooter';
+import { MessageHeader } from '../entities/MessageHeader';
 
 const root = document.querySelector('#root');
 
@@ -20,7 +20,7 @@ const authPage = () => {
 };
 
 const messagesPage = () => {
-  render('#root', MessageFooter());
+  render('#root', MessageHeader());
 };
 
 const profilePage = () => {
