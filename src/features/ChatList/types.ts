@@ -1,9 +1,9 @@
 import { ChatComponent } from '../../entities/Chat/ChatComponent';
-import { Block } from '../../shared/lib/Block';
+import { SearchInputComponent } from '../../shared/ui/SearchInput/SearchInputComponent';
 
 type TemplateProps = {
   chats: ChatComponent[];
-  search: Block;
+  search: SearchInputComponent;
 }
 
 export type TemplateType = (props: TemplateProps) => string

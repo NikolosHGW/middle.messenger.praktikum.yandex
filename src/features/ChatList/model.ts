@@ -1,6 +1,6 @@
 import { ChatListComponent } from './ChatListComponent';
 import { Chat } from '../../entities/Chat';
-import { Input } from '../../shared/ui/Input';
+import { SearchInput } from '../../shared/ui/SearchInput';
 
 const getDefaultChats = () => [
   Chat(),
@@ -13,7 +13,7 @@ const getDefaultChats = () => [
 
 const ChatList = ({
   chats = getDefaultChats(),
-  search = Input(),
+  search = SearchInput(),
   className = 'chat-list',
 } = {}) => new ChatListComponent({
   chats,

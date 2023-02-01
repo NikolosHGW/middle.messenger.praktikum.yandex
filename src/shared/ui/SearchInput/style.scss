@@ -1,0 +1,26 @@
+@use '../mixins.scss';
+
+.search {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.search__input {
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background-color: var(--color-third-gray);
+  font-size: 12px;
+  @include mixins.middle-font;
+  box-sizing: border-box;
+  text-align: center;
+  height: 32px;
+  color: var(--color-secondary-gray);
+}
+
+.search__input::placeholder {
+  color: var(--color-secondary-gray);
+}
