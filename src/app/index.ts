@@ -5,10 +5,8 @@ import { LoginPage } from '../pages/LoginPage';
 import { MessagesPage } from '../pages/MessagesPage';
 import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
-import './index.scss';
 import { render } from '../shared/utils/render';
-
-const root = document.querySelector('#root');
+import './index.scss';
 
 const loginPage = () => {
   render('#root', LoginPage());
@@ -42,7 +40,7 @@ const serverErrorPage = () => {
   render('#root', ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' }));
 };
 
-const routes = {
+const routes: Record<string, () => void> = {
   '/': loginPage,
   '/auth': authPage,
   '/messages': messagesPage,
