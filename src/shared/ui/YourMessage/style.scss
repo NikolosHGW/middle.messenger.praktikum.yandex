@@ -1,21 +1,22 @@
 @use '../mixins.scss';
 
-.their-message {
-  max-width: 380px;
+.your-message {
+  max-width: 114px;
   margin: 0;
   padding: 11px;
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
   font-family: var(--font-family);
-  background-color: var(--color-some-gray);
+  background-color: var(--color-some-blue);
   border-radius: 10px;
-  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
   position: relative;
   box-sizing: border-box;
+  display: flex;
 }
 
-.their-message__time {
+.your-message__time {
   position: absolute;
   right: 11px;
   bottom: 11px;
