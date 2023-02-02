@@ -6,12 +6,14 @@ const chatListTemplate: TemplateType = (props) => ui(props);
 
 class MessageWindowComponent extends Block {
   constructor({
+    header,
     messages,
+    footer,
     className,
   }: MessageWindowProps) {
     super(
-      'div',
-      {},
+      'section',
+      { header, footer },
       { attributes: { class: className }, childrenWithList: { messages } },
     );
   }
