@@ -1,4 +1,4 @@
-import MessagesPage from './ui.hbs';
+import { MessagesPage } from './model';
 import './style.scss';
 
 export { MessagesPage };
