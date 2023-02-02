@@ -12,6 +12,7 @@ class ProfileContainerComponent extends Block {
     inputs,
     buttons,
     attributes,
+    events,
   }: ProfileContainerProps) {
     super(
       'div',
@@ -19,6 +20,7 @@ class ProfileContainerComponent extends Block {
         avatar,
         title,
         formName,
+        events,
       },
       { attributes, childrenWithList: { inputs, buttons } },
     );

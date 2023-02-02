@@ -10,12 +10,14 @@ const ProfileContainer = ({
   inputs = [Input(), Input()],
   buttons = [Button()],
   className = 'profile-container',
+  events = {},
 } = {}) => new ProfileContainerComponent({
   avatar,
   title,
   formName,
   inputs,
   buttons,
+  events,
   attributes: { class: className },
 });
 

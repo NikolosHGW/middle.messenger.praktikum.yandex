@@ -1,5 +1,6 @@
 import { AvatarComponent } from '../../shared/ui/Avatar/AvatarComponent';
 import { InputComponent } from '../../shared/ui/Input/InputComponent';
+import { EventsPropType } from '../../shared/utils/types/types';
 
 export type ProfileContainerProps = {
   avatar: AvatarComponent,
@@ -7,5 +8,6 @@ export type ProfileContainerProps = {
   formName: string,
   inputs: InputComponent[],
   buttons: InputComponent[],
+  events: EventsPropType,
   attributes: { class: string },
 }

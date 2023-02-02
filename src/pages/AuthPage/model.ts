@@ -3,30 +3,61 @@ import { AuthPageComponent } from './AuthPageComponent';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
+import { getInputTarget, logObjectToConsole } from '../../shared/utils/helpers';
+
+const resultForm = {
+  email: '',
+  login: '',
+  firstName: '',
+  secondName: '',
+  phone: '',
+  password: '',
+  secondPassword: '',
+};
 
 const emailInput = () => Input({
   inputId: 'email-input',
   placeholder: 'Почта',
   inputName: 'email',
   inputType: 'email',
+  events: {
+    change: (evt: Event) => {
+      resultForm.email = getInputTarget(evt.target).value;
+    },
+  },
 });
 
 const loginInput = () => Input({
   inputId: 'login-input',
   placeholder: 'Логин',
   inputName: 'login',
+  events: {
+    change: (evt: Event) => {
+      resultForm.login = getInputTarget(evt.target).value;
+    },
+  },
 });
 
 const nameInput = () => Input({
   inputId: 'name-input',
   placeholder: 'Имя',
   inputName: 'first_name',
+  events: {
+    change: (evt: Event) => {
+      resultForm.firstName = getInputTarget(evt.target).value;
+    },
+  },
 });
 
 const secondNameInput = () => Input({
   inputId: 'second-name-input',
   placeholder: 'Фамилия',
   inputName: 'second_name',
+  events: {
+    change: (evt: Event) => {
+      resultForm.secondName = getInputTarget(evt.target).value;
+    },
+  },
 });
 
 const phoneInput = () => Input({
@@ -34,21 +65,36 @@ const phoneInput = () => Input({
   placeholder: 'Телефон',
   inputName: 'phone',
   inputType: 'phone',
+  events: {
+    change: (evt: Event) => {
+      resultForm.phone = getInputTarget(evt.target).value;
+    },
+  },
 });
 
 const passwordInput = () => Input({
   inputId: 'password-input',
   placeholder: 'Пароль',
   inputName: 'password',
+  events: {
+    change: (evt: Event) => {
+      resultForm.password = getInputTarget(evt.target).value;
+    },
+  },
 });
 
 const secondPassword = () => Input({
   inputId: 'second-password-input',
   placeholder: 'Пароль (ещё раз)',
   inputName: 'password',
+  events: {
+    change: (evt: Event) => {
+      resultForm.secondPassword = getInputTarget(evt.target).value;
+    },
+  },
 });
 
-const buttonLogin = () => Button({ text: 'Зарегистрироваться' });
+const buttonLogin = () => Button({ text: 'Зарегистрироваться', buttonType: 'submit' });
 
 const buttonAuthLink = () => TextButton({
   text: 'Войти',
@@ -71,6 +117,12 @@ const form = () => Form({
   formName: 'auth',
   inputs: getInputs(),
   buttons: [buttonLogin(), buttonAuthLink()],
+  events: {
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      logObjectToConsole(resultForm);
+    },
+  },
 });
 
 const AuthPage = () => new AuthPageComponent({ Form: form() });
