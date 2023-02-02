@@ -13,6 +13,7 @@ class FormComponent extends Block {
     fieldsetClassName,
     inputs,
     buttons,
+    events,
     attributes,
   }: FormProps) {
     super(
@@ -23,6 +24,7 @@ class FormComponent extends Block {
         headingClassName,
         formClassName,
         fieldsetClassName,
+        events,
       },
       { attributes, childrenWithList: { inputs, buttons } },
     );

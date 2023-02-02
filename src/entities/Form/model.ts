@@ -11,6 +11,7 @@ const Form = ({
   headingClassName = 'form-container__heading',
   formClassName = 'form',
   fieldsetClassName = 'form__fieldset',
+  events = {},
 } = {}) => new FormComponent({
   title,
   formName,
@@ -19,6 +20,7 @@ const Form = ({
   fieldsetClassName,
   inputs,
   buttons,
+  events,
   attributes: { class: className },
 });
 

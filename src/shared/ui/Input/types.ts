@@ -1,3 +1,5 @@
+import { EventsPropType } from '../../utils/types/types';
+
 type InputAttributes = {
   class: string,
 }
@@ -11,6 +13,6 @@ export type InputProps = {
   errorSpanClassName: string,
   withEditSpan: boolean,
   spanText: string,
-  events: Record<string, () => void>
+  events: EventsPropType,
   attributes: InputAttributes,
 };

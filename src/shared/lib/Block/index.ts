@@ -1,4 +1,5 @@
 import { v4 as makeUUID } from 'uuid';
+import { EventsPropType } from '../../utils/types/types';
 import { EventBus } from '../EventBus';
 import { BlockProps, ExtendRecord, Options } from './types';
 
@@ -222,7 +223,7 @@ class Block {
   private toggleEvents(needAdd: boolean) {
     const { events = {} } = this.props;
 
-    const castEvents = (events as Record<string, () => void>);
+    const castEvents = (events as EventsPropType);
 
     const dynamicEventMethod = needAdd ? 'addEventListener' : 'removeEventListener';
 

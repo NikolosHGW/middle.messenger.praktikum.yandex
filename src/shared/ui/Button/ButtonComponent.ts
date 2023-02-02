@@ -5,8 +5,8 @@ import ui from './ui.hbs';
 const buttoTemplate = (props: ButtonProps) => ui(props);
 
 class ButtonComponent extends Block {
-  constructor({ text, attributes }: ButtonProps) {
-    super('button', { text }, { attributes });
+  constructor({ text, events, attributes }: ButtonProps) {
+    super('button', { text, events }, { attributes });
   }
 
   customRender() {

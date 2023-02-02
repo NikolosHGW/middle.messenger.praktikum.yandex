@@ -5,8 +5,11 @@ const Button = ({
   buttonType = 'button',
   ariaLabel = 'auth',
   classButton = 'button',
+  events = {},
 } = {}) => new ButtonComponent({
-  text, attributes: { class: classButton, 'aria-label': ariaLabel, type: buttonType },
+  text,
+  events,
+  attributes: { class: classButton, 'aria-label': ariaLabel, type: buttonType },
 });
 
 export { Button };

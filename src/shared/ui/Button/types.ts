@@ -1,3 +1,5 @@
+import { EventsPropType } from '../../utils/types/types';
+
 type ButtonAttributes = {
   class: string,
   type: string,
@@ -6,5 +8,6 @@ type ButtonAttributes = {
 
 export type ButtonProps = {
   text: string,
-  attributes: ButtonAttributes
+  attributes: ButtonAttributes,
+  events: EventsPropType,
 }

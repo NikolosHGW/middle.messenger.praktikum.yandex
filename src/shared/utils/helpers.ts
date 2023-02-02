@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 export const getInputTarget = (target: EventTarget | null) => (target as HTMLInputElement);
 
-export const logInputValueToConsole = (evt: Event) => console.log(getInputTarget(evt.target).value);
+export const logObjectToConsole = (obj: Record<string, string>) => console.log(obj);

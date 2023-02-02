@@ -1,5 +1,6 @@
 import { ButtonComponent } from '../../shared/ui/Button/ButtonComponent';
 import { InputComponent } from '../../shared/ui/Input/InputComponent';
+import { EventsPropType } from '../../shared/utils/types/types';
 
 type FormProps = {
   title: string,
@@ -9,6 +10,7 @@ type FormProps = {
   fieldsetClassName: string,
   inputs: Array<InputComponent>,
   buttons: Array<ButtonComponent>,
+  events: EventsPropType,
   attributes: { class: string },
 }
 
