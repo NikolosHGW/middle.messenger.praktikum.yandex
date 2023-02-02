@@ -81,7 +81,7 @@ const exitPasswordTextButton = () => TextButton({
   className: 'text-button form__text-button text-button_color_red',
 });
 
-const inputs = [
+const getInputs = () => [
   emailInput(),
   loginInput(),
   nameInput(),
@@ -90,7 +90,7 @@ const inputs = [
   phoneInput(),
 ];
 
-const buttons = [
+const getButtons = () => [
   editTextButton(),
   editPasswordTextButton(),
   exitPasswordTextButton(),
@@ -100,8 +100,8 @@ const profileContainer = () => ProfileContainer({
   avatar: Avatar(),
   title: 'Иван',
   formName: 'profile',
-  inputs,
-  buttons,
+  inputs: getInputs(),
+  buttons: getButtons(),
 });
 
 const ProfilePage = () => new ProfilePageComponent({ ProfileContainer: profileContainer() });

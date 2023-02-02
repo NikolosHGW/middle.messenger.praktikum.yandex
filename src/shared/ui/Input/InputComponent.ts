@@ -14,6 +14,7 @@ class InputComponent extends Block {
     errorSpanClassName,
     withEditSpan,
     spanText,
+    events,
   }: InputProps) {
     super(
       'label',
@@ -25,6 +26,7 @@ class InputComponent extends Block {
         errorSpanClassName,
         withEditSpan,
         spanText,
+        events,
       },
       { attributes },
     );

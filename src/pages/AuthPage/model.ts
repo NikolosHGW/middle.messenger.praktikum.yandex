@@ -56,7 +56,7 @@ const buttonAuthLink = () => TextButton({
   href: '/',
 });
 
-const inputs = [
+const getInputs = () => [
   emailInput(),
   loginInput(),
   nameInput(),
@@ -69,7 +69,7 @@ const inputs = [
 const form = () => Form({
   title: 'Регистрация',
   formName: 'auth',
-  inputs,
+  inputs: getInputs(),
   buttons: [buttonLogin(), buttonAuthLink()],
 });
 

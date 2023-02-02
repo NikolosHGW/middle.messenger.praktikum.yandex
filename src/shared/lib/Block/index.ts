@@ -173,9 +173,11 @@ class Block {
 
   private render() {
     const block = this.customRender();
+    this.toggleEvents(false);
     this.htmlElement.innerHTML = '';
     this.htmlElement.appendChild(block);
     this.setAttributes();
+    this.toggleEvents(true);
   }
 
   // Может переопределять пользователь, необязательно трогать
@@ -215,6 +217,18 @@ class Block {
     element.setAttribute('data-id', this.id);
 
     return element;
+  }
+
+  private toggleEvents(needAdd: boolean) {
+    const { events = {} } = this.props;
+
+    const castEvents = (events as Record<string, () => void>);
+
+    const dynamicEventMethod = needAdd ? 'addEventListener' : 'removeEventListener';
+
+    Object.keys(events).forEach((eventName: string) => {
+      this.htmlElement[dynamicEventMethod](eventName, castEvents[eventName]);
+    });
   }
 
   show() {

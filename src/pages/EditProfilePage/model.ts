@@ -67,7 +67,7 @@ const phoneInput = () => Input({
   inputClassName: 'edit-label__input',
 });
 
-const inputs = [
+const getInputs = () => [
   emailInput(),
   loginInput(),
   nameInput(),
@@ -80,7 +80,7 @@ const profileContainer = () => ProfileContainer({
   avatar: Avatar(),
   title: '',
   formName: 'profile',
-  inputs,
+  inputs: getInputs(),
   buttons: [Button({ text: 'Сохранить' })],
 });
 

@@ -10,6 +10,7 @@ const Input = ({
   errorSpanClassName = 'label__input-error',
   withEditSpan = false,
   spanText = '',
+  events = {},
 } = {}) => new InputComponent({
   inputId,
   placeholder,
@@ -19,6 +20,7 @@ const Input = ({
   errorSpanClassName,
   withEditSpan,
   spanText,
+  events,
   attributes: { class: className },
 });
 

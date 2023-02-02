@@ -3,11 +3,13 @@ import { LoginPageComponent } from './LoginPageComponent';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
+import { logInputValueToConsole } from '../../shared/utils/helpers';
 
 const loginInput = () => Input({
   inputId: 'login-input',
   placeholder: 'Логин',
   inputName: 'login',
+  events: { input: (evt: Event) => logInputValueToConsole(evt) },
 });
 
 const passwordInput = () => Input({

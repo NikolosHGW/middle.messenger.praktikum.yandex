@@ -21,7 +21,9 @@
         "tsx": "never"
       }
    ],
-   "no-param-reassign": [2, { "props": false }]
+   "no-param-reassign": [2, { "props": false }],
+   // TODO: убрать, когда будет бэк для форм
+   "no-console": "off"
   },
   "settings": {
     "import/resolver": {

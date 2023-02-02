@@ -37,7 +37,7 @@ const repeatPasswordInput = () => Input({
   inputClassName: 'edit-label__input',
 });
 
-const inputs = [
+const getInputs = () => [
   oldPasswordInput(),
   newPasswordInput(),
   repeatPasswordInput(),
@@ -47,7 +47,7 @@ const profileContainer = () => ProfileContainer({
   avatar: Avatar(),
   title: '',
   formName: 'profile',
-  inputs,
+  inputs: getInputs(),
   buttons: [Button({ text: 'Сохранить' })],
 });
 

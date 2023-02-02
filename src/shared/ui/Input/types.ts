@@ -11,5 +11,6 @@ export type InputProps = {
   errorSpanClassName: string,
   withEditSpan: boolean,
   spanText: string,
+  events: Record<string, () => void>
   attributes: InputAttributes,
 };
