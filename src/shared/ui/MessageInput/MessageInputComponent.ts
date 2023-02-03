@@ -5,8 +5,8 @@ import ui from './ui.hbs';
 const messageInputTemplate = () => ui();
 
 class MessageInputComponent extends Block {
-  constructor({ className }: MessageInputProps) {
-    super('label', {}, { attributes: { class: className } });
+  constructor({ className, events }: MessageInputProps) {
+    super('label', { events }, { attributes: { class: className } });
   }
 
   customRender() {
