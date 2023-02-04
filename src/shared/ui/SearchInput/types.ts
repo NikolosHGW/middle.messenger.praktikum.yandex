@@ -1,3 +1,3 @@
-export type SearchInputProps = {
-  className: string;
+export type searchinputprops = {
+  classname: string;
 }

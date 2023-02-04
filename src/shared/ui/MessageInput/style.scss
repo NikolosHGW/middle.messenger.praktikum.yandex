@@ -1,4 +1,4 @@
-@use '../mixins.scss';
+@use "../mixins.scss";
 
 .message {
   display: flex;
@@ -14,7 +14,9 @@
   border: none;
   background-color: var(--color-third-gray);
   font-size: 12px;
+
   @include mixins.middle-font;
+
   box-sizing: border-box;
   text-align: start;
   padding: 0 20px;

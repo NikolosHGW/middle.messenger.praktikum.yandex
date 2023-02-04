@@ -1,14 +1,14 @@
 .avatar {
   border-radius: 50%;
   background-color: var(--color-third-gray);
-  background-image: url('../../images/avatar.min.svg');
+  background-image: url("../../images/avatar.min.svg");
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;
   border: 0;
   outline: 0;
   cursor: pointer;
-  transition: opacity .4s linear;
+  transition: opacity 0.4s linear;
 }
 
 .avatar:hover {

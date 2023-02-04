@@ -1,4 +1,4 @@
-@use '../mixins.scss';
+@use "../mixins.scss";
 
 .button {
   max-width: 280px;
@@ -8,12 +8,14 @@
   border: 0;
   color: var(--color-white);
   padding: 0;
+
   @include mixins.middle-font;
+
   font-size: 13px;
   border-radius: 8px;
   outline: 0;
   cursor: pointer;
-  transition: opacity .4s linear;
+  transition: opacity 0.4s linear;
   font-family: var(--font-family);
 }
 

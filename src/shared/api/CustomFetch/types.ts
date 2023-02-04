@@ -1,7 +1,7 @@
-export type Options = {
+export type options = {
   timeout?: number;
-  data?: Record<string, unknown>;
-  headers?: Record<string, string>;
+  data?: record<string, unknown>;
+  headers?: record<string, string>;
 }
 
-export type OptionsWithMethod = Options & { method: string }
+export type optionswithmethod = options & { method: string; }

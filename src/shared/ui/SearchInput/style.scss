@@ -1,4 +1,4 @@
-@use '../mixins.scss';
+@use "../mixins.scss";
 
 .search {
   display: flex;
@@ -14,7 +14,9 @@
   border: none;
   background-color: var(--color-third-gray);
   font-size: 12px;
+
   @include mixins.middle-font;
+
   box-sizing: border-box;
   text-align: center;
   height: 32px;

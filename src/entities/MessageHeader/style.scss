@@ -29,9 +29,9 @@
   height: 15px;
   border: 0;
   cursor: pointer;
-  transition: opacity .4s linear;
+  transition: opacity 0.4s linear;
   align-self: center;
-  background-image: url('../../shared/images/dots.min.svg');
+  background-image: url("../../shared/images/dots.min.svg");
 }
 
 .menu:hover {

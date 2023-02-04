@@ -5,7 +5,7 @@
   height: 32px;
   border: 0;
   cursor: pointer;
-  transition: opacity .4s linear;
+  transition: opacity 0.4s linear;
 }
 
 .message-footer {
@@ -16,8 +16,9 @@
 
 .attach {
   @extend %button-style;
-  background-image: url('../../shared/images/attach.min.svg');
-  background-color: rgba($color: var(--color-white), $alpha: 1.0);
+
+  background-image: url("../../shared/images/attach.min.svg");
+  background-color: rgba($color: var(--color-white), $alpha: 100%);
 }
 
 .attach:hover {
@@ -26,7 +27,8 @@
 
 .send {
   @extend %button-style;
-  background-image: url('../../shared/images/send.min.svg');
+
+  background-image: url("../../shared/images/send.min.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-color: var(--color-secondary-primary);

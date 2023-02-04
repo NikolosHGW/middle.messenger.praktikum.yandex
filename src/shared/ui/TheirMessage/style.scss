@@ -1,4 +1,4 @@
-@use '../mixins.scss';
+@use "../mixins.scss";
 
 .their-message {
   max-width: 380px;
@@ -19,6 +19,8 @@
   position: absolute;
   right: 11px;
   bottom: 11px;
+
   @include mixins.middle-font;
+
   font-size: 9px;
 }
