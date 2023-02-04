@@ -34,15 +34,15 @@ class Validation {
         if (isValide) {
           this.removeErrorClass(errorSpan);
         } else {
-          this.addErrorClass(errorSpan);
+          this.addErrorClass(errorSpan, input.validationMessage || undefined);
         }
       }
     }
   };
 
-  static addErrorClass = (errorSpan: HTMLSpanElement) => {
+  static addErrorClass = (errorSpan: HTMLSpanElement, message: string = 'Ошибка!') => {
     errorSpan.classList.add(this.CONSTANTS.errorSpanActive);
-    errorSpan.textContent = 'Ошибка!';
+    errorSpan.textContent = message;
   };
 
   static removeErrorClass = (errorSpan: HTMLSpanElement) => {
