@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .login .label {
@@ -16,4 +17,10 @@
 
 .login .form__text-button {
   margin: 14px 0 30px;
+}
+
+.login__nav {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }

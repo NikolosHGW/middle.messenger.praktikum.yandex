@@ -2,11 +2,11 @@ import { Block } from '../../shared/lib/Block';
 import ui from './ui.hbs';
 import { LoginPagePropsType, TemplateType } from './types';
 
-const loginPageTemplate: TemplateType = ({ Form }) => ui({ Form });
+const loginPageTemplate: TemplateType = ({ Form, links }) => ui({ Form, links });
 
 class LoginPageComponent extends Block {
-  constructor({ Form, attributes = { class: 'login' } }: LoginPagePropsType) {
-    super('main', { Form }, { attributes });
+  constructor({ Form, links, attributes = { class: 'login' } }: LoginPagePropsType) {
+    super('main', { Form }, { attributes, childrenWithList: { links } });
   }
 
   customRender() {

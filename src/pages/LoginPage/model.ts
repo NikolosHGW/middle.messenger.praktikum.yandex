@@ -5,6 +5,7 @@ import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
 import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
+import { List } from '../../shared/ui/List';
 
 const resultForm = {
   login: '',
@@ -49,6 +50,58 @@ const buttonAuthLink = () => TextButton({
   href: 'auth',
 });
 
+const buttonLinkAuth = () => TextButton({
+  text: 'Авторизация /auth',
+  className: 'text-button',
+  href: 'auth',
+});
+
+const buttonLinkMessages = () => TextButton({
+  text: 'Сообщения /messages',
+  className: 'text-button',
+  href: 'messages',
+});
+
+const buttonLinkProfile = () => TextButton({
+  text: 'Профиль /profile',
+  className: 'text-button',
+  href: 'profile',
+});
+
+const buttonLinkEdit = () => TextButton({
+  text: 'Изменить профиль /edit',
+  className: 'text-button',
+  href: 'edit',
+});
+
+const buttonLinkPassword = () => TextButton({
+  text: 'Изменить пароль /password',
+  className: 'text-button',
+  href: 'password',
+});
+
+const buttonLinkNotFound = () => TextButton({
+  text: '404 /not-found',
+  className: 'text-button',
+  href: 'not-found',
+});
+
+const buttonLinkError = () => TextButton({
+  text: '500 /error',
+  className: 'text-button',
+  href: 'error',
+});
+
+const getList = () => [
+  List({ link: buttonLinkAuth() }),
+  List({ link: buttonLinkMessages() }),
+  List({ link: buttonLinkProfile() }),
+  List({ link: buttonLinkEdit() }),
+  List({ link: buttonLinkPassword() }),
+  List({ link: buttonLinkNotFound() }),
+  List({ link: buttonLinkError() }),
+];
+
 const form = () => Form({
   title: 'Вход',
   formName: 'login',
@@ -63,6 +116,6 @@ const form = () => Form({
   },
 });
 
-const LoginPage = () => new LoginPageComponent({ Form: form() });
+const LoginPage = () => new LoginPageComponent({ Form: form(), links: getList() });
 
 export { LoginPage };
