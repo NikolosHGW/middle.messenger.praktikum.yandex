@@ -9,6 +9,7 @@ class Validation {
     errorSpanActive: 'error-span_active',
     login: 'login',
     password: 'password',
+    input: 'input',
   };
 
   static toggleErrorClass = (input: HTMLInputElement | null, isValide: boolean) => {
@@ -35,8 +36,7 @@ class Validation {
     errorSpan.textContent = '';
   };
 
-  static hadleInputEvent = (evt: Event, inputType: InputType) => {
-    const { target } = evt;
+  static handleInputEvent = (target: EventTarget, inputType: InputType) => {
     const { value } = getInputTarget(target);
     switch (inputType) {
       case this.CONSTANTS.login: {
@@ -48,8 +48,20 @@ class Validation {
         break;
       }
       default:
-        Validation.checkLogin(getInputTarget(evt.target).value);
+        Validation.checkLogin(getInputTarget(target).value);
         break;
+    }
+  };
+
+  static handleSubmit = (evt: Event) => {
+    const inputs = (evt.target as HTMLFormElement).querySelectorAll(this.CONSTANTS.input);
+    if (inputs) {
+      inputs.forEach((input) => {
+        const name = input.attributes.getNamedItem('name')?.value;
+        if (name) {
+          this.handleInputEvent(input, (name as InputType));
+        }
+      });
     }
   };
 

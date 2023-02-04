@@ -8,7 +8,9 @@ import { Validation } from '../../shared/lib/Validation/Validation';
 import { InputType } from '../../shared/lib/Validation/types';
 
 const validate = (type: InputType) => (evt: Event) => {
-  Validation.hadleInputEvent(evt, type);
+  if (evt.target) {
+    Validation.handleInputEvent(evt.target, type);
+  }
 };
 
 const resultForm = {
@@ -63,6 +65,7 @@ const form = () => Form({
     submit: (evt: Event) => {
       evt.preventDefault();
       logObjectToConsole(resultForm);
+      Validation.handleSubmit(evt);
     },
   },
 });
