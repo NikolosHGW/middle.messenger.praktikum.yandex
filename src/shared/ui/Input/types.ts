@@ -13,6 +13,7 @@ export type InputProps = {
   errorSpanClassName: string,
   withEditSpan: boolean,
   spanText: string,
+  autocomplete: string,
   events: EventsPropType,
   attributes: InputAttributes,
 };

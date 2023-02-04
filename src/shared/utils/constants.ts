@@ -1,2 +1,2 @@
-export const LOGIN = 'login';
-export const PASSWORD = 'password';
+export const loginRegexString = '^(?![0-9]+$)[a-zA-Z0-9-_]{3,20}$';
+export const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/;

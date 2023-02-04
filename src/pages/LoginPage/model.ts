@@ -5,9 +5,10 @@ import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
 import { getInputTarget, logObjectToConsole } from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
+import { InputType } from '../../shared/lib/Validation/types';
 
-const validateLogin = (evt: Event) => {
-  Validation.hadleInputEvent(evt, 'login');
+const validate = (type: InputType) => (evt: Event) => {
+  Validation.hadleInputEvent(evt, type);
 };
 
 const resultForm = {
@@ -23,8 +24,8 @@ const loginInput = () => Input({
     change: (evt: Event) => {
       resultForm.login = getInputTarget(evt.target).value;
     },
-    focus: validateLogin,
-    blur: validateLogin,
+    focus: validate('login'),
+    blur: validate('login'),
   },
 });
 
@@ -32,10 +33,13 @@ const passwordInput = () => Input({
   inputId: 'password-input',
   placeholder: 'Пароль',
   inputName: 'password',
+  inputType: 'password',
   events: {
     change: (evt: Event) => {
       resultForm.password = getInputTarget(evt.target).value;
     },
+    focus: validate('password'),
+    blur: validate('password'),
   },
 });
 

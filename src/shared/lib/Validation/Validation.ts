@@ -1,3 +1,4 @@
+import { loginRegexString, passwordRegex } from '../../utils/constants';
 import { getInputTarget } from '../../utils/helpers';
 import { InputType } from './types';
 
@@ -7,6 +8,7 @@ class Validation {
     errorSpanClass: '.error-span',
     errorSpanActive: 'error-span_active',
     login: 'login',
+    password: 'password',
   };
 
   static toggleErrorClass = (input: HTMLInputElement | null, isValide: boolean) => {
@@ -34,11 +36,15 @@ class Validation {
   };
 
   static hadleInputEvent = (evt: Event, inputType: InputType) => {
+    const { target } = evt;
+    const { value } = getInputTarget(target);
     switch (inputType) {
       case this.CONSTANTS.login: {
-        const { target } = evt;
-        const { value } = getInputTarget(target);
         this.toggleErrorClass(target as HTMLInputElement, !!this.checkLogin(value));
+        break;
+      }
+      case this.CONSTANTS.password: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkPassword(value));
         break;
       }
       default:
@@ -47,7 +53,9 @@ class Validation {
     }
   };
 
-  static checkLogin = (value: string) => value.match('^(?![0-9]+$)[a-zA-Z0-9-_]{3,20}$');
+  static checkLogin = (value: string) => value.match(loginRegexString);
+
+  static checkPassword = (value: string) => value.match(passwordRegex);
 }
 
 export { Validation };
