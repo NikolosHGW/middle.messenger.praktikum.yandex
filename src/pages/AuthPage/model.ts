@@ -4,6 +4,14 @@ import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
 import { getInputTarget, logObjectToConsole } from '../../shared/utils/helpers';
+import { Validation } from '../../shared/lib/Validation/Validation';
+import { InputType } from '../../shared/lib/Validation/types';
+
+const validate = (type: InputType) => (evt: Event) => {
+  if (evt.target) {
+    Validation.handleInputEvent(evt.target, type);
+  }
+};
 
 const resultForm = {
   email: '',
@@ -24,6 +32,8 @@ const emailInput = () => Input({
     change: (evt: Event) => {
       resultForm.email = getInputTarget(evt.target).value;
     },
+    focus: validate('email'),
+    blur: validate('email'),
   },
 });
 
@@ -35,6 +45,8 @@ const loginInput = () => Input({
     change: (evt: Event) => {
       resultForm.login = getInputTarget(evt.target).value;
     },
+    focus: validate('login'),
+    blur: validate('login'),
   },
 });
 
@@ -46,6 +58,8 @@ const nameInput = () => Input({
     change: (evt: Event) => {
       resultForm.firstName = getInputTarget(evt.target).value;
     },
+    focus: validate('first_name'),
+    blur: validate('first_name'),
   },
 });
 
@@ -57,6 +71,8 @@ const secondNameInput = () => Input({
     change: (evt: Event) => {
       resultForm.secondName = getInputTarget(evt.target).value;
     },
+    focus: validate('second_name'),
+    blur: validate('second_name'),
   },
 });
 
@@ -69,6 +85,8 @@ const phoneInput = () => Input({
     change: (evt: Event) => {
       resultForm.phone = getInputTarget(evt.target).value;
     },
+    focus: validate('phone'),
+    blur: validate('phone'),
   },
 });
 
@@ -80,6 +98,8 @@ const passwordInput = () => Input({
     change: (evt: Event) => {
       resultForm.password = getInputTarget(evt.target).value;
     },
+    focus: validate('password'),
+    blur: validate('password'),
   },
 });
 
@@ -91,6 +111,8 @@ const secondPassword = () => Input({
     change: (evt: Event) => {
       resultForm.secondPassword = getInputTarget(evt.target).value;
     },
+    focus: validate('password'),
+    blur: validate('password'),
   },
 });
 
@@ -121,6 +143,7 @@ const form = () => Form({
     submit: (evt: Event) => {
       evt.preventDefault();
       logObjectToConsole(resultForm);
+      Validation.handleSubmit(evt);
     },
   },
 });

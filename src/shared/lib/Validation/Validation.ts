@@ -1,4 +1,10 @@
-import { loginRegexString, passwordRegex } from '../../utils/constants';
+import {
+  emailRegex,
+  loginRegexString,
+  nameRegex,
+  passwordRegex,
+  phoneRegex,
+} from '../../utils/constants';
 import { getInputTarget } from '../../utils/helpers';
 import { InputType } from './types';
 
@@ -10,6 +16,10 @@ class Validation {
     login: 'login',
     password: 'password',
     input: 'input',
+    email: 'email',
+    firstName: 'first_name',
+    secondName: 'second_name',
+    phone: 'phone',
   };
 
   static toggleErrorClass = (input: HTMLInputElement | null, isValide: boolean) => {
@@ -47,6 +57,22 @@ class Validation {
         this.toggleErrorClass(target as HTMLInputElement, !!this.checkPassword(value));
         break;
       }
+      case this.CONSTANTS.email: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkEmail(value));
+        break;
+      }
+      case this.CONSTANTS.firstName: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkNames(value));
+        break;
+      }
+      case this.CONSTANTS.secondName: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkNames(value));
+        break;
+      }
+      case this.CONSTANTS.phone: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkPhone(value));
+        break;
+      }
       default:
         Validation.checkLogin(getInputTarget(target).value);
         break;
@@ -68,6 +94,12 @@ class Validation {
   static checkLogin = (value: string) => value.match(loginRegexString);
 
   static checkPassword = (value: string) => value.match(passwordRegex);
+
+  static checkEmail = (value: string) => value.match(emailRegex);
+
+  static checkNames = (value: string) => value.match(nameRegex);
+
+  static checkPhone = (value: string) => value.match(phoneRegex);
 }
 
 export { Validation };
