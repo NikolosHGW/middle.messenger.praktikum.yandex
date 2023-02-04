@@ -137,8 +137,6 @@ class Block {
     Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
   }
 
-  // Может переопределять пользователь, необязательно трогать
-  // eslint-disable-next-line class-methods-use-this
   customComponentDidMount() {
     return false;
   }
@@ -188,7 +186,6 @@ class Block {
     this.toggleEvents(true);
   }
 
-  // Может переопределять пользователь, необязательно трогать
   customRender(): Node {
     return this.htmlElement;
   }
