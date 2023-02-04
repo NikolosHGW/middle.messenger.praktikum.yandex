@@ -3,15 +3,8 @@ import { LoginPageComponent } from './LoginPageComponent';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
-import { getInputTarget, logObjectToConsole } from '../../shared/utils/helpers';
+import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
-import { InputType } from '../../shared/lib/Validation/types';
-
-const validate = (type: InputType) => (evt: Event) => {
-  if (evt.target) {
-    Validation.handleInputEvent(evt.target, type);
-  }
-};
 
 const resultForm = {
   login: '',

@@ -3,7 +3,8 @@ import { ProfileContainer } from '../../entities/ProfileContainer';
 import { Avatar } from '../../shared/ui/Avatar';
 import { Button } from '../../shared/ui/Button';
 import { EditPasswordPageComponent } from './EditPasswordPageComponent';
-import { getInputTarget, logObjectToConsole } from '../../shared/utils/helpers';
+import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
+import { Validation } from '../../shared/lib/Validation/Validation';
 
 const resultForm = {
   oldPassword: '',
@@ -14,7 +15,7 @@ const resultForm = {
 const oldPasswordInput = () => Input({
   inputId: 'old-password-input',
   placeholder: 'Старый пароль',
-  inputName: 'oldPassword',
+  inputName: 'old_password',
   inputType: 'password',
   spanText: 'Старый пароль',
   withEditSpan: true,
@@ -24,13 +25,15 @@ const oldPasswordInput = () => Input({
     change: (evt: Event) => {
       resultForm.oldPassword = getInputTarget(evt.target).value;
     },
+    focus: validate('old_password'),
+    blur: validate('old_password'),
   },
 });
 
 const newPasswordInput = () => Input({
   inputId: 'password-input',
   placeholder: 'Новый пароль',
-  inputName: 'newPassword',
+  inputName: 'new_password',
   inputType: 'password',
   spanText: 'Новый пароль',
   withEditSpan: true,
@@ -40,13 +43,15 @@ const newPasswordInput = () => Input({
     change: (evt: Event) => {
       resultForm.newPassword = getInputTarget(evt.target).value;
     },
+    focus: validate('new_password'),
+    blur: validate('new_password'),
   },
 });
 
 const repeatPasswordInput = () => Input({
   inputId: 'repeat-password-input',
   placeholder: 'Повторите новый пароль',
-  inputName: 'newPassword',
+  inputName: 'repeat_password',
   inputType: 'password',
   spanText: 'Повторите новый пароль',
   withEditSpan: true,
@@ -56,6 +61,8 @@ const repeatPasswordInput = () => Input({
     change: (evt: Event) => {
       resultForm.repeatNewPassword = getInputTarget(evt.target).value;
     },
+    focus: validate('repeat_password'),
+    blur: validate('repeat_password'),
   },
 });
 
@@ -75,6 +82,7 @@ const profileContainer = () => ProfileContainer({
     submit: (evt: Event) => {
       evt.preventDefault();
       logObjectToConsole(resultForm);
+      Validation.handleSubmit(evt);
     },
   },
 });

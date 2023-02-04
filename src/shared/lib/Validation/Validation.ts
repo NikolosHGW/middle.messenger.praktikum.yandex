@@ -20,6 +20,10 @@ class Validation {
     firstName: 'first_name',
     secondName: 'second_name',
     phone: 'phone',
+    displayName: 'display_name',
+    oldPassword: 'old_password',
+    newPassword: 'new_password',
+    repeatPassword: 'repeat_password',
   };
 
   static toggleErrorClass = (input: HTMLInputElement | null, isValide: boolean) => {
@@ -62,15 +66,31 @@ class Validation {
         break;
       }
       case this.CONSTANTS.firstName: {
-        this.toggleErrorClass(target as HTMLInputElement, !!this.checkNames(value));
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkName(value));
         break;
       }
       case this.CONSTANTS.secondName: {
-        this.toggleErrorClass(target as HTMLInputElement, !!this.checkNames(value));
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkName(value));
         break;
       }
       case this.CONSTANTS.phone: {
         this.toggleErrorClass(target as HTMLInputElement, !!this.checkPhone(value));
+        break;
+      }
+      case this.CONSTANTS.displayName: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkName(value));
+        break;
+      }
+      case this.CONSTANTS.oldPassword: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkPassword(value));
+        break;
+      }
+      case this.CONSTANTS.newPassword: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkPassword(value));
+        break;
+      }
+      case this.CONSTANTS.repeatPassword: {
+        this.toggleErrorClass(target as HTMLInputElement, !!this.checkPassword(value));
         break;
       }
       default:
@@ -97,7 +117,7 @@ class Validation {
 
   static checkEmail = (value: string) => value.match(emailRegex);
 
-  static checkNames = (value: string) => value.match(nameRegex);
+  static checkName = (value: string) => value.match(nameRegex);
 
   static checkPhone = (value: string) => value.match(phoneRegex);
 }
