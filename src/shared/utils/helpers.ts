@@ -11,3 +11,13 @@ export const validate = (type: InputType) => (evt: Event) => {
     Validation.handleInputEvent(evt.target, type);
   }
 };
+
+export const queryStringify = (
+  data: Record<string, unknown>,
+) => Object.entries(data).reduce((prev, item) => {
+  const pair = `${item.at(0)}=${item.at(1)}`;
+  if (prev === '') {
+    return `?${pair}`;
+  }
+  return `${prev}&${pair}`;
+}, '');
