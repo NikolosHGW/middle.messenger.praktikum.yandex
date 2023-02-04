@@ -22,3 +22,12 @@
 - `/password` — Изменения пароля
 - `/not-found` — Страничка не найдена
 - `/error` — Ошибка сервера
+
+## Инструменты
+
+- TypeScript,
+- Parcer,
+- ESLint,
+- Stylelint,
+- Sass,
+- Express.js,
