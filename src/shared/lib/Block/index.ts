@@ -19,6 +19,8 @@ class Block {
 
   private id: string;
 
+  private needUpdateProps: boolean;
+
   props: BlockProps<Block>;
 
   children: Record<string, Block>;
@@ -132,9 +134,7 @@ class Block {
   }
 
   private componentDidMount() {
-    if (this.customComponentDidMount()) {
-      Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
-    }
+    Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
   }
 
   // Может переопределять пользователь, необязательно трогать
@@ -148,16 +148,7 @@ class Block {
   }
 
   componentDidUpdate() {
-    const response = this.customComponentDidUpdate();
-    if (response) {
-      this.render();
-    }
-  }
-
-  // Может переопределять пользователь, необязательно трогать
-  customComponentDidUpdate() {
-    // eslint-disable-next-line no-self-compare
-    return this === this;
+    this.render();
   }
 
   setProps = (nextProps: {}) => {
@@ -165,7 +156,23 @@ class Block {
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    this.needUpdateProps = false;
+
+    const oldProps = { ...this.props };
+
+    const { children, props } = Block.getChildren(nextProps);
+
+    if (Object.values(children).length) {
+      Object.assign(this.children, children);
+    }
+    if (Object.values(props).length) {
+      Object.assign(this.props, props);
+    }
+
+    if (this.needUpdateProps) {
+      this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, this.props);
+      this.needUpdateProps = false;
+    }
   };
 
   get element() {
@@ -190,13 +197,15 @@ class Block {
     return this.htmlElement;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   private makePropsProxy(props: {}): {} {
-    const { eventBus } = this;
-
     return new Proxy(props, {
       set(target: Record<string, string>, prop: string, value: string) {
-        target[prop] = value;
-        eventBus().emit(Block.EVENTS.FLOW_CDU);
+        if (target[prop] !== value) {
+          target[prop] = value;
+          this.needUpdateProps = true;
+        }
+
         return true;
       },
       deleteProperty() {
@@ -225,10 +234,12 @@ class Block {
 
     const castEvents = (events as EventsPropType);
 
-    const dynamicEventMethod = needAdd ? 'addEventListener' : 'removeEventListener';
-
     Object.keys(events).forEach((eventName: string) => {
-      this.htmlElement[dynamicEventMethod](eventName, castEvents[eventName]);
+      if (needAdd) {
+        this.htmlElement.addEventListener(eventName, castEvents[eventName]);
+      } else {
+        this.htmlElement.removeEventListener(eventName, castEvents[eventName]);
+      }
     });
   }
 
