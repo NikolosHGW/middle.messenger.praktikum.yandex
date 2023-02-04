@@ -4,6 +4,11 @@ import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
 import { getInputTarget, logObjectToConsole } from '../../shared/utils/helpers';
+import { Validation } from '../../shared/lib/Validation/Validation';
+
+const validateLogin = (evt: Event) => {
+  Validation.hadleInputEvent(evt, 'login');
+};
 
 const resultForm = {
   login: '',
@@ -18,6 +23,8 @@ const loginInput = () => Input({
     change: (evt: Event) => {
       resultForm.login = getInputTarget(evt.target).value;
     },
+    focus: validateLogin,
+    blur: validateLogin,
   },
 });
 

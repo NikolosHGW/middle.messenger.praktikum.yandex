@@ -45,9 +45,9 @@ class Block {
 
     this.id = makeUUID();
 
-    this.children = children;
-
     this.eventBus = () => eventBus;
+
+    this.children = this.makePropsProxy(children);
 
     this.props = this.makePropsProxy({ ...propsWithoutChildren, id: this.id });
 
@@ -197,13 +197,14 @@ class Block {
     return this.htmlElement;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private makePropsProxy(props: {}): {} {
+    const self = this;
+
     return new Proxy(props, {
       set(target: Record<string, string>, prop: string, value: string) {
         if (target[prop] !== value) {
           target[prop] = value;
-          this.needUpdateProps = true;
+          self.needUpdateProps = true;
         }
 
         return true;
@@ -229,12 +230,31 @@ class Block {
     return element;
   }
 
+  toggleInputEvents(eventName: string, needAdd: boolean) {
+    const { events = {} } = this.props;
+
+    const castEvents = (events as EventsPropType);
+    const input = this.htmlElement.querySelector('input');
+
+    if (input) {
+      if (needAdd) {
+        input.addEventListener(eventName, castEvents[eventName]);
+      } else {
+        input.removeEventListener(eventName, castEvents[eventName]);
+      }
+    }
+  }
+
   private toggleEvents(needAdd: boolean) {
     const { events = {} } = this.props;
+    const inputsEvents = ['focus', 'blur'];
 
     const castEvents = (events as EventsPropType);
 
     Object.keys(events).forEach((eventName: string) => {
+      if (inputsEvents.includes(eventName)) {
+        this.toggleInputEvents(eventName, needAdd);
+      }
       if (needAdd) {
         this.htmlElement.addEventListener(eventName, castEvents[eventName]);
       } else {
