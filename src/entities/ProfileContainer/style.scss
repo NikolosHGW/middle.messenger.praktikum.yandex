@@ -25,11 +25,13 @@
 
 .profile-form {
   width: 100%;
+
   @extend %extend-flex;
 }
 
 .profile-form__fieldset {
   @extend %extend-flex;
+
   border: 0;
   margin: 0;
   padding: 0;

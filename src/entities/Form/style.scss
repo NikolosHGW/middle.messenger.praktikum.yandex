@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-secondary-primary);
   box-sizing: border-box;
 }
 
@@ -26,11 +26,13 @@
 
 .form {
   width: 100%;
+
   @extend %extend-flex;
 }
 
 .form__fieldset {
   @extend %extend-flex;
+
   border: 0;
   margin: 0;
   padding: 0;

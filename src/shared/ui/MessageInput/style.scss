@@ -1,0 +1,29 @@
+@use "../mixins.scss";
+
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.message__input {
+  border-radius: 30px;
+  outline: none;
+  border: none;
+  background-color: var(--color-third-gray);
+  font-size: 12px;
+
+  @include mixins.middle-font;
+
+  box-sizing: border-box;
+  text-align: start;
+  padding: 0 20px;
+  height: 32px;
+  color: var(--color-secondary-gray);
+}
+
+.message__input::placeholder {
+  color: var(--color-secondary-gray);
+}

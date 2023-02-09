@@ -1,0 +1,39 @@
+.message-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.message-header__avatar {
+  width: 47px;
+  height: 47px;
+}
+
+.message-header__avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message-header__name {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
+  color: var(--color-dark-secondary);
+  margin: 0;
+}
+
+.menu {
+  padding: 0;
+  outline: none;
+  width: 3px;
+  height: 15px;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+  align-self: center;
+  background-image: url("../../shared/images/dots.min.svg");
+}
+
+.menu:hover {
+  opacity: 0.7;
+}

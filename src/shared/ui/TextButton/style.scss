@@ -1,21 +1,27 @@
-@use '../mixins.scss';
+@use "../mixins.scss";
 
 .text-button {
   border: 0;
-  color: var(--color-primary);
+  color: var(--color-secondary-primary);
   padding: 0;
+
   @include mixins.middle-font;
+
   font-size: 11px;
   outline: 0;
   cursor: pointer;
-  transition: opacity .4s linear;
+  transition: opacity 0.4s linear;
   font-family: var(--font-family);
-  background-color: rgba($color: var(--color-primary), $alpha: 1.0);
+  background-color: rgba($color: var(--color-secondary-primary), $alpha: 100%);
   text-decoration: none;
 }
 
 .text-button_color_red {
   color: var(--color-red);
+}
+
+.text-button_color_gray {
+  color: var(--color-secondary-gray);
 }
 
 .text-button:hover {

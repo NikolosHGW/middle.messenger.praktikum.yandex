@@ -1,4 +1,4 @@
-@use '../mixins.scss';
+@use "../mixins.scss";
 
 .label {
   display: flex;
@@ -14,9 +14,11 @@
   margin: 0;
   padding: 0;
   border: 0;
-  border-bottom: 1px solid var(--color-primary);
+  border-bottom: 1px solid var(--color-secondary-primary);
   padding-bottom: 7px;
+
   @include mixins.middle-font;
+
   font-size: 13px;
   box-sizing: border-box;
 }
@@ -32,12 +34,49 @@
 .label__input-error {
   position: absolute;
   top: 32px;
+
   @include mixins.middle-font;
+
   font-size: 12px;
   color: var(--color-red);
   visibility: hidden;
 }
 
-.label__input-error_active {
+.error-span_active {
   visibility: visible;
+}
+
+.edit-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  position: relative;
+  max-width: 510px;
+  width: 100%;
+  font-family: var(--font-family);
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.edit-label__span {
+  font-family: var(--font-family);
+  font-size: 13px;
+}
+
+.edit-label__input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  padding-bottom: 7px;
+
+  @include mixins.middle-font;
+
+  font-size: 13px;
+  box-sizing: border-box;
+  text-align: end;
+  color: var(--color-secondary-gray);
+  background-color: rgb(0 0 0 / 0%);
+}
+
+.edit-label__input:focus {
+  outline: 0;
 }
