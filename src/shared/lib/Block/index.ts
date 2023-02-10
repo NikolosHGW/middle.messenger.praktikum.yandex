@@ -1,9 +1,14 @@
 import { v4 as makeUUID } from 'uuid';
 import { EventsPropType } from '../../utils/types/types';
 import { EventBus } from '../EventBus';
-import { BlockProps, ExtendRecord, Options } from './types';
+import {
+  BlockProps,
+  Component,
+  ExtendRecord,
+  Options,
+} from './types';
 
-class Block {
+abstract class Block implements Component {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -17,22 +22,22 @@ class Block {
 
   private eventBus: () => EventBus;
 
-  private id: string;
-
   private needUpdateProps: boolean;
 
-  props: BlockProps<Block>;
+  readonly id: string;
 
-  children: Record<string, Block>;
+  props: BlockProps<Component>;
+
+  children: Record<string, Component>;
 
   attributes?: Record<string, string>;
 
-  childrenWithList?: ExtendRecord<Array<Block>>;
+  childrenWithList?: ExtendRecord<Array<Component>>;
 
   constructor(
     tagName = 'div',
-    props: BlockProps<Block> = {},
-    options: Options<Block> = {},
+    props: BlockProps<Component> = {},
+    options: Options<Component> = {},
     eventBus: EventBus = new EventBus(),
   ) {
     const { children, props: propsWithoutChildren } = Block.getChildren(props);
@@ -55,7 +60,7 @@ class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  private saveOptions(options: Options<Block>) {
+  private saveOptions(options: Options<Component>) {
     const { attributes, childrenWithList } = options;
     if (attributes) {
       this.attributes = { ...attributes };
@@ -66,15 +71,15 @@ class Block {
   }
 
   private static getChildren(propsAndChildren: {}) {
-    const children: Record<string, Block> = {};
+    const children: Record<string, Component> = {};
     const props: Record<string, string> = {};
 
     Object.entries(propsAndChildren).forEach((
-      [key, value]: [key: string, value: Block | string],
+      [key, value]: [key: string, value: Component | string],
     ) => {
-      if (value instanceof Block) {
+      if (value instanceof Block && typeof value !== 'string') {
         children[key] = value;
-      } else {
+      } else if (typeof value === 'string') {
         props[key] = value;
       }
     });
@@ -82,18 +87,18 @@ class Block {
     return { children, props };
   }
 
-  compile(templator: (props: {}) => string, props: BlockProps<Block>) {
+  compile(templator: (props: {}) => string, props: BlockProps<Component>) {
     const propsAndStubs = { ...props };
-    const childrenBlocks: Block[] = [];
+    const childrenBlocks: Component[] = [];
 
-    Object.entries(this.children).forEach(([key, child]: [key: string, child: Block]) => {
+    Object.entries(this.children).forEach(([key, child]: [key: string, child: Component]) => {
       propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
       childrenBlocks.push(child);
     });
 
     if (this.childrenWithList) {
       Object.entries(this.childrenWithList).forEach((
-        [key, childs]: [key: string, childs: Block[]],
+        [key, childs]: [key: string, childs: Component[]],
       ) => {
         const resultString = childs.reduce((prev, child) => {
           childrenBlocks.push(child);

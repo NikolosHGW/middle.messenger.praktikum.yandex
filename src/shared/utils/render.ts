@@ -1,6 +1,6 @@
-import { Block } from '../lib/Block';
+import { Component } from '../lib/Block/types';
 
-export const render = (query: string, block: Block) => {
+export const render = (query: string, block: Component) => {
   const root = document.querySelector(query);
 
   if (root) {
