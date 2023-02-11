@@ -26,4 +26,5 @@ export interface Component {
   toggleInputEvents: (eventName: string, needAdd: boolean) => void;
   show: EmptyFunc;
   hide: EmptyFunc;
+  unMount: EmptyFunc;
 }

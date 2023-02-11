@@ -1,24 +1,23 @@
 import { Component } from '../Block/types';
 import { Route } from '../Route';
-import { ClassType } from '../Route/types';
 
 class Router {
   public static instance: Router;
 
   private currentRoute: Route<Component> | null;
 
-  public routes: Route<Component>[];
+  public routes: Record<string, Route<Component>>;
 
   public history: History;
 
   public rootQuery: string;
 
-  private constructor(rootQuery: string) {
+  constructor(rootQuery: string) {
     if (Router.instance) {
       return Router.instance;
     }
 
-    this.routes = [];
+    this.routes = {};
     this.history = window.history;
     this.currentRoute = null;
     this.rootQuery = rootQuery;
@@ -26,9 +25,9 @@ class Router {
     Router.instance = this;
   }
 
-  use(pathname: string, block: ClassType<Component>) {
+  use(pathname: string, block: () => Component) {
     const route = new Route<Component>(pathname, block, { rootQuery: this.rootQuery });
-    this.routes.push(route);
+    this.routes[pathname] = route;
 
     return this;
   }
@@ -68,7 +67,7 @@ class Router {
   }
 
   getRoute(pathname: string) {
-    return this.routes.find((route) => route.match(pathname));
+    return this.routes[pathname];
   }
 }
 

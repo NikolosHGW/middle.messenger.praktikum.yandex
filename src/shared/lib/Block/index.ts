@@ -72,14 +72,14 @@ abstract class Block implements Component {
 
   private static getChildren(propsAndChildren: {}) {
     const children: Record<string, Component> = {};
-    const props: Record<string, string> = {};
+    const props: Record<string, Component | string> = {};
 
     Object.entries(propsAndChildren).forEach((
       [key, value]: [key: string, value: Component | string],
     ) => {
-      if (value instanceof Block && typeof value !== 'string') {
+      if (value instanceof Block) {
         children[key] = value;
-      } else if (typeof value === 'string') {
+      } else {
         props[key] = value;
       }
     });
@@ -271,6 +271,10 @@ abstract class Block implements Component {
 
   hide() {
     this.htmlElement.style.display = 'none';
+  }
+
+  unMount() {
+    this.htmlElement.remove();
   }
 }
 

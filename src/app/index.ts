@@ -3,59 +3,71 @@ import { EditPasswordPage } from '../pages/EditPasswordPage';
 import { EditProfilePage } from '../pages/EditProfilePage';
 import { LoginPage } from '../pages/LoginPage';
 import { MessagesPage } from '../pages/MessagesPage';
-import { ErrorPage } from '../pages/ErrorPage';
+// import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
-import { render } from '../shared/utils/render';
+import { Router } from '../shared/lib/Router';
+// import { render } from '../shared/utils/render';
 import './index.scss';
 
-const loginPage = () => {
-  render('#root', LoginPage());
-};
+const router = new Router('#root');
 
-const authPage = () => {
-  render('#root', AuthPage());
-};
+router
+  .use('/', LoginPage)
+  .use('/auth', AuthPage)
+  .use('/messages', MessagesPage)
+  .use('/profile', ProfilePage)
+  .use('/edit', EditProfilePage)
+  .use('/password', EditPasswordPage)
+  .start();
 
-const messagesPage = () => {
-  render('#root', MessagesPage());
-};
+// const loginPage = () => {
+//   render('#root', LoginPage());
+// };
 
-const profilePage = () => {
-  render('#root', ProfilePage());
-};
+// const authPage = () => {
+//   render('#root', AuthPage());
+// };
 
-const editProfilePage = () => {
-  render('#root', EditProfilePage());
-};
+// const messagesPage = () => {
+//   render('#root', MessagesPage());
+// };
 
-const editPasswordPage = () => {
-  render('#root', EditPasswordPage());
-};
+// const profilePage = () => {
+//   render('#root', ProfilePage());
+// };
 
-const notFoundPage = () => {
-  render('#root', ErrorPage({ title: '404', subtitle: 'Не туда попали' }));
-};
+// const editProfilePage = () => {
+//   render('#root', EditProfilePage());
+// };
 
-const serverErrorPage = () => {
-  render('#root', ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' }));
-};
+// const editPasswordPage = () => {
+//   render('#root', EditPasswordPage());
+// };
 
-const routes: Record<string, () => void> = {
-  '/': loginPage,
-  '/auth': authPage,
-  '/messages': messagesPage,
-  '/profile': profilePage,
-  '/edit': editProfilePage,
-  '/password': editPasswordPage,
-  '/not-found': notFoundPage,
-  '/error': serverErrorPage,
-};
+// const notFoundPage = () => {
+//   render('#root', ErrorPage({ title: '404', subtitle: 'Не туда попали' }));
+// };
 
-const router = () => {
-  const route = routes[window.location.pathname];
+// const serverErrorPage = () => {
+//   render('#root', ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' }));
+// };
 
-  route();
-};
+// const routes: Record<string, () => void> = {
+//   '/': loginPage,
+//   '/auth': authPage,
+//   '/messages': messagesPage,
+//   '/profile': profilePage,
+//   '/edit': editProfilePage,
+//   '/password': editPasswordPage,
+//   '/not-found': notFoundPage,
+//   '/error': serverErrorPage,
+// };
 
-window.addEventListener('load', router);
-window.addEventListener('hashchange', router);
+// const router = () => {
+//   const route = routes[window.location.pathname];
+
+//   route();
+// };
+
+// window.addEventListener('load', router);
+// window.addEventListener('hashchange', router);
