@@ -1,9 +1,9 @@
 import { queryStringify } from '../../utils/helpers';
 import { METHODS } from './constants';
-import { Options, OptionsWithMethod } from './types';
+import { HTTPMethod, OptionsWithMethod } from './types';
 
 class CustomFetch {
-  get = (_url: string, options: Options = {}) => {
+  get: HTTPMethod = (_url, options = {}) => {
     let url = _url;
     if (options.data) {
       url += queryStringify(options.data);
@@ -11,19 +11,19 @@ class CustomFetch {
     return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
   };
 
-  put = (url: string, options: Options = {}) => {
+  put: HTTPMethod = (url, options = {}) => {
     const newOptions = { ...options, method: METHODS.PUT };
 
     return this.request(url, newOptions, options.timeout);
   };
 
-  post = (url: string, options: Options = {}) => {
+  post: HTTPMethod = (url, options = {}) => {
     const newOptions = { ...options, method: METHODS.POST };
 
     return this.request(url, newOptions, options.timeout);
   };
 
-  delete = (url: string, options: Options = {}) => {
+  delete: HTTPMethod = (url, options = {}) => {
     const newOptions = { ...options, method: METHODS.DELETE };
 
     return this.request(url, newOptions, options.timeout);

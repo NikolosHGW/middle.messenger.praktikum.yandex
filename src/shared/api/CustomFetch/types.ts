@@ -1,7 +1,9 @@
-export type options = {
+export type Options = {
   timeout?: number;
-  data?: record<string, unknown>;
-  headers?: record<string, string>;
-}
+  data?: Record<string, unknown>;
+  headers?: Record<string, string>;
+};
 
-export type optionswithmethod = options & { method: string; }
+export type OptionsWithMethod = Options & { method: string; };
+
+export type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
