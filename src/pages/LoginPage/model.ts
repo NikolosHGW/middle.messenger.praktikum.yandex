@@ -3,7 +3,12 @@ import { LoginPageComponent } from './LoginPageComponent';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
-import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
+import {
+  getInputTarget,
+  linkTo,
+  logObjectToConsole,
+  validate,
+} from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
 import { List } from '../../shared/ui/List';
 
@@ -47,49 +52,65 @@ const buttonLogin = () => Button({
 const buttonAuthLink = () => TextButton({
   text: 'Нет аккаунта?',
   className: 'text-button form__text-button',
-  href: 'auth',
+  events: {
+    click: linkTo('/auth'),
+  },
 });
 
 const buttonLinkAuth = () => TextButton({
   text: 'Авторизация /auth',
   className: 'text-button',
-  href: 'auth',
+  events: {
+    click: linkTo('/auth'),
+  },
 });
 
 const buttonLinkMessages = () => TextButton({
   text: 'Сообщения /messages',
   className: 'text-button',
-  href: 'messages',
+  events: {
+    click: linkTo('/messages'),
+  },
 });
 
 const buttonLinkProfile = () => TextButton({
   text: 'Профиль /profile',
   className: 'text-button',
-  href: 'profile',
+  events: {
+    click: linkTo('/profile'),
+  },
 });
 
 const buttonLinkEdit = () => TextButton({
   text: 'Изменить профиль /edit',
   className: 'text-button',
-  href: 'edit',
+  events: {
+    click: linkTo('/edit'),
+  },
 });
 
 const buttonLinkPassword = () => TextButton({
   text: 'Изменить пароль /password',
   className: 'text-button',
-  href: 'password',
+  events: {
+    click: linkTo('/password'),
+  },
 });
 
 const buttonLinkNotFound = () => TextButton({
   text: '404 /not-found',
   className: 'text-button',
-  href: 'not-found',
+  events: {
+    click: linkTo('/not-found'),
+  },
 });
 
 const buttonLinkError = () => TextButton({
   text: '500 /error',
   className: 'text-button',
-  href: 'error',
+  events: {
+    click: linkTo('/error'),
+  },
 });
 
 const getList = () => [

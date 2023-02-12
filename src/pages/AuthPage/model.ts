@@ -3,7 +3,12 @@ import { AuthPageComponent } from './AuthPageComponent';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
-import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
+import {
+  getInputTarget,
+  linkTo,
+  logObjectToConsole,
+  validate,
+} from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
 
 const resultForm = {
@@ -114,7 +119,9 @@ const buttonLogin = () => Button({ text: 'Зарегистрироваться',
 const buttonAuthLink = () => TextButton({
   text: 'Войти',
   className: 'text-button form__text-button',
-  href: '/',
+  events: {
+    click: linkTo('/'),
+  },
 });
 
 const getInputs = () => [

@@ -1,4 +1,7 @@
+import { EventsPropType } from '../../utils/types/types';
+
 export type TextButtonProps = {
   text: string,
-  attributes: { class: string, href: string }
+  events: EventsPropType,
+  attributes: { class: string, 'aria-label': string, type: string },
 };

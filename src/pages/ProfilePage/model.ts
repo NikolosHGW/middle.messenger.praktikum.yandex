@@ -3,6 +3,7 @@ import { TextButton } from '../../shared/ui/TextButton';
 import { ProfileContainer } from '../../entities/ProfileContainer';
 import { ProfilePageComponent } from './ProfilePageComponent';
 import { Avatar } from '../../shared/ui/Avatar';
+import { linkTo } from '../../shared/utils/helpers';
 
 const emailInput = () => Input({
   inputId: 'email-input',
@@ -68,16 +69,24 @@ const phoneInput = () => Input({
 });
 
 const editTextButton = () => TextButton({
-  text: 'Изменить Данные', href: 'edit',
+  text: 'Изменить Данные',
+  events: {
+    click: linkTo('/edit'),
+  },
 });
 
 const editPasswordTextButton = () => TextButton({
-  text: 'Изменить пароль', href: 'password',
+  text: 'Изменить пароль',
+  events: {
+    click: linkTo('/password'),
+  },
 });
 
 const exitPasswordTextButton = () => TextButton({
   text: 'Выйти',
-  href: 'messages',
+  events: {
+    click: linkTo('/messages'),
+  },
   className: 'text-button form__text-button text-button_color_red',
 });
 

@@ -5,8 +5,8 @@ import ui from './ui.hbs';
 const textButtoTemplate = (props: TextButtonProps) => ui(props);
 
 class TextButtonComponent extends Block {
-  constructor({ text, attributes }: TextButtonProps) {
-    super('a', { text }, { attributes });
+  constructor({ text, events, attributes }: TextButtonProps) {
+    super('button', { text, events }, { attributes });
   }
 
   customRender() {

@@ -1,3 +1,4 @@
+import { Router } from '../lib/Router';
 import { InputType } from '../lib/Validation/types';
 import { Validation } from '../lib/Validation/Validation';
 import { PlainObject } from './types/types';
@@ -53,4 +54,8 @@ export const isEqual = (lhs: PlainObject, rhs: PlainObject) => {
 
     return true;
   });
+};
+
+export const linkTo = (pathname: string) => () => {
+  new Router('#root').go(pathname);
 };
