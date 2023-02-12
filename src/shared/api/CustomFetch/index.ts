@@ -3,6 +3,12 @@ import { METHODS } from './constants';
 import { HTTPMethod, OptionsWithMethod } from './types';
 
 class CustomFetch {
+  private rootUrl: string;
+
+  constructor(rootUrl: string) {
+    this.rootUrl = rootUrl;
+  }
+
   get: HTTPMethod = (_url, options = {}) => {
     let url = _url;
     if (options.data) {
@@ -30,13 +36,25 @@ class CustomFetch {
   };
 
   request = (url: string, options: OptionsWithMethod, timeout = 5000) => {
-    const { method, data, headers } = options;
+    const {
+      method,
+      data,
+      headers,
+      withCredentials = true,
+    } = options;
+    const fullUrl = this.rootUrl + url;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
+      xhr.open(method, fullUrl);
       if (headers) {
         Object.entries(headers).forEach(([key, head]) => xhr.setRequestHeader(key, head));
+      } else {
+        xhr.setRequestHeader('content-type', 'application/json');
+      }
+
+      if (withCredentials) {
+        xhr.withCredentials = true;
       }
 
       xhr.onload = () => {
