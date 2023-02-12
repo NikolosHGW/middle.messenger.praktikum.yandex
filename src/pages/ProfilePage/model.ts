@@ -4,6 +4,7 @@ import { ProfileContainer } from '../../entities/ProfileContainer';
 import { ProfilePageComponent } from './ProfilePageComponent';
 import { Avatar } from '../../shared/ui/Avatar';
 import { linkTo } from '../../shared/utils/helpers';
+import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL, MESSAGE_URL } from '../../shared/utils/constants';
 
 const emailInput = () => Input({
   inputId: 'email-input',
@@ -71,21 +72,21 @@ const phoneInput = () => Input({
 const editTextButton = () => TextButton({
   text: 'Изменить Данные',
   events: {
-    click: linkTo('/edit'),
+    click: linkTo(EDIT_PROFILE_URL),
   },
 });
 
 const editPasswordTextButton = () => TextButton({
   text: 'Изменить пароль',
   events: {
-    click: linkTo('/password'),
+    click: linkTo(EDIT_PASSWORD_URL),
   },
 });
 
 const exitPasswordTextButton = () => TextButton({
   text: 'Выйти',
   events: {
-    click: linkTo('/messages'),
+    click: linkTo(MESSAGE_URL),
   },
   className: 'text-button form__text-button text-button_color_red',
 });

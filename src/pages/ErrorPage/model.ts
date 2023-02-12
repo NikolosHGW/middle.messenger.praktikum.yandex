@@ -1,4 +1,5 @@
 import { TextButton } from '../../shared/ui/TextButton';
+import { MESSAGE_URL } from '../../shared/utils/constants';
 import { linkTo } from '../../shared/utils/helpers';
 import { ErrorPageComponent } from './ErrorPageComponent';
 
@@ -10,7 +11,7 @@ const ErrorPage = (
   button: TextButton({
     text: 'Назад к чатам',
     events: {
-      click: linkTo('/messages'),
+      click: linkTo(MESSAGE_URL),
     },
   }),
 });

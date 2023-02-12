@@ -11,6 +11,15 @@ import {
 } from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
 import { List } from '../../shared/ui/List';
+import {
+  AUTH_URL,
+  EDIT_PASSWORD_URL,
+  EDIT_PROFILE_URL,
+  ERROR_URL,
+  MESSAGE_URL,
+  NOT_FOUND_URL,
+  PROFILE_URL,
+} from '../../shared/utils/constants';
 
 const resultForm = {
   login: '',
@@ -53,7 +62,7 @@ const buttonAuthLink = () => TextButton({
   text: 'Нет аккаунта?',
   className: 'text-button form__text-button',
   events: {
-    click: linkTo('/auth'),
+    click: linkTo(AUTH_URL),
   },
 });
 
@@ -61,7 +70,7 @@ const buttonLinkAuth = () => TextButton({
   text: 'Авторизация /auth',
   className: 'text-button',
   events: {
-    click: linkTo('/auth'),
+    click: linkTo(AUTH_URL),
   },
 });
 
@@ -69,7 +78,7 @@ const buttonLinkMessages = () => TextButton({
   text: 'Сообщения /messages',
   className: 'text-button',
   events: {
-    click: linkTo('/messages'),
+    click: linkTo(MESSAGE_URL),
   },
 });
 
@@ -77,7 +86,7 @@ const buttonLinkProfile = () => TextButton({
   text: 'Профиль /profile',
   className: 'text-button',
   events: {
-    click: linkTo('/profile'),
+    click: linkTo(PROFILE_URL),
   },
 });
 
@@ -85,7 +94,7 @@ const buttonLinkEdit = () => TextButton({
   text: 'Изменить профиль /edit',
   className: 'text-button',
   events: {
-    click: linkTo('/edit'),
+    click: linkTo(EDIT_PROFILE_URL),
   },
 });
 
@@ -93,7 +102,7 @@ const buttonLinkPassword = () => TextButton({
   text: 'Изменить пароль /password',
   className: 'text-button',
   events: {
-    click: linkTo('/password'),
+    click: linkTo(EDIT_PASSWORD_URL),
   },
 });
 
@@ -101,7 +110,7 @@ const buttonLinkNotFound = () => TextButton({
   text: '404 /not-found',
   className: 'text-button',
   events: {
-    click: linkTo('/not-found'),
+    click: linkTo(NOT_FOUND_URL),
   },
 });
 
@@ -109,7 +118,7 @@ const buttonLinkError = () => TextButton({
   text: '500 /error',
   className: 'text-button',
   events: {
-    click: linkTo('/error'),
+    click: linkTo(ERROR_URL),
   },
 });
 

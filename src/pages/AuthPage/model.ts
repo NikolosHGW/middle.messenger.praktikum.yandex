@@ -10,6 +10,7 @@ import {
   validate,
 } from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
+import { LOGIN_URL } from '../../shared/utils/constants';
 
 const resultForm = {
   email: '',
@@ -120,7 +121,7 @@ const buttonAuthLink = () => TextButton({
   text: 'Войти',
   className: 'text-button form__text-button',
   events: {
-    click: linkTo('/'),
+    click: linkTo(LOGIN_URL),
   },
 });
 
