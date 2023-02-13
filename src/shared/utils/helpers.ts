@@ -59,3 +59,40 @@ export const isEqual = (lhs: PlainObject, rhs: PlainObject) => {
 export const linkTo = (pathname: string) => () => {
   new Router('#root').go(pathname);
 };
+
+const merge = (lhs: PlainObject, rhs: PlainObject): PlainObject => {
+  Object.values(rhs).forEach((p) => {
+    if (Object.prototype.hasOwnProperty.call(rhs, p)) {
+      try {
+        if (rhs[p].constructor === Object) {
+          rhs[p] = merge(lhs[p] as PlainObject, rhs[p] as PlainObject);
+        } else {
+          lhs[p] = rhs[p];
+        }
+      } catch (e) {
+        lhs[p] = rhs[p];
+      }
+    }
+  });
+
+  return lhs;
+};
+
+export const set = (
+  object: PlainObject | unknown,
+  path: string,
+  value: unknown,
+): PlainObject | unknown => {
+  if (typeof object !== 'object' || object === null) {
+    return object;
+  }
+
+  if (typeof path !== 'string') {
+    throw new Error('path must be string');
+  }
+
+  const result = path.split('.').reduceRight<PlainObject>((acc, key) => ({
+    [key]: acc,
+  }), value as any);
+  return merge(object as PlainObject, result);
+};
