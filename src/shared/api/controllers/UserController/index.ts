@@ -1,34 +1,25 @@
 import { SignInAPI } from '../../SignInAPI';
 import { LogoutAPI } from '../../LogoutAPI';
 import { store } from '../../../lib/Store';
+import { parseXMLRequest } from '../../../utils/helpers';
+import { handleError } from '../../../utils/decorators';
 
 class UserController {
+  @handleError
   public static getUser() {
-    try {
-      SignInAPI.read()
-        .then((result: XMLHttpRequest) => new Promise<unknown>((resolve) => {
-          resolve(JSON.parse(result.response));
-        }))
-        .then(({ email: displayName }) => store.set('user.displayName', displayName));
-    } catch (err) {
-      // console.log(err);
-    }
+    SignInAPI.read()
+      .then(parseXMLRequest)
+      .then(({ email: displayName }) => store.set('user.displayName', displayName));
   }
 
+  @handleError
   public static login(data: { login: string, password: string }) {
-    try {
-      SignInAPI.create(data);
-    } catch (err) {
-      // console.log(err);
-    }
+    SignInAPI.create(data);
   }
 
+  @handleError
   public static logout() {
-    try {
-      LogoutAPI.create();
-    } catch (err) {
-      // console.log(err);
-    }
+    LogoutAPI.create();
   }
 }
 

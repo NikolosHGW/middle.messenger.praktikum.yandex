@@ -96,3 +96,9 @@ export const set = (
   }), value as any);
   return merge(object as PlainObject, result);
 };
+
+export const parseXMLRequest = (result: XMLHttpRequest) => new Promise<unknown>(
+  (resolve) => {
+    resolve(JSON.parse(result.response));
+  },
+);
