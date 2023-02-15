@@ -1,13 +1,13 @@
 import { authApiInstance } from './utils';
 
 class AuthAPI {
-  create(data: Record<string, string>) {
+  static create(data: Record<string, string>) {
     return authApiInstance.post('/auth/signup', {
       data,
     });
   }
 
-  read() {
+  static read() {
     return authApiInstance.get('/auth/user');
   }
 }

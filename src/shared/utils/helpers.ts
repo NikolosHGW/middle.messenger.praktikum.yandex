@@ -61,7 +61,7 @@ export const linkTo = (pathname: string) => () => {
 };
 
 const merge = (lhs: PlainObject, rhs: PlainObject): PlainObject => {
-  Object.values(rhs).forEach((p) => {
+  Object.keys(rhs).forEach((p) => {
     if (Object.prototype.hasOwnProperty.call(rhs, p)) {
       try {
         if (rhs[p].constructor === Object) {

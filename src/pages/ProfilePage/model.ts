@@ -5,6 +5,7 @@ import { ProfilePageComponent } from './ProfilePageComponent';
 import { Avatar } from '../../shared/ui/Avatar';
 import { linkTo } from '../../shared/utils/helpers';
 import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL, MESSAGE_URL } from '../../shared/utils/constants';
+import { UserController } from './controller';
 
 const emailInput = () => Input({
   inputId: 'email-input',
@@ -108,12 +109,15 @@ const getButtons = () => [
 
 const profileContainer = () => ProfileContainer({
   avatar: Avatar(),
-  title: 'Иван',
+  title: '',
   formName: 'profile',
   inputs: getInputs(),
   buttons: getButtons(),
 });
 
-const ProfilePage = () => new ProfilePageComponent({ ProfileContainer: profileContainer() });
+const ProfilePage = () => {
+  UserController.getUser();
+  return new ProfilePageComponent({ ProfileContainer: profileContainer() });
+};
 
 export { ProfilePage };

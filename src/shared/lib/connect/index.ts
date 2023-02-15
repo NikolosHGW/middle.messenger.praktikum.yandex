@@ -1,17 +1,15 @@
 import { isEqual } from '../../utils/helpers';
 import { PlainObject } from '../../utils/types/types';
-import { Block } from '../Block';
+import { Component } from '../Block/types';
 import { store } from '../Store';
 import { StoreEvents } from '../Store/utils';
-import { ParametersType } from './types';
 
 const connect = (
   mapStateToProps: (state: PlainObject) => PlainObject,
-) => (Component: typeof Block) => class <Props, Options> extends Component {
-  constructor(properties: ParametersType<Props, Options>) {
-    let state = mapStateToProps(store.getState());
-    const { tagName = '', props = {}, options = {} } = properties;
-    super(tagName, { ...props, ...state }, options);
+) => (Block: new (...args: unknown[]) => Component) => class <Props> extends Block {
+  constructor(props: Props) {
+    let state = { ...props } as PlainObject;
+    super(props);
 
     store.on(StoreEvents.Updated, () => {
       const newState = mapStateToProps(store.getState());
