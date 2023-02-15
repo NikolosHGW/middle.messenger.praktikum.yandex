@@ -20,6 +20,7 @@ import {
   NOT_FOUND_URL,
   PROFILE_URL,
 } from '../../shared/utils/constants';
+import { UserController } from '../../shared/api/controllers/UserController';
 
 const resultForm = {
   login: '',
@@ -142,6 +143,7 @@ const form = () => Form({
       evt.preventDefault();
       logObjectToConsole(resultForm);
       Validation.handleSubmit(evt);
+      UserController.login(resultForm);
     },
   },
 });

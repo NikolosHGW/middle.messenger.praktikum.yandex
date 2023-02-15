@@ -4,8 +4,8 @@ import { ProfileContainer } from '../../entities/ProfileContainer';
 import { ProfilePageComponent } from './ProfilePageComponent';
 import { Avatar } from '../../shared/ui/Avatar';
 import { linkTo } from '../../shared/utils/helpers';
-import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL, MESSAGE_URL } from '../../shared/utils/constants';
-import { UserController } from './controller';
+import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL } from '../../shared/utils/constants';
+import { UserController } from '../../shared/api/controllers/UserController';
 
 const emailInput = () => Input({
   inputId: 'email-input',
@@ -87,7 +87,7 @@ const editPasswordTextButton = () => TextButton({
 const exitPasswordTextButton = () => TextButton({
   text: 'Выйти',
   events: {
-    click: linkTo(MESSAGE_URL),
+    click: () => UserController.logout(),
   },
   className: 'text-button form__text-button text-button_color_red',
 });

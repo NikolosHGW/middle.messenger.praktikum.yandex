@@ -12,3 +12,5 @@ export const EDIT_PROFILE_URL = '/edit';
 export const EDIT_PASSWORD_URL = '/password';
 export const NOT_FOUND_URL = '/not-found';
 export const ERROR_URL = '/error';
+
+export const ROOT_URL = 'https://ya-praktikum.tech/api/v2';

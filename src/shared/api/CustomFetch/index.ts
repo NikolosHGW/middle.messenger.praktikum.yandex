@@ -1,3 +1,4 @@
+import { ROOT_URL } from '../../utils/constants';
 import { queryStringify } from '../../utils/helpers';
 import { METHODS } from './constants';
 import { HTTPMethod, OptionsWithMethod } from './types';
@@ -5,8 +6,11 @@ import { HTTPMethod, OptionsWithMethod } from './types';
 class CustomFetch {
   private rootUrl: string;
 
-  constructor(rootUrl: string) {
+  private postfix: string;
+
+  constructor(postfix: string, rootUrl: string = ROOT_URL) {
     this.rootUrl = rootUrl;
+    this.postfix = postfix;
   }
 
   get: HTTPMethod = (_url, options = {}) => {
@@ -42,7 +46,7 @@ class CustomFetch {
       headers,
       withCredentials = true,
     } = options;
-    const fullUrl = this.rootUrl + url;
+    const fullUrl = this.rootUrl + this.postfix + url;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
