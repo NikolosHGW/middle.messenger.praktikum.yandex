@@ -7,7 +7,6 @@ import {
   getInputTarget,
   linkTo,
   logObjectToConsole,
-  validate,
 } from '../../shared/utils/helpers';
 import { Validation } from '../../shared/lib/Validation/Validation';
 import { List } from '../../shared/ui/List';
@@ -16,11 +15,14 @@ import {
   EDIT_PASSWORD_URL,
   EDIT_PROFILE_URL,
   ERROR_URL,
+  loginRegexString,
   MESSAGE_URL,
   NOT_FOUND_URL,
+  passwordRegex,
   PROFILE_URL,
 } from '../../shared/utils/constants';
 import { UserController } from '../../shared/api/controllers/UserController';
+import { FormValidator } from '../../shared/lib/FormValidator';
 
 const resultForm = {
   login: '',
@@ -31,12 +33,11 @@ const loginInput = () => Input({
   inputId: 'login-input',
   placeholder: 'Логин',
   inputName: 'login',
+  pattern: loginRegexString,
   events: {
     change: (evt: Event) => {
       resultForm.login = getInputTarget(evt.target).value;
     },
-    focus: validate('login'),
-    blur: validate('login'),
   },
 });
 
@@ -45,12 +46,11 @@ const passwordInput = () => Input({
   placeholder: 'Пароль',
   inputName: 'password',
   inputType: 'password',
+  pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
       resultForm.password = getInputTarget(evt.target).value;
     },
-    focus: validate('password'),
-    blur: validate('password'),
   },
 });
 
@@ -133,20 +133,36 @@ const getList = () => [
   List({ link: buttonLinkError() }),
 ];
 
-const form = () => Form({
-  title: 'Вход',
-  formName: 'login',
-  inputs: [loginInput(), passwordInput()],
-  buttons: [buttonLogin(), buttonAuthLink()],
-  events: {
-    submit: (evt: Event) => {
-      evt.preventDefault();
-      logObjectToConsole(resultForm);
-      Validation.handleSubmit(evt);
-      UserController.login(resultForm);
+const form = () => {
+  const formObject = Form({
+    title: 'Вход',
+    formName: 'login',
+    inputs: [loginInput(), passwordInput()],
+    buttons: [buttonLogin(), buttonAuthLink()],
+    events: {
+      submit: (evt: Event) => {
+        evt.preventDefault();
+        logObjectToConsole(resultForm);
+        Validation.handleSubmit(evt);
+        if (Validation.getIsValidForm(evt)) {
+          UserController.login(resultForm);
+        }
+      },
     },
-  },
-});
+  });
+
+  const loginFormValid = new FormValidator({
+    inputSelector: '.label__input',
+    submitButtonSelector: '.button',
+    inactiveButtonClass: 'button_disabled',
+    inputErrorClass: 'label__input_type_error',
+    errorClass: 'label__input-error',
+  }, formObject.getContent().querySelector('.form') as HTMLFormElement);
+
+  loginFormValid.enableValidation();
+
+  return formObject;
+};
 
 const LoginPage = () => new LoginPageComponent({ Form: form(), links: getList() });
 

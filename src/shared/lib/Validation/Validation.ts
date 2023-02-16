@@ -24,6 +24,7 @@ class Validation {
     oldPassword: 'old_password',
     newPassword: 'new_password',
     repeatPassword: 'repeat_password',
+    buttonDisabled: 'button_disabled',
   };
 
   static toggleErrorClass = (input: HTMLInputElement | null, isValide: boolean) => {
@@ -109,7 +110,22 @@ class Validation {
         }
       });
     }
+    Validation.toggleSubmitActivation(evt);
   };
+
+  static toggleSubmitActivation = (evt: Event) => {
+    const form = (evt.target as HTMLFormElement).querySelector('button[type="submit"]');
+    const hasDisabledClass = form!.classList.contains(Validation.CONSTANTS.buttonDisabled);
+    const isValid = Validation.getIsValidForm(evt);
+    if (isValid && hasDisabledClass) {
+      form!.classList.remove(Validation.CONSTANTS.buttonDisabled);
+    } else if (!isValid) {
+      form!.classList.add(Validation.CONSTANTS.buttonDisabled);
+    }
+  };
+
+  static getIsValidForm = (evt: Event) => !(evt.target as HTMLFormElement)
+    .querySelector(`.${this.CONSTANTS.errorSpanActive}`);
 
   static checkLogin = (value: string) => value.match(loginRegexString);
 

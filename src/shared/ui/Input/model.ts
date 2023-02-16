@@ -12,6 +12,7 @@ const Input = ({
   spanText = '',
   autocomplete = 'false',
   events = {},
+  pattern = '',
 } = {}) => new InputComponent({
   inputId,
   placeholder,
@@ -23,6 +24,7 @@ const Input = ({
   spanText,
   autocomplete,
   events,
+  pattern,
   attributes: { class: className },
 });
 

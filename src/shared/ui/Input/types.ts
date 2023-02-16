@@ -16,4 +16,5 @@ export type InputProps = {
   autocomplete: string,
   events: EventsPropType,
   attributes: InputAttributes,
+  pattern: string,
 };
