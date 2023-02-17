@@ -5,7 +5,7 @@ import { LoginPage } from '../pages/LoginPage';
 import { MessagesPage } from '../pages/MessagesPage';
 import { ErrorPage } from '../pages/ErrorPage';
 import { ProfilePage } from '../pages/ProfilePage';
-import { Router } from '../shared/lib/Router';
+import { router } from '../shared/lib/Router';
 import {
   AUTH_URL,
   EDIT_PASSWORD_URL,
@@ -17,8 +17,6 @@ import {
   PROFILE_URL,
 } from '../shared/utils/constants';
 import './index.scss';
-
-const router = new Router('#root');
 
 router
   .use(LOGIN_URL, LoginPage)

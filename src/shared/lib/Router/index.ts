@@ -1,3 +1,4 @@
+import { protectRoute } from '../../utils/decorators';
 import { Component } from '../Block/types';
 import { Route } from '../Route';
 
@@ -40,6 +41,7 @@ class Router {
     this.onRoute(window.location.pathname);
   }
 
+  @protectRoute
   private onRoute(pathname: string) {
     const route = this.getRoute(pathname);
 
@@ -71,4 +73,6 @@ class Router {
   }
 }
 
-export { Router };
+const router = new Router('#root');
+
+export { router };

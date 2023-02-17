@@ -1,4 +1,4 @@
-import { Router } from '../lib/Router';
+import { router } from '../lib/Router';
 import { InputType } from '../lib/Validation/types';
 import { Validation } from '../lib/Validation/Validation';
 import { PlainObject } from './types/types';
@@ -54,7 +54,7 @@ export const isEqual = (lhs: PlainObject, rhs: PlainObject) => {
 };
 
 export const linkTo = (pathname: string) => () => {
-  new Router('#root').go(pathname);
+  router.go(pathname);
 };
 
 const merge = (lhs: PlainObject, rhs: PlainObject): PlainObject => {
