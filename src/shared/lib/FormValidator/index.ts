@@ -93,6 +93,14 @@ class FormValidator {
         this.checkInputValidity(inputElement);
         this.toggleButtonState();
       });
+      inputElement.addEventListener('focus', () => {
+        this.checkInputValidity(inputElement);
+        this.toggleButtonState();
+      });
+      inputElement.addEventListener('blur', () => {
+        this.checkInputValidity(inputElement);
+        this.toggleButtonState();
+      });
     });
   }
 
