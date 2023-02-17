@@ -4,11 +4,11 @@ export const handleError = <Target = unknown>(
   descriptor: PropertyDescriptor,
 ) => {
   const originalMethod = descriptor.value;
-  descriptor.value = (...args: unknown[]) => {
+  descriptor.value = async (...args: unknown[]) => {
     try {
-      originalMethod.apply(this, args);
+      await originalMethod.apply(this, args);
     } catch (err) {
-      // console.log(err);
+      // console.log(err, 'Привет Дривэ');
     }
   };
 };

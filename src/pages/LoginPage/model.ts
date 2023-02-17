@@ -6,9 +6,7 @@ import { TextButton } from '../../shared/ui/TextButton';
 import {
   getInputTarget,
   linkTo,
-  logObjectToConsole,
 } from '../../shared/utils/helpers';
-import { Validation } from '../../shared/lib/Validation/Validation';
 import { List } from '../../shared/ui/List';
 import {
   AUTH_URL,
@@ -142,11 +140,7 @@ const form = () => {
     events: {
       submit: (evt: Event) => {
         evt.preventDefault();
-        logObjectToConsole(resultForm);
-        Validation.handleSubmit(evt);
-        if (Validation.getIsValidForm(evt)) {
-          UserController.login(resultForm);
-        }
+        UserController.login(resultForm);
       },
     },
   });
@@ -156,7 +150,7 @@ const form = () => {
     submitButtonSelector: '.button',
     inactiveButtonClass: 'button_disabled',
     inputErrorClass: 'label__input_type_error',
-    errorClass: 'label__input-error',
+    errorClass: 'error-span_active',
   }, formObject.getContent().querySelector('.form') as HTMLFormElement);
 
   loginFormValid.enableValidation();

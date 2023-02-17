@@ -13,8 +13,9 @@ class UserController {
   }
 
   @handleError
-  public static login(data: { login: string, password: string }) {
-    SignInAPI.create(data);
+  public static async login(data: { login: string, password: string }) {
+    await SignInAPI.create(data);
+    store.set('user.isLoggedIn', true);
   }
 
   @handleError

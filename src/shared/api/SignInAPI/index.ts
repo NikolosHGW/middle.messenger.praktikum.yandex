@@ -1,10 +1,13 @@
+import { parseXMLRequest } from '../../utils/helpers';
 import { authApiInstance } from '../instances';
 
 class SignInAPI {
-  static create(data: { login: string, password: string }) {
-    return authApiInstance.post('/signin', {
+  static async create(data: { login: string, password: string }) {
+    const result = await authApiInstance.post('/signin', {
       data,
-    });
+    }) as XMLHttpRequest;
+
+    return parseXMLRequest(result);
   }
 
   static read() {
