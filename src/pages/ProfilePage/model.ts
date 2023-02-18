@@ -6,7 +6,15 @@ import { Avatar } from '../../shared/ui/Avatar';
 import { linkTo } from '../../shared/utils/helpers';
 import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL } from '../../shared/utils/constants';
 import { UserController } from '../../shared/api/controllers/UserController';
-import { withEmailInput } from '../../shared/utils/connectors';
+import {
+  withDisplayNameInput,
+  withEmailInput,
+  withFirstNameInput,
+  withLoginInput,
+  withPhoneInput,
+  withSecondNameInput,
+} from '../../shared/utils/connectors';
+import { withTitle } from './connectors';
 
 const emailInput = () => withEmailInput(Input)({
   inputId: 'email-input',
@@ -20,7 +28,7 @@ const emailInput = () => withEmailInput(Input)({
   disabled: true,
 });
 
-const loginInput = () => Input({
+const loginInput = () => withLoginInput(Input)({
   inputId: 'login-input',
   placeholder: 'Логин',
   inputName: 'login',
@@ -31,7 +39,7 @@ const loginInput = () => Input({
   disabled: true,
 });
 
-const nameInput = () => Input({
+const nameInput = () => withFirstNameInput(Input)({
   inputId: 'name-input',
   placeholder: 'Имя',
   inputName: 'first_name',
@@ -42,7 +50,7 @@ const nameInput = () => Input({
   disabled: true,
 });
 
-const secondNameInput = () => Input({
+const secondNameInput = () => withSecondNameInput(Input)({
   inputId: 'second-name-input',
   placeholder: 'Фамилия',
   inputName: 'second_name',
@@ -53,7 +61,7 @@ const secondNameInput = () => Input({
   disabled: true,
 });
 
-const displayNameInput = () => Input({
+const displayNameInput = () => withDisplayNameInput(Input)({
   inputId: 'display-name-input',
   placeholder: 'Имя в чате',
   inputName: 'display_name',
@@ -65,7 +73,7 @@ const displayNameInput = () => Input({
   disabled: true,
 });
 
-const phoneInput = () => Input({
+const phoneInput = () => withPhoneInput(Input)({
   inputId: 'phone-input',
   placeholder: 'Телефон',
   inputName: 'phone',
@@ -114,7 +122,7 @@ const getButtons = () => [
   exitPasswordTextButton(),
 ];
 
-const profileContainer = () => ProfileContainer({
+const profileContainer = () => withTitle(ProfileContainer)({
   avatar: Avatar(),
   title: '',
   formName: 'profile',
