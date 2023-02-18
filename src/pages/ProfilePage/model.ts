@@ -6,8 +6,9 @@ import { Avatar } from '../../shared/ui/Avatar';
 import { linkTo } from '../../shared/utils/helpers';
 import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL } from '../../shared/utils/constants';
 import { UserController } from '../../shared/api/controllers/UserController';
+import { withEmailInput } from '../../shared/utils/connectors';
 
-const emailInput = () => Input({
+const emailInput = () => withEmailInput(Input)({
   inputId: 'email-input',
   placeholder: 'Почта',
   inputName: 'email',
@@ -16,6 +17,7 @@ const emailInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
 const loginInput = () => Input({
@@ -26,6 +28,7 @@ const loginInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
 const nameInput = () => Input({
@@ -36,6 +39,7 @@ const nameInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
 const secondNameInput = () => Input({
@@ -46,6 +50,7 @@ const secondNameInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
 const displayNameInput = () => Input({
@@ -57,6 +62,7 @@ const displayNameInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
 const phoneInput = () => Input({
@@ -68,6 +74,7 @@ const phoneInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
 const editTextButton = () => TextButton({

@@ -12,7 +12,7 @@ class UserController {
   public static async getUser() {
     SignInAPI.read()
       .then(parseXMLRequest)
-      .then(({ email: displayName }) => store.set('user.displayName', displayName));
+      .then((data) => store.set('user', data));
   }
 
   @handleError

@@ -18,6 +18,7 @@ class InputComponent extends Block {
     autocomplete,
     events,
     pattern,
+    disabled,
   }: InputProps) {
     super(
       'label',
@@ -33,6 +34,7 @@ class InputComponent extends Block {
         autocomplete,
         events,
         pattern,
+        disabled,
       },
       { attributes },
     );

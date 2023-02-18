@@ -13,6 +13,7 @@ const Input = ({
   autocomplete = 'false',
   events = {},
   pattern = '',
+  disabled = false,
 } = {}) => new InputComponent({
   inputId,
   placeholder,
@@ -25,6 +26,7 @@ const Input = ({
   autocomplete,
   events,
   pattern,
+  disabled,
   attributes: { class: className },
 });
 

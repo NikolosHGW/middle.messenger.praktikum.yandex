@@ -17,4 +17,5 @@ export type InputProps = {
   events: EventsPropType,
   attributes: InputAttributes,
   pattern: string,
+  disabled: boolean,
 };
