@@ -11,15 +11,16 @@ import {
   emailRegex, loginRegexString, LOGIN_URL, nameRegex, passwordRegex, phoneRegex,
 } from '../../shared/utils/constants';
 import { FormValidator } from '../../shared/lib/FormValidator';
+import { UserController } from '../../shared/api/controllers/UserController';
 
 const resultForm = {
   email: '',
   login: '',
-  firstName: '',
-  secondName: '',
+  first_name: '',
+  second_name: '',
   phone: '',
   password: '',
-  secondPassword: '',
+  second_password: '',
 };
 
 const emailInput = () => Input({
@@ -54,7 +55,7 @@ const nameInput = () => Input({
   pattern: nameRegex,
   events: {
     change: (evt: Event) => {
-      resultForm.firstName = getInputTarget(evt.target).value;
+      resultForm.first_name = getInputTarget(evt.target).value;
     },
   },
 });
@@ -66,7 +67,7 @@ const secondNameInput = () => Input({
   pattern: nameRegex,
   events: {
     change: (evt: Event) => {
-      resultForm.secondName = getInputTarget(evt.target).value;
+      resultForm.second_name = getInputTarget(evt.target).value;
     },
   },
 });
@@ -103,7 +104,7 @@ const secondPassword = () => Input({
   pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
-      resultForm.secondPassword = getInputTarget(evt.target).value;
+      resultForm.second_password = getInputTarget(evt.target).value;
     },
   },
 });
@@ -137,6 +138,7 @@ const form = () => {
     events: {
       submit: (evt: Event) => {
         evt.preventDefault();
+        UserController.signup(resultForm);
       },
     },
   });
