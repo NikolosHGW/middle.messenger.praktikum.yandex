@@ -14,6 +14,7 @@ const Input = ({
   events = {},
   pattern = '',
   disabled = false,
+  value = '',
 } = {}) => new InputComponent({
   inputId,
   placeholder,
@@ -27,6 +28,7 @@ const Input = ({
   events,
   pattern,
   disabled,
+  value,
   attributes: { class: className },
 });
 

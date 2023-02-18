@@ -13,8 +13,8 @@ import {
   withLoginInput,
   withPhoneInput,
   withSecondNameInput,
-} from '../../shared/utils/connectors';
-import { withTitle } from './connectors';
+  withTitle,
+} from './connectors';
 
 const emailInput = () => withEmailInput(Input)({
   inputId: 'email-input',

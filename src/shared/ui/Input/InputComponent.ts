@@ -19,6 +19,7 @@ class InputComponent extends Block {
     events,
     pattern,
     disabled,
+    value,
   }: InputProps) {
     super(
       'label',
@@ -35,6 +36,7 @@ class InputComponent extends Block {
         events,
         pattern,
         disabled,
+        value,
       },
       { attributes },
     );

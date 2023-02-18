@@ -1,3 +1,4 @@
+import { FormValidator } from '../../shared/lib/FormValidator';
 import { Avatar } from '../../shared/ui/Avatar';
 import { Button } from '../../shared/ui/Button';
 import { Input } from '../../shared/ui/Input';
@@ -11,14 +12,28 @@ const ProfileContainer = ({
   buttons = [Button()],
   className = 'profile-container',
   events = {},
-} = {}) => new ProfileContainerComponent({
-  avatar,
-  title,
-  formName,
-  inputs,
-  buttons,
-  events,
-  attributes: { class: className },
-});
+} = {}) => {
+  const profileContainer = new ProfileContainerComponent({
+    avatar,
+    title,
+    formName,
+    inputs,
+    buttons,
+    events,
+    attributes: { class: className },
+  });
+
+  const profileFormValid = new FormValidator({
+    inputSelector: '.edit-label__input',
+    submitButtonSelector: '.button',
+    inactiveButtonClass: 'button_disabled',
+    inputErrorClass: 'label__input_type_error',
+    errorClass: 'error-span_active',
+  }, profileContainer.getContent().querySelector('.profile-form') as HTMLFormElement);
+
+  profileFormValid.enableValidation();
+
+  return profileContainer;
+};
 
 export { ProfileContainer };

@@ -18,4 +18,5 @@ export type InputProps = {
   attributes: InputAttributes,
   pattern: string,
   disabled: boolean,
+  value: string,
 };
