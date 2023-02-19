@@ -1,6 +1,6 @@
-import { parseXMLRequest } from '../../utils/helpers';
-import { UserData } from '../../utils/types/types';
-import { userApiInstance } from '../instances';
+import { parseXMLRequest } from '../../../utils/helpers';
+import { UserData } from '../../../utils/types/types';
+import { userApiInstance } from '../../instances';
 
 class EditProfileAPI {
   static async update(data: UserData) {

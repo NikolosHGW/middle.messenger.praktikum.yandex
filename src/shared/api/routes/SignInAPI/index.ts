@@ -1,5 +1,5 @@
-import { parseXMLRequest } from '../../utils/helpers';
-import { authApiInstance } from '../instances';
+import { parseXMLRequest } from '../../../utils/helpers';
+import { authApiInstance } from '../../instances';
 
 class SignInAPI {
   static async create(data: { login: string, password: string }) {

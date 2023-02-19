@@ -1,5 +1,5 @@
-import { parseXMLRequest } from '../../utils/helpers';
-import { userApiInstance } from '../instances';
+import { parseXMLRequest } from '../../../utils/helpers';
+import { userApiInstance } from '../../instances';
 
 class EditAvatarAPI {
   static async update(data: FormData) {

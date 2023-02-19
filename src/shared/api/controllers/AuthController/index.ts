@@ -1,11 +1,11 @@
-import { SignInAPI } from '../../SignInAPI';
-import { LogoutAPI } from '../../LogoutAPI';
+import { SignInAPI } from '../../routes/SignInAPI';
+import { LogoutAPI } from '../../routes/LogoutAPI';
 import { store } from '../../../lib/Store';
 import { linkTo, parseXMLRequest } from '../../../utils/helpers';
 import { handleError } from '../../../utils/decorators';
 import { LOGIN_URL, MESSAGE_URL } from '../../../utils/constants';
 import { LoginData, SignupData } from '../../types';
-import { SignupAPI } from '../../SignupAPI';
+import { SignupAPI } from '../../routes/SignupAPI';
 
 class AuthController {
   @handleError

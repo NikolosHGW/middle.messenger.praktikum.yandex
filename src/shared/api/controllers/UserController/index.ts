@@ -1,9 +1,10 @@
 import { store } from '../../../lib/Store';
 import { handleError } from '../../../utils/decorators';
 import { UserData } from '../../../utils/types/types';
-import { EditAvatarAPI } from '../../EditAvatarAPI';
-import { EditPasswordAPI } from '../../EditPasswordAPI';
-import { EditProfileAPI } from '../../EditProfileAPI';
+import { EditAvatarAPI } from '../../routes/EditAvatarAPI';
+import { EditPasswordAPI } from '../../routes/EditPasswordAPI';
+import { EditProfileAPI } from '../../routes/EditProfileAPI';
+import { SearchUserAPI } from '../../routes/SearchUserAPI';
 
 class UserController {
   @handleError
@@ -23,6 +24,13 @@ class UserController {
     const newUserData = await EditAvatarAPI.update(data) as { avatar: string };
 
     store.set('user.avatar', newUserData.avatar);
+  }
+
+  @handleError
+  public static async searchUser(data: { login: string }) {
+    const newUserData = await SearchUserAPI.create(data);
+
+    console.log(newUserData);
   }
 }
 

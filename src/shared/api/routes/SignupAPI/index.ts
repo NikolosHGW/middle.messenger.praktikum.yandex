@@ -1,6 +1,6 @@
-import { parseXMLRequest } from '../../utils/helpers';
-import { authApiInstance } from '../instances';
-import { SignupData } from '../types';
+import { parseXMLRequest } from '../../../utils/helpers';
+import { authApiInstance } from '../../instances';
+import { SignupData } from '../../types';
 
 class SignupAPI {
   static async create(data: SignupData) {

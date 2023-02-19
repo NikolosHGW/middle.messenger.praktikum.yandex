@@ -1,4 +1,4 @@
-import { authApiInstance } from '../instances';
+import { authApiInstance } from '../../instances';
 
 class LogoutAPI {
   static create() {

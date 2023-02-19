@@ -1,5 +1,5 @@
-import { parseXMLRequest } from '../../utils/helpers';
-import { userApiInstance } from '../instances';
+import { parseXMLRequest } from '../../../utils/helpers';
+import { userApiInstance } from '../../instances';
 
 class EditPasswordAPI {
   static async update(data: { oldPassword: string, newPassword: string }) {
