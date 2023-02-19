@@ -5,8 +5,15 @@ import ui from './ui.hbs';
 const avatarTemplate = (props: AvatarProps) => ui(props);
 
 class AvatarComponent extends Block {
-  constructor({ img, events, attributes }: AvatarProps) {
-    super('form', { img, events }, { attributes });
+  constructor(
+    {
+      img,
+      events,
+      withButton,
+      attributes,
+    }: AvatarProps,
+  ) {
+    super('form', { img, events, withButton }, { attributes });
   }
 
   customRender() {

@@ -2,7 +2,7 @@ import { Avatar } from '../../shared/ui/Avatar';
 import { ChatComponent } from './ChatComponent';
 
 const Chat = ({
-  avatar = Avatar({ className: 'avatar chat__avatar' }),
+  avatar = Avatar({ className: 'personal-image chat__personal-image', withButton: false }),
   title = 'Иван',
   lastMessage = 'Друзья, у меня для вас особенный...',
   className = 'chat',

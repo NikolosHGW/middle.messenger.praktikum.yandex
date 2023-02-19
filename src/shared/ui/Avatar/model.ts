@@ -6,9 +6,11 @@ const Avatar = ({
   className = 'personal-image',
   img = avatarDefault,
   events = {},
+  withButton = true,
 } = {}) => new AvatarComponent({
   img,
   events,
+  withButton,
   attributes: {
     class: className,
     name,

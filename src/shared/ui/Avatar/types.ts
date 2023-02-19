@@ -8,5 +8,6 @@ export type AvatarAttributes = {
 export type AvatarProps = {
   img: string,
   events: EventsPropType,
+  withButton: boolean,
   attributes: AvatarAttributes
 }

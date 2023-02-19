@@ -124,7 +124,7 @@ const getButtons = () => [
 ];
 
 const profileContainer = () => withTitle(ProfileContainer)({
-  avatar: withAvatar(Avatar)({}),
+  avatar: withAvatar(Avatar)({ className: 'personal-image personal-image_big-size' }),
   title: '',
   formName: 'profile',
   inputs: getInputs(),

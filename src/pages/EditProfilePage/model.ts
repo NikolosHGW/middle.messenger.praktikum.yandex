@@ -170,6 +170,7 @@ const profileContainer = (
   { userData, avatarImg }: { userData: UserData, avatarImg: string },
 ) => ProfileContainer({
   avatar: withAvatar(Avatar)({
+    className: 'personal-image personal-image_big-size',
     img: avatarImg,
     events: {
       input: (evt: Event) => {

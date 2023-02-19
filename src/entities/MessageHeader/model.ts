@@ -3,7 +3,7 @@ import { Button } from '../../shared/ui/Button';
 import { MessageHeaderComponent } from './MessageHeaderComponent';
 
 const MessageHeader = ({
-  avatar = Avatar({ className: 'avatar message-header__avatar' }),
+  avatar = Avatar({ className: 'personal-image message-header__personal-image', withButton: false }),
   name = 'Вадим',
   menuButton = Button({ text: '', ariaLabel: 'menu', classButton: 'menu' }),
   className = 'message-header',

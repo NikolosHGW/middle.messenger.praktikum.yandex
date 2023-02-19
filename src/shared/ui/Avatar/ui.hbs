@@ -1,9 +1,15 @@
-<label class="label">
-  <input id="avatar" type="file" name="avatar-input" accept="image/*" />
+<label class="personal-image-label">
+  {{#if withButton}}
+    <input id="avatar" type="file" name="avatar-input" accept="image/*" />
+  {{else}}
+    <input id="avatar" type="file" name="avatar-input" accept="image/*" disabled />
+  {{/if}}
   <figure class="personal-figure">
     <img src="{{{img}}}" class="personal-avatar" alt="avatar">
-    <figcaption class="personal-figcaption">
-      <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" alt="камера">
-    </figcaption>
+    {{#if withButton}}
+      <figcaption class="personal-figcaption">
+        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" alt="камера">
+      </figcaption>
+    {{/if}}
   </figure>
 </label>
