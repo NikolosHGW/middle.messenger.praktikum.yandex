@@ -15,6 +15,7 @@ import {
   withSecondNameInput,
   withTitle,
 } from './connectors';
+import { withAvatar } from '../../shared/utils/connectors';
 
 const emailInput = () => withEmailInput(Input)({
   inputId: 'email-input',
@@ -123,7 +124,7 @@ const getButtons = () => [
 ];
 
 const profileContainer = () => withTitle(ProfileContainer)({
-  avatar: Avatar(),
+  avatar: withAvatar(Avatar)({}),
   title: '',
   formName: 'profile',
   inputs: getInputs(),

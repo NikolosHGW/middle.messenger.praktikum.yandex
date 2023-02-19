@@ -43,7 +43,7 @@
   border: 2px solid transparent;
   box-shadow: 0 2px 4px 0 rgba($color: var(--color-dark), $alpha: 20%);
   transition: all ease-in-out 0.3s;
-  object-fit: none;
+  object-fit: contain;
   background-color: var(--color-third-gray);
 }
 

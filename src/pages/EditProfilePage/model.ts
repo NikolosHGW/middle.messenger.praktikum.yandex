@@ -9,6 +9,7 @@ import {
   loginRegexString,
   nameRegex,
   phoneRegex,
+  ROOT_URL,
 } from '../../shared/utils/constants';
 import {
   withDisplayNameInput,
@@ -23,6 +24,7 @@ import { store } from '../../shared/lib/Store';
 import { UserData } from '../../shared/utils/types/types';
 import { UserController } from '../../shared/api/controllers/UserController';
 import { StoreEvents } from '../../shared/lib/Store/utils';
+import { withAvatar } from '../../shared/utils/connectors';
 
 const resultForm = {
   email: '',
@@ -32,6 +34,8 @@ const resultForm = {
   display_name: '',
   phone: '',
 };
+
+let avatar = '';
 
 const addListenerForResultForm = () => {
   store.on(StoreEvents.Updated, () => {
@@ -43,6 +47,8 @@ const addListenerForResultForm = () => {
     resultForm.second_name = userData?.second_name ?? '';
     resultForm.display_name = userData?.display_name ?? '';
     resultForm.phone = userData?.phone ?? '';
+
+    avatar = userData?.avatar ? `${ROOT_URL}/resources${userData.avatar}` : '';
   });
 };
 
@@ -160,8 +166,11 @@ const getInputs = (data: UserData) => [
   phoneInput(data.phone),
 ];
 
-const profileContainer = (userData: UserData) => ProfileContainer({
-  avatar: Avatar({
+const profileContainer = (
+  { userData, avatarImg }: { userData: UserData, avatarImg: string },
+) => ProfileContainer({
+  avatar: withAvatar(Avatar)({
+    img: avatarImg,
     events: {
       input: (evt: Event) => {
         const form = new FormData();
@@ -187,6 +196,7 @@ const EditProfilePage = () => {
   const userDataFromStore = store.getState().user;
   if (userDataFromStore?.id) {
     delete userDataFromStore.id;
+    avatar = `${ROOT_URL}/resources${userDataFromStore.avatar}`;
     delete userDataFromStore.avatar;
     Object.assign(resultForm, userDataFromStore);
   } else {
@@ -194,7 +204,7 @@ const EditProfilePage = () => {
   }
 
   return new EditProfilePageComponent({
-    ProfileContainer: profileContainer(resultForm),
+    ProfileContainer: profileContainer({ userData: resultForm, avatarImg: avatar }),
   });
 };
 

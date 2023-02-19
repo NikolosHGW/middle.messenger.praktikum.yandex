@@ -20,7 +20,9 @@ class UserController {
 
   @handleError
   public static async editAvatar(data: FormData) {
-    await EditAvatarAPI.update(data);
+    const newUserData = await EditAvatarAPI.update(data) as { avatar: string };
+
+    store.set('user.avatar', newUserData.avatar);
   }
 }
 
