@@ -1,9 +1,11 @@
-{{{avatar}}}
-<div class="chat__text-container">
-  <h2 class="chat__title">{{{title}}}</h2>
-  <p class="chat__message">{{{lastMessage}}}</p>
-</div>
-<div class="chat__info-container">
-  <span class="chat__time">{{{time}}}</span>
-  {{#if counter}}<span class="chat__counter">{{{counter}}}</span>{{/if}}
-</div>
+<button type="button" class="chat__button" aria-label="open chat">
+  {{{avatar}}}
+  <div class="chat__text-container">
+    <h2 class="chat__title">{{{title}}}</h2>
+    <p class="chat__message">{{{lastMessage}}}</p>
+  </div>
+  <div class="chat__info-container">
+    <span class="chat__time">{{{time}}}</span>
+    {{#if counter}}<span class="chat__counter">{{{counter}}}</span>{{/if}}
+  </div>
+</button>

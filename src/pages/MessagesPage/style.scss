@@ -6,6 +6,27 @@
   height: 100vh;
 }
 
+.messages__buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.create {
+  padding: 0;
+  outline: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+  background-color: var(--color-secondary-primary);
+  border-radius: 50%;
+  color: var(--color-white);
+  margin-left: 10px;
+}
+
 .messages__chats {
   max-width: 310px;
   width: 100%;

@@ -8,6 +8,7 @@ const Chat = ({
   className = 'chat',
   time = '1 Мая 2023',
   counter = '3',
+  events = {},
 } = {}) => new ChatComponent({
   avatar,
   title,
@@ -15,6 +16,7 @@ const Chat = ({
   time,
   counter,
   className,
+  events,
 });
 
 export { Chat };

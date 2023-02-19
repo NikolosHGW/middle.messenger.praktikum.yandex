@@ -4,6 +4,7 @@ import { ChatList } from '../../features/ChatList';
 import { MessageWindow } from '../../features/MessageWindow';
 import { linkTo } from '../../shared/utils/helpers';
 import { PROFILE_URL } from '../../shared/utils/constants';
+import { Button } from '../../shared/ui/Button';
 
 const MessagesPage = () => new MessagesPageComponent({
   profileButton: TextButton({
@@ -13,6 +14,7 @@ const MessagesPage = () => new MessagesPageComponent({
       click: linkTo(PROFILE_URL),
     },
   }),
+  createButton: Button({ classButton: 'create', text: '+' }),
   chatList: ChatList({}),
   messageWindow: MessageWindow(),
   className: 'messages',

@@ -1,4 +1,5 @@
 import { AvatarComponent } from '../../shared/ui/Avatar/AvatarComponent';
+import { EventsPropType } from '../../shared/utils/types/types';
 
 export type TemplateProps = {
   title: string,
@@ -6,6 +7,7 @@ export type TemplateProps = {
   avatar: AvatarComponent,
   time: string,
   counter: string,
+  events: EventsPropType,
 }
 
 export type ChatProps = TemplateProps & {
