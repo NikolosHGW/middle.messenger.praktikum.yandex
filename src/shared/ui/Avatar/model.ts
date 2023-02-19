@@ -1,17 +1,14 @@
 import { AvatarComponent } from './AvatarComponent';
+import avatarDefault from '../../images/avatar.min.svg';
 
 const Avatar = ({
-  text = '',
-  type = 'submit',
   name = 'avatar',
-  className = 'avatar avatar_big-size',
-  ariaLabel = 'аватар',
+  className = 'personal-image',
+  img = avatarDefault,
 } = {}) => new AvatarComponent({
-  text,
+  img,
   attributes: {
     class: className,
-    'aria-label': ariaLabel,
-    type,
     name,
   },
 });
