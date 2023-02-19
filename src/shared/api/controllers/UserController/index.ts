@@ -1,6 +1,7 @@
 import { store } from '../../../lib/Store';
 import { handleError } from '../../../utils/decorators';
 import { UserData } from '../../../utils/types/types';
+import { editPasswordAPI } from '../../EditPasswordAPI';
 import { EditProfileAPI } from '../../EditProfileAPI';
 
 class UserController {
@@ -9,6 +10,11 @@ class UserController {
     const newUserData = await EditProfileAPI.update(data);
 
     store.set('user', newUserData);
+  }
+
+  @handleError
+  public static async editPassword(data: { oldPassword: string, newPassword: string }) {
+    await editPasswordAPI.update(data);
   }
 }
 
