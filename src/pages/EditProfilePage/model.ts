@@ -18,17 +18,32 @@ import {
   withPhoneInput,
   withSecondNameInput,
 } from './connectors';
-import { UserController } from '../../shared/api/controllers/UserController';
+import { AuthController } from '../../shared/api/controllers/AuthController';
 import { store } from '../../shared/lib/Store';
-import { PlainObject } from '../../shared/utils/types/types';
+import { UserData } from '../../shared/utils/types/types';
+import { UserController } from '../../shared/api/controllers/UserController';
+import { StoreEvents } from '../../shared/lib/Store/utils';
 
 const resultForm = {
   email: '',
   login: '',
-  firstName: '',
-  secondName: '',
-  displayName: '',
+  first_name: '',
+  second_name: '',
+  display_name: '',
   phone: '',
+};
+
+const addListenerForResultForm = () => {
+  store.on(StoreEvents.Updated, () => {
+    const userData = store.getState().user;
+
+    resultForm.email = userData?.email ?? '';
+    resultForm.login = userData?.login ?? '';
+    resultForm.first_name = userData?.first_name ?? '';
+    resultForm.second_name = userData?.second_name ?? '';
+    resultForm.display_name = userData?.display_name ?? '';
+    resultForm.phone = userData?.phone ?? '';
+  });
 };
 
 const emailInput = (value = '') => withEmailInput(Input)({
@@ -78,7 +93,7 @@ const nameInput = (value = '') => withFirstNameInput(Input)({
   value,
   events: {
     change: (evt: Event) => {
-      resultForm.firstName = getInputTarget(evt.target).value;
+      resultForm.first_name = getInputTarget(evt.target).value;
     },
   },
 });
@@ -95,7 +110,7 @@ const secondNameInput = (value = '') => withSecondNameInput(Input)({
   value,
   events: {
     change: (evt: Event) => {
-      resultForm.secondName = getInputTarget(evt.target).value;
+      resultForm.second_name = getInputTarget(evt.target).value;
     },
   },
 });
@@ -113,7 +128,7 @@ const displayNameInput = (value = '') => withDisplayNameInput(Input)({
   value,
   events: {
     change: (evt: Event) => {
-      resultForm.displayName = getInputTarget(evt.target).value;
+      resultForm.display_name = getInputTarget(evt.target).value;
     },
   },
 });
@@ -136,7 +151,7 @@ const phoneInput = (value = '') => withPhoneInput(Input)({
   },
 });
 
-const getInputs = (data: PlainObject) => [
+const getInputs = (data: UserData) => [
   emailInput(data.email),
   loginInput(data.login),
   nameInput(data.first_name),
@@ -145,7 +160,7 @@ const getInputs = (data: PlainObject) => [
   phoneInput(data.phone),
 ];
 
-const profileContainer = (userData: PlainObject) => ProfileContainer({
+const profileContainer = (userData: UserData) => ProfileContainer({
   avatar: Avatar(),
   title: '',
   formName: 'profile',
@@ -154,22 +169,24 @@ const profileContainer = (userData: PlainObject) => ProfileContainer({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      // UserController.getUser();
+      UserController.editUser(userData);
     },
   },
 });
 
 const EditProfilePage = () => {
-  const userData = {};
+  addListenerForResultForm();
   const userDataFromStore = store.getState().user;
   if (userDataFromStore?.id) {
-    Object.assign(userData, userDataFromStore);
+    delete userDataFromStore.id;
+    delete userDataFromStore.avatar;
+    Object.assign(resultForm, userDataFromStore);
   } else {
-    UserController.getUser();
+    AuthController.getUser();
   }
 
   return new EditProfilePageComponent({
-    ProfileContainer: profileContainer(userData),
+    ProfileContainer: profileContainer(resultForm),
   });
 };
 

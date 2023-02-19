@@ -5,7 +5,7 @@ import { ProfilePageComponent } from './ProfilePageComponent';
 import { Avatar } from '../../shared/ui/Avatar';
 import { linkTo } from '../../shared/utils/helpers';
 import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL } from '../../shared/utils/constants';
-import { UserController } from '../../shared/api/controllers/UserController';
+import { AuthController } from '../../shared/api/controllers/AuthController';
 import {
   withDisplayNameInput,
   withEmailInput,
@@ -102,7 +102,7 @@ const editPasswordTextButton = () => TextButton({
 const exitPasswordTextButton = () => TextButton({
   text: 'Выйти',
   events: {
-    click: () => UserController.logout(),
+    click: () => AuthController.logout(),
   },
   className: 'text-button form__text-button text-button_color_red',
 });
@@ -131,7 +131,7 @@ const profileContainer = () => withTitle(ProfileContainer)({
 });
 
 const ProfilePage = () => {
-  UserController.getUser();
+  AuthController.getUser();
   return new ProfilePageComponent({ ProfileContainer: profileContainer() });
 };
 

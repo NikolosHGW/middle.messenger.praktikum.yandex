@@ -11,7 +11,7 @@ import {
   emailRegex, loginRegexString, LOGIN_URL, nameRegex, passwordRegex, phoneRegex,
 } from '../../shared/utils/constants';
 import { FormValidator } from '../../shared/lib/FormValidator';
-import { UserController } from '../../shared/api/controllers/UserController';
+import { AuthController } from '../../shared/api/controllers/AuthController';
 
 const resultForm = {
   email: '',
@@ -138,7 +138,7 @@ const form = () => {
     events: {
       submit: (evt: Event) => {
         evt.preventDefault();
-        UserController.signup(resultForm);
+        AuthController.signup(resultForm);
       },
     },
   });

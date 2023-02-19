@@ -19,7 +19,7 @@ import {
   passwordRegex,
   PROFILE_URL,
 } from '../../shared/utils/constants';
-import { UserController } from '../../shared/api/controllers/UserController';
+import { AuthController } from '../../shared/api/controllers/AuthController';
 import { FormValidator } from '../../shared/lib/FormValidator';
 
 const resultForm = {
@@ -140,7 +140,7 @@ const form = () => {
     events: {
       submit: (evt: Event) => {
         evt.preventDefault();
-        UserController.login(resultForm);
+        AuthController.login(resultForm);
       },
     },
   });
