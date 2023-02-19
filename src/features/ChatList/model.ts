@@ -2,24 +2,37 @@ import { ChatListComponent } from './ChatListComponent';
 import { Chat } from '../../entities/Chat';
 import { SearchInput } from '../../shared/ui/SearchInput';
 import { UserController } from '../../shared/api/controllers/UserController';
-import { getInputTarget } from '../../shared/utils/helpers';
+import { debounce, getInputTarget } from '../../shared/utils/helpers';
+import { functionConnect } from '../../shared/lib/functionConnect';
+import { ChatType } from '../../shared/utils/types/types';
+import { Avatar } from '../../shared/ui/Avatar';
+import { ROOT_URL } from '../../shared/utils/constants';
 
-const getDefaultChats = () => [
-  Chat(),
-  Chat(),
-  Chat(),
-  Chat(),
-  Chat(),
-  Chat(),
-];
+const withChats = functionConnect(
+  (state) => ({
+    chats: state.chats?.map((chat: ChatType) => (
+      Chat({
+        title: chat.display_name ?? chat.login,
+        avatar: Avatar({
+          className: 'personal-image chat__personal-image',
+          withButton: false,
+          img: chat.avatar ? `${ROOT_URL}/resources${chat.avatar}` : undefined,
+        }),
+        lastMessage: '',
+        time: '',
+        counter: '',
+      })
+    )),
+  }),
+);
 
 const ChatList = ({
-  chats = getDefaultChats(),
+  chats = [],
   search = SearchInput({
     events: {
-      input: (evt: Event) => {
+      keyup: debounce((evt: Event) => {
         UserController.searchUser({ login: getInputTarget(evt.target).value });
-      },
+      }),
     },
   }),
   className = 'chat-list',
@@ -29,4 +42,6 @@ const ChatList = ({
   className,
 });
 
-export { ChatList };
+const chatListComponent = withChats(ChatList);
+
+export { chatListComponent as ChatList };

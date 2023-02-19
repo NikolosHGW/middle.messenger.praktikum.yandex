@@ -66,25 +66,28 @@ abstract class Block implements Component {
       this.attributes = { ...attributes };
     }
     if (childrenWithList) {
-      this.childrenWithList = { ...childrenWithList };
+      this.childrenWithList = this.makePropsProxy({ ...childrenWithList });
     }
   }
 
   private static getChildren(propsAndChildren: {}) {
     const children: Record<string, Component> = {};
     const props: Record<string, Component | string> = {};
+    const childrenList: Record<string, Array<Component>> = {};
 
     Object.entries(propsAndChildren).forEach((
       [key, value]: [key: string, value: Component | string],
     ) => {
       if (value instanceof Block) {
         children[key] = value;
+      } else if (Array.isArray(value)) {
+        childrenList[key] = value;
       } else {
         props[key] = value;
       }
     });
 
-    return { children, props };
+    return { children, props, childrenList };
   }
 
   compile(templator: (props: {}) => string, props: BlockProps<Component>) {
@@ -163,13 +166,16 @@ abstract class Block implements Component {
 
     const oldProps = { ...this.props };
 
-    const { children, props } = Block.getChildren(nextProps);
+    const { children, props, childrenList } = Block.getChildren(nextProps);
 
     if (Object.values(children).length) {
       Object.assign(this.children, children);
     }
     if (Object.values(props).length) {
       Object.assign(this.props, props);
+    }
+    if (Object.values(childrenList).length) {
+      Object.assign(this.childrenWithList as ExtendRecord<Component[]>, childrenList);
     }
 
     if (this.needUpdateProps) {

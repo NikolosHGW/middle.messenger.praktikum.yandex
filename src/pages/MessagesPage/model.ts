@@ -13,7 +13,7 @@ const MessagesPage = () => new MessagesPageComponent({
       click: linkTo(PROFILE_URL),
     },
   }),
-  chatList: ChatList(),
+  chatList: ChatList({}),
   messageWindow: MessageWindow(),
   className: 'messages',
 });
