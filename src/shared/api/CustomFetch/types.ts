@@ -1,6 +1,6 @@
 export type Options = {
   timeout?: number,
-  data?: Record<string, unknown>,
+  data?: Record<string, unknown> | FormData,
   headers?: Record<string, string>,
   withCredentials?: boolean,
 };

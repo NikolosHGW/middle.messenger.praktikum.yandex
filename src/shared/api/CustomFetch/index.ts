@@ -15,7 +15,7 @@ class CustomFetch {
 
   get: HTTPMethod = (_url, options = {}) => {
     let url = _url;
-    if (options.data) {
+    if (options.data && !(options.data instanceof FormData)) {
       url += queryStringify(options.data);
     }
     return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
@@ -47,13 +47,14 @@ class CustomFetch {
       withCredentials = true,
     } = options;
     const fullUrl = this.rootUrl + this.postfix + url;
+    const isFormData = data instanceof FormData;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, fullUrl);
       if (headers) {
         Object.entries(headers).forEach(([key, head]) => xhr.setRequestHeader(key, head));
-      } else {
+      } else if (!isFormData) {
         xhr.setRequestHeader('content-type', 'application/json');
       }
 
@@ -76,6 +77,8 @@ class CustomFetch {
 
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (isFormData) {
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }

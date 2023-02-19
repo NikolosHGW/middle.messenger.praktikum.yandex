@@ -5,8 +5,10 @@ const Avatar = ({
   name = 'avatar',
   className = 'personal-image',
   img = avatarDefault,
+  events = {},
 } = {}) => new AvatarComponent({
   img,
+  events,
   attributes: {
     class: className,
     name,

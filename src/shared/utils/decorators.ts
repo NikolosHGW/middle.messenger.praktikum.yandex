@@ -10,7 +10,7 @@ export const handleError = <Target = unknown>(
     try {
       await originalMethod(...args);
     } catch (err) {
-      // console.log(err, 'Привет Дривэ');
+      console.log(err, 'Привет Дривэ');
     }
   };
 };

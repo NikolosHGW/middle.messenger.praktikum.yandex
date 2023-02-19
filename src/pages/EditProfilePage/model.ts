@@ -161,7 +161,15 @@ const getInputs = (data: UserData) => [
 ];
 
 const profileContainer = (userData: UserData) => ProfileContainer({
-  avatar: Avatar(),
+  avatar: Avatar({
+    events: {
+      input: (evt: Event) => {
+        const form = new FormData();
+        form.append('avatar', getInputTarget(evt.target).files![0]);
+        UserController.editAvatar(form);
+      },
+    },
+  }),
   title: '',
   formName: 'profile',
   inputs: getInputs(userData),

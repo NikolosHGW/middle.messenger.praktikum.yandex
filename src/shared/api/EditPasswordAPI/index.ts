@@ -1,7 +1,7 @@
 import { parseXMLRequest } from '../../utils/helpers';
 import { userApiInstance } from '../instances';
 
-class editPasswordAPI {
+class EditPasswordAPI {
   static async update(data: { oldPassword: string, newPassword: string }) {
     const result = await userApiInstance.put('/password', {
       data,
@@ -11,4 +11,4 @@ class editPasswordAPI {
   }
 }
 
-export { editPasswordAPI };
+export { EditPasswordAPI };
