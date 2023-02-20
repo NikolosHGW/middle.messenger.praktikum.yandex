@@ -11,9 +11,10 @@ class MessagesPageComponent extends Block {
     chatList,
     messageWindow,
     className,
+    isCreateMode,
   }: MessagesPageProps) {
     super('main', {
-      profileButton, chatList, messageWindow, createButton,
+      profileButton, chatList, messageWindow, createButton, isCreateMode,
     }, { attributes: { class: className } });
   }
 

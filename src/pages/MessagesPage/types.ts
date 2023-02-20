@@ -8,6 +8,7 @@ type TemplateProps = {
   createButton: ButtonComponent;
   chatList: ChatListComponent;
   messageWindow: MessageWindowComponent;
+  isCreateMode: boolean,
 }
 
 export type TemplateType = (props: TemplateProps) => string;

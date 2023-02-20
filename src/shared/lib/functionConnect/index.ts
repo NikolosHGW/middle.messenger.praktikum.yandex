@@ -6,9 +6,9 @@ import { StoreEvents } from '../Store/utils';
 
 function functionConnect(mapStateToProps: (state: PlainObject) => PlainObject) {
   function withHOC<TComponent extends Component>(
-    funcComponent: (props: PlainObject) => TComponent,
+    funcComponent: (props?: PlainObject) => TComponent,
   ) {
-    function newFuncComponent(props: PlainObject) {
+    function newFuncComponent(props?: PlainObject) {
       let state = { ...props } as PlainObject;
 
       const objectComponent = funcComponent(props);
