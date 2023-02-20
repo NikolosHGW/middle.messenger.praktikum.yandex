@@ -1,7 +1,7 @@
 import { EmptyFunc, EventsPropType } from '../../utils/types/types';
 
 export type ExtendRecord<T> = Record<string, T>;
-export type BlockProps<B> = ExtendRecord<string | B | boolean | EventsPropType>;
+export type BlockProps<B> = ExtendRecord<string | B | boolean | EventsPropType | number>;
 export type Options<B> = {
   attributes?: Record<string, string>,
   childrenWithList?: ExtendRecord<Array<B>>

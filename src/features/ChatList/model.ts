@@ -12,15 +12,16 @@ const withChats = functionConnect(
   (state) => ({
     chats: state.chats?.map((chat: ChatType) => (
       Chat({
-        title: chat.display_name ?? chat.login,
+        title: chat.title,
         avatar: Avatar({
           className: 'personal-image chat__personal-image',
           withButton: false,
           img: chat.avatar ? `${ROOT_URL}/resources${chat.avatar}` : undefined,
         }),
-        lastMessage: '',
-        time: '',
-        counter: '',
+        lastMessage: chat.last_message?.content,
+        time: chat.last_message?.time,
+        counter: chat.unread_count.toString(),
+        chatId: chat.id,
       })
     )),
   }),

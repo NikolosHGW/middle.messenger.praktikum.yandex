@@ -3,12 +3,10 @@
     {{{createButton}}}
     {{{profileButton}}}
   </div>
-  {{#if isCreateMode}}
-    <div class="messages__create-container">
-      {{{inputTitleChat}}}
-      {{{sendButton}}}
-    </div>
-  {{/if}}
+  <div style="{{#if isCreateMode}}display:flex{{/if}}" class="messages__create-container">
+    {{{inputTitleChat}}}
+    {{{sendButton}}}
+  </div>
   {{{chatList}}}
 </section>
 {{{messageWindow}}}

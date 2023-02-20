@@ -8,6 +8,7 @@ export type TemplateProps = {
   time: string,
   counter: string,
   events: EventsPropType,
+  chatId: number,
 }
 
 export type ChatProps = TemplateProps & {

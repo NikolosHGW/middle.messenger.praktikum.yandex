@@ -4,11 +4,12 @@ import { ChatComponent } from './ChatComponent';
 const Chat = ({
   avatar = Avatar({ className: 'personal-image chat__personal-image', withButton: false }),
   title = 'Иван',
-  lastMessage = 'Друзья, у меня для вас особенный...',
+  lastMessage = '',
   className = 'chat',
   time = '1 Мая 2023',
   counter = '3',
   events = {},
+  chatId = 0,
 } = {}) => new ChatComponent({
   avatar,
   title,
@@ -17,6 +18,7 @@ const Chat = ({
   counter,
   className,
   events,
+  chatId,
 });
 
 export { Chat };

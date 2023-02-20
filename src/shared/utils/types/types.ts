@@ -14,12 +14,10 @@ export type UserData = {
 };
 
 export type ChatType = {
-  'id': number;
-  'first_name': string;
-  'second_name': string;
-  'display_name': string;
-  'login': string;
-  'email': string;
-  'phone': string;
-  'avatar': string;
+  avatar: null | string;
+  created_by: number;
+  id: number
+  last_message: null | { user: UserData, time: string, content: string}
+  title: string
+  unread_count: number
 }

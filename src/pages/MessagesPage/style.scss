@@ -43,5 +43,7 @@
 }
 
 .messages__create-container {
-  margin: 10px auto;
+  margin: 10px 0;
+  display: none;
+  justify-content: space-between;
 }
