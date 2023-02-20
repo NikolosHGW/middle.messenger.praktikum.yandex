@@ -1,6 +1,31 @@
+@use "../../shared/ui/mixins.scss";
+
+%extend-button {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  width: 180px;
+  background-color: rgba($color: var(--color-black), $alpha: 100%);
+  border: 0;
+  color: var(--color-black);
+  padding: 0 0 0 20px;
+
+  @include mixins.middle-font;
+
+  font-size: 13px;
+  border-radius: 8px;
+  outline: 0;
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+  font-family: var(--font-family);
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
 .message-header {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .message-header__personal-image {
@@ -36,4 +61,55 @@
 
 .menu:hover {
   opacity: 0.7;
+}
+
+.message-header__menu {
+  box-shadow: 0 0 6px var(--color-black);
+  position: absolute;
+  right: 0;
+  top: 70px;
+  padding: 0;
+  border-radius: 12px;
+  width: 210px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-header__menu_display_none {
+  display: none;
+}
+
+.message-header__ul {
+  margin: 0;
+  padding: 0;
+}
+
+.message-header__li {
+  list-style: none;
+}
+
+.message-header__li:first-of-type {
+  margin-bottom: 15px;
+}
+
+.add-user {
+  @extend %extend-button;
+
+  background-image: url("../../shared/images/plus.min.svg");
+}
+
+.add-user:hover {
+  opacity: 0.5;
+}
+
+.delete-user {
+  @extend %extend-button;
+
+  background-image: url("../../shared/images/delete.min.svg");
+}
+
+.delete-user:hover {
+  opacity: 0.5;
 }

@@ -1,22 +1,45 @@
 import { MessageFooter } from '../../entities/MessageFooter';
 import { MessageHeader } from '../../entities/MessageHeader';
-import { TheirMessage } from '../../shared/ui/TheirMessage';
-import { YourMessage } from '../../shared/ui/YourMessage';
+import { EventBus } from '../../shared/lib/EventBus';
+import { functionConnect } from '../../shared/lib/functionConnect';
+import { Button } from '../../shared/ui/Button';
+import { PlainObject } from '../../shared/utils/types/types';
 import { MessageWindowComponent } from './MessageWindowComponent';
 
+let needHide = true;
+const eventBus = new EventBus();
+
+const withCurrentChat = functionConnect(
+  (state: PlainObject) => ({
+    name: state.currentChat?.last_message?.user?.login,
+    menuButton: Button({
+      text: '',
+      ariaLabel: 'menu',
+      classButton: 'menu',
+      events: {
+        click: () => {
+          needHide = !needHide;
+          eventBus.emit('needHide');
+        },
+      },
+    }),
+  }),
+);
+
 const MessageWindow = ({
-  header = MessageHeader(),
-  messages = [
-    TheirMessage({ className: 'their-message message-window__their-message' }),
-    YourMessage({ className: 'your-message message-window__your-message' }),
-  ],
+  header = withCurrentChat(MessageHeader)(),
+  messages = [],
   footer = MessageFooter(),
   className = 'message-window',
-} = {}) => new MessageWindowComponent({
-  header,
-  messages,
-  footer,
-  className,
-});
+} = {}) => {
+  eventBus.on('needHide', () => header.setProps({ needHide }));
+
+  return new MessageWindowComponent({
+    header,
+    messages,
+    footer,
+    className,
+  });
+};
 
 export { MessageWindow };

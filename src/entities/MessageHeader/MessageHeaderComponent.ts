@@ -10,10 +10,15 @@ class MessageHeaderComponent extends Block {
     name,
     menuButton,
     className,
+    addUserButton,
+    deleteUserButton,
+    needHide,
   }: MessageFooterProps) {
     super(
       'header',
-      { avatar, name, menuButton },
+      {
+        avatar, name, menuButton, addUserButton, deleteUserButton, needHide,
+      },
       { attributes: { class: className } },
     );
   }

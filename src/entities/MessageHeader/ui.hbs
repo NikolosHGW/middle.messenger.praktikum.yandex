@@ -3,3 +3,13 @@
   <h2 class="message-header__name">{{{name}}}</h2>
 </div>
 {{{menuButton}}}
+<div class="message-header__menu{{#if needHide}} message-header__menu_display_none{{/if}}">
+  <ul class="message-header__ul">
+    <li class="message-header__li">
+      {{{addUserButton}}}
+    </li>
+    <li class="message-header__li">
+      {{{deleteUserButton}}}
+    </li>
+  </ul>
+</div>

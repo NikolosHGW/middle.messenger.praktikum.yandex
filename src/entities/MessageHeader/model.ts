@@ -4,14 +4,20 @@ import { MessageHeaderComponent } from './MessageHeaderComponent';
 
 const MessageHeader = ({
   avatar = Avatar({ className: 'personal-image message-header__personal-image', withButton: false }),
-  name = 'Вадим',
+  name = '',
   menuButton = Button({ text: '', ariaLabel: 'menu', classButton: 'menu' }),
   className = 'message-header',
+  addUserButton = Button({ text: 'Добавить пользователя', ariaLabel: '', classButton: 'add-user' }),
+  deleteUserButton = Button({ text: 'Удалить пользователя', ariaLabel: '', classButton: 'delete-user' }),
+  needHide = true,
 } = {}) => new MessageHeaderComponent({
   avatar,
   name,
   menuButton,
   className,
+  addUserButton,
+  deleteUserButton,
+  needHide,
 });
 
 export { MessageHeader };

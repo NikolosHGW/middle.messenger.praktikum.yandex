@@ -7,6 +7,7 @@ import { functionConnect } from '../../shared/lib/functionConnect';
 import { ChatType } from '../../shared/utils/types/types';
 import { Avatar } from '../../shared/ui/Avatar';
 import { ROOT_URL } from '../../shared/utils/constants';
+import { store } from '../../shared/lib/Store';
 
 const withChats = functionConnect(
   (state) => ({
@@ -22,6 +23,11 @@ const withChats = functionConnect(
         time: chat.last_message?.time,
         counter: chat.unread_count.toString(),
         chatId: chat.id,
+        events: {
+          click: () => {
+            store.set('currentChat', { ...chat });
+          },
+        },
       })
     )),
   }),
