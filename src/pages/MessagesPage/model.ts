@@ -10,11 +10,22 @@ import { functionConnect } from '../../shared/lib/functionConnect';
 import { PlainObject } from '../../shared/utils/types/types';
 import { Input } from '../../shared/ui/Input';
 import { ChatController } from '../../shared/api/controllers/ChatController';
+import { StoreEvents } from '../../shared/lib/Store/utils';
 
 let titleChat = 'Новый чат';
 
 const MessagesPage = () => {
   ChatController.getChats();
+  const messageWindow = MessageWindow();
+  store.on(StoreEvents.Updated, () => {
+    const { currentChat } = store.getState();
+    const element = messageWindow.getContent();
+    if (currentChat) {
+      element.removeAttribute('style');
+    } else {
+      element.setAttribute('style', 'display: none');
+    }
+  });
 
   return new MessagesPageComponent({
     profileButton: TextButton({
@@ -58,13 +69,16 @@ const MessagesPage = () => {
     }),
     isCreateMode: false,
     chatList: ChatList({}),
-    messageWindow: MessageWindow(),
+    messageWindow,
     className: 'messages',
   });
 };
 
 const withIsCreateMode = functionConnect(
-  (state: PlainObject) => ({ isCreateMode: state.chatList?.isCreateMode }),
+  (state: PlainObject) => ({
+    isCreateMode: state.chatList?.isCreateMode,
+    withoutCurrentChat: !state.currentChat,
+  }),
 );
 
 const messagesPageFunc = withIsCreateMode(MessagesPage);
