@@ -7,6 +7,12 @@ class ChatUsersAPI {
 
     return parseXMLRequest(result);
   }
+
+  static async update(users: number[], chatId: number) {
+    const result = await chatApiInstance.put('/users', { data: { users, chatId } }) as XMLHttpRequest;
+
+    return parseXMLRequest(result);
+  }
 }
 
 export { ChatUsersAPI };

@@ -10,6 +10,11 @@ class ChatUsersController {
 
     return users;
   }
+
+  @handleError
+  public static async addUsersToChat(userIds: number[], chatId: number) {
+    await ChatUsersAPI.update(userIds, chatId);
+  }
 }
 
 export { ChatUsersController };
