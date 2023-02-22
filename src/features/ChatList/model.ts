@@ -8,6 +8,7 @@ import { ChatType } from '../../shared/utils/types/types';
 import { Avatar } from '../../shared/ui/Avatar';
 import { RESOURCE_URL } from '../../shared/utils/constants';
 import { store } from '../../shared/lib/Store';
+import { ChatUsersController } from '../../shared/api/controllers/ChatUsersController';
 import { ChatController } from '../../shared/api/controllers/ChatController';
 import { addNewSocketToStore } from '../../shared/lib/Socket';
 
@@ -27,11 +28,19 @@ const withChats = functionConnect(
         chatId: chat.id,
         events: {
           click: async () => {
+            const { currentSocket } = store.getState();
+            if (currentSocket) {
+              currentSocket.close();
+            }
             store.set('currentChat', { ...chat });
-            await ChatController.getToken(chat.id);
-            const { token } = store.getState();
-            const userId = store.getState().user?.id ?? 527818;
-            addNewSocketToStore(userId, chat.id, token);
+            await ChatUsersController.getUsers(chat.id);
+            const { currentChatUsers } = store.getState();
+            if (currentChatUsers?.length > 1) {
+              await ChatController.getToken(chat.id);
+              const { token } = store.getState();
+              const userId = store.getState().user?.id;
+              addNewSocketToStore(userId, chat.id, token);
+            }
           },
         },
       })

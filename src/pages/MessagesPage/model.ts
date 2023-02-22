@@ -10,12 +10,14 @@ import { functionConnect } from '../../shared/lib/functionConnect';
 import { PlainObject } from '../../shared/utils/types/types';
 import { Input } from '../../shared/ui/Input';
 import { ChatController } from '../../shared/api/controllers/ChatController';
+import { AuthController } from '../../shared/api/controllers/AuthController';
 import { StoreEvents } from '../../shared/lib/Store/utils';
 
 let titleChat = 'Новый чат';
 
 const MessagesPage = () => {
   ChatController.getChats();
+  AuthController.getUser();
   const messageWindow = MessageWindow();
   store.on(StoreEvents.Updated, () => {
     const { currentChat } = store.getState();
