@@ -2,6 +2,8 @@ import { MessageFooter } from '../../entities/MessageFooter';
 import { MessageHeader } from '../../entities/MessageHeader';
 import { EventBus } from '../../shared/lib/EventBus';
 import { functionConnect } from '../../shared/lib/functionConnect';
+import { store } from '../../shared/lib/Store';
+import { StoreEvents } from '../../shared/lib/Store/utils';
 import { Avatar } from '../../shared/ui/Avatar';
 import { Button } from '../../shared/ui/Button';
 import { RESOURCE_URL } from '../../shared/utils/constants';
@@ -40,6 +42,15 @@ const MessageWindow = ({
   className = 'message-window',
 } = {}) => {
   eventBus.on('needHide', () => header.setProps({ needHide }));
+  store.on(StoreEvents.Updated, () => {
+    const { currentSocket } = store.getState();
+    if (currentSocket) {
+      currentSocket.send(JSON.stringify({
+        content: '0',
+        type: 'get old',
+      }));
+    }
+  });
 
   return new MessageWindowComponent({
     header,

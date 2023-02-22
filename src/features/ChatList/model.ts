@@ -9,7 +9,7 @@ import { Avatar } from '../../shared/ui/Avatar';
 import { RESOURCE_URL } from '../../shared/utils/constants';
 import { store } from '../../shared/lib/Store';
 import { ChatController } from '../../shared/api/controllers/ChatController';
-import { createSocket } from '../../shared/lib/Socket';
+import { addNewSocketToStore } from '../../shared/lib/Socket';
 
 const withChats = functionConnect(
   (state) => ({
@@ -31,7 +31,7 @@ const withChats = functionConnect(
             await ChatController.getToken(chat.id);
             const { token } = store.getState();
             const userId = store.getState().user?.id ?? 527818;
-            createSocket(userId, chat.id, token);
+            addNewSocketToStore(userId, chat.id, token);
           },
         },
       })

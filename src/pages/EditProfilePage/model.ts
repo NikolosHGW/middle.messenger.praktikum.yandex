@@ -25,6 +25,7 @@ import { UserData } from '../../shared/utils/types/types';
 import { UserController } from '../../shared/api/controllers/UserController';
 import { StoreEvents } from '../../shared/lib/Store/utils';
 import { withAvatar } from '../../shared/utils/connectors';
+import avatarDefault from '../../shared/images/avatar.min.svg';
 
 const resultForm = {
   email: '',
@@ -197,7 +198,7 @@ const EditProfilePage = () => {
   const userDataFromStore = store.getState().user;
   if (userDataFromStore?.id) {
     delete userDataFromStore.id;
-    avatar = `${RESOURCE_URL}${userDataFromStore.avatar}`;
+    avatar = userDataFromStore.avatar ? `${RESOURCE_URL}${userDataFromStore.avatar}` : avatarDefault;
     delete userDataFromStore.avatar;
     Object.assign(resultForm, userDataFromStore);
   } else {

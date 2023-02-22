@@ -1,6 +1,8 @@
+import { store } from '../Store';
+
 const SOCKET_URL = 'wss://ya-praktikum.tech/ws/chats';
 
-const createSocket = (userId: number, chatId: number, token: string) => {
+const addNewSocketToStore = (userId: number, chatId: number, token: string) => {
   const socket = new WebSocket(`${SOCKET_URL}/${userId}/${chatId}/${token}`);
 
   socket.addEventListener('open', () => {
@@ -30,6 +32,8 @@ const createSocket = (userId: number, chatId: number, token: string) => {
     console.log(event);
     console.log('Ошибка', event);
   });
+
+  store.set('currentSocket', socket);
 };
 
-export { createSocket };
+export { addNewSocketToStore };

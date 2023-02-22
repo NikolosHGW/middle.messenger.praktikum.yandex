@@ -1,6 +1,7 @@
+import { store } from '../../shared/lib/Store';
 import { Button } from '../../shared/ui/Button';
 import { MessageInput } from '../../shared/ui/MessageInput';
-import { getInputTarget, logObjectToConsole } from '../../shared/utils/helpers';
+import { getInputTarget } from '../../shared/utils/helpers';
 import { MessageFooterComponent } from './MessageFooterComponent';
 
 const validateMessage = (evt: Event) => {
@@ -35,7 +36,15 @@ const MessageFooter = ({
     classButton: 'send',
     events: {
       click: () => {
-        logObjectToConsole(resultInput);
+        const { currentSocket } = store.getState();
+        currentSocket.send(JSON.stringify({
+          content: resultInput.message,
+          type: 'message',
+        }));
+        // currentSocket.send(JSON.stringify({
+        //   content: '0',
+        //   type: 'get old',
+        // }));
       },
     },
   }),
