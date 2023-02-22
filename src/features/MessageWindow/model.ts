@@ -2,7 +2,9 @@ import { MessageFooter } from '../../entities/MessageFooter';
 import { MessageHeader } from '../../entities/MessageHeader';
 import { EventBus } from '../../shared/lib/EventBus';
 import { functionConnect } from '../../shared/lib/functionConnect';
+import { Avatar } from '../../shared/ui/Avatar';
 import { Button } from '../../shared/ui/Button';
+import { RESOURCE_URL } from '../../shared/utils/constants';
 import { PlainObject } from '../../shared/utils/types/types';
 import { MessageWindowComponent } from './MessageWindowComponent';
 
@@ -11,7 +13,12 @@ const eventBus = new EventBus();
 
 const withCurrentChat = functionConnect(
   (state: PlainObject) => ({
-    name: state.currentChat?.last_message?.user?.login,
+    avatar: Avatar({
+      className: 'personal-image message-header__personal-image',
+      withButton: false,
+      img: state.currentChat?.avatar ? `${RESOURCE_URL}${state.currentChat?.avatar}` : undefined,
+    }),
+    name: state.currentChat?.title,
     menuButton: Button({
       text: '',
       ariaLabel: 'menu',

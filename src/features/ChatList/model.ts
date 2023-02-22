@@ -6,8 +6,10 @@ import { debounce, getInputTarget } from '../../shared/utils/helpers';
 import { functionConnect } from '../../shared/lib/functionConnect';
 import { ChatType } from '../../shared/utils/types/types';
 import { Avatar } from '../../shared/ui/Avatar';
-import { ROOT_URL } from '../../shared/utils/constants';
+import { RESOURCE_URL } from '../../shared/utils/constants';
 import { store } from '../../shared/lib/Store';
+import { ChatController } from '../../shared/api/controllers/ChatController';
+import { createSocket } from '../../shared/lib/Socket';
 
 const withChats = functionConnect(
   (state) => ({
@@ -17,15 +19,19 @@ const withChats = functionConnect(
         avatar: Avatar({
           className: 'personal-image chat__personal-image',
           withButton: false,
-          img: chat.avatar ? `${ROOT_URL}/resources${chat.avatar}` : undefined,
+          img: chat.avatar ? `${RESOURCE_URL}${chat.avatar}` : undefined,
         }),
         lastMessage: chat.last_message?.content,
         time: chat.last_message?.time,
         counter: chat.unread_count.toString(),
         chatId: chat.id,
         events: {
-          click: () => {
+          click: async () => {
             store.set('currentChat', { ...chat });
+            await ChatController.getToken(chat.id);
+            const { token } = store.getState();
+            const userId = store.getState().user?.id ?? 527818;
+            createSocket(userId, chat.id, token);
           },
         },
       })

@@ -9,7 +9,7 @@ import {
   loginRegexString,
   nameRegex,
   phoneRegex,
-  ROOT_URL,
+  RESOURCE_URL,
 } from '../../shared/utils/constants';
 import {
   withDisplayNameInput,
@@ -48,7 +48,7 @@ const addListenerForResultForm = () => {
     resultForm.display_name = userData?.display_name ?? '';
     resultForm.phone = userData?.phone ?? '';
 
-    avatar = userData?.avatar ? `${ROOT_URL}/resources${userData.avatar}` : '';
+    avatar = userData?.avatar ? `${RESOURCE_URL}${userData.avatar}` : '';
   });
 };
 
@@ -197,7 +197,7 @@ const EditProfilePage = () => {
   const userDataFromStore = store.getState().user;
   if (userDataFromStore?.id) {
     delete userDataFromStore.id;
-    avatar = `${ROOT_URL}/resources${userDataFromStore.avatar}`;
+    avatar = `${RESOURCE_URL}${userDataFromStore.avatar}`;
     delete userDataFromStore.avatar;
     Object.assign(resultForm, userDataFromStore);
   } else {

@@ -14,3 +14,4 @@ export const NOT_FOUND_URL = '/not-found';
 export const ERROR_URL = '/error';
 
 export const ROOT_URL = 'https://ya-praktikum.tech/api/v2';
+export const RESOURCE_URL = `${ROOT_URL}/resources`;

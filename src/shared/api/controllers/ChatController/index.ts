@@ -1,6 +1,7 @@
 import { store } from '../../../lib/Store';
 import { handleError } from '../../../utils/decorators';
 import { ChatAPI } from '../../routes/ChatAPI';
+import { TokenChatAPI } from '../../routes/TokenChatAPI';
 
 class ChatController {
   @handleError
@@ -14,6 +15,12 @@ class ChatController {
   public static async getChats() {
     const chats = await ChatAPI.read();
     store.set('chats', chats);
+  }
+
+  @handleError
+  public static async getToken(chatId: number) {
+    const data = await TokenChatAPI.create(chatId) as { token: string };
+    store.set('token', data.token);
   }
 }
 
