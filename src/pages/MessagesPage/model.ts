@@ -17,8 +17,11 @@ import { Form } from '../../entities/Form';
 import { EventBus } from '../../shared/lib/EventBus';
 import { Avatar } from '../../shared/ui/Avatar';
 import { MessageHeader } from '../../entities/MessageHeader';
+import { ChatUsersController } from '../../shared/api/controllers/ChatUsersController';
+import { UserController } from '../../shared/api/controllers/UserController';
 
 let titleChat = 'Новый чат';
+let searchLogin = '';
 
 let needHide = true;
 const eventBus = new EventBus();
@@ -42,8 +45,33 @@ const MessagesPage = () => {
     form: Form({
       className: 'popup__form-container',
       headingClassName: 'popup__form-container__heading',
-      inputs: [Input()],
-      buttons: [Button({ text: 'Добавить', classButton: 'button popup__button' })],
+      inputs: [
+        Input({
+          events: {
+            input: (evt: Event) => {
+              searchLogin = getInputTarget(evt.target).value;
+            },
+          },
+        }),
+      ],
+      buttons: [
+        Button({
+          text: 'Добавить',
+          classButton: 'button popup__button',
+          events: {
+            click: async (evt: Event) => {
+              await UserController.searchUser({ login: searchLogin });
+              const { searchedUsers } = store.getState();
+              const { currentChat } = store.getState();
+              if (searchedUsers.length > 0 && currentChat) {
+                ChatUsersController.addUsersToChat([searchedUsers[0].id], currentChat.id);
+                (evt.target as HTMLButtonElement).closest('.popup')?.dispatchEvent(new Event('click'));
+                ChatUsersController.getUsers(currentChat.id);
+              }
+            },
+          },
+        }),
+      ],
       title: 'Добавить пользователя',
     }),
     className: 'popup popup_add',

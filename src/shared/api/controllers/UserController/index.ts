@@ -28,9 +28,9 @@ class UserController {
 
   @handleError
   public static async searchUser(data: { login: string }) {
-    const chats = await SearchUserAPI.create(data);
+    const users = await SearchUserAPI.create(data);
 
-    store.set('chats', chats);
+    store.set('searchedUsers', users);
   }
 }
 

@@ -15,8 +15,8 @@ class PopupComponent extends Block {
     }
   }
 
-  closeEvent() {
-    if (this.getContent().classList.contains('popup')) {
+  closeEvent(evt: Event) {
+    if ((evt.target as HTMLDivElement).classList.contains('popup')) {
       this.close();
     }
   }
