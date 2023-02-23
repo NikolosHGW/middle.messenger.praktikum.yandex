@@ -13,12 +13,13 @@
   border-top-left-radius: 0;
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .their-message__time {
-  position: absolute;
-  right: 11px;
-  bottom: 11px;
+  justify-content: flex-end;
+  display: flex;
 
   @include mixins.middle-font;
 

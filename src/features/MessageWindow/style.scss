@@ -21,18 +21,11 @@
 
 .message-window__their-message {
   align-self: flex-start;
-}
-
-.message-window__their-message:last-of-type {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .message-window__your-message {
-  margin-top: 30px;
   align-self: flex-end;
   min-width: 114px;
-}
-
-.message-window__your-message:last-of-type {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }

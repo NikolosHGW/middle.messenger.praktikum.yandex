@@ -19,12 +19,32 @@ import { Avatar } from '../../shared/ui/Avatar';
 import { MessageHeader } from '../../entities/MessageHeader';
 import { ChatUsersController } from '../../shared/api/controllers/ChatUsersController';
 import { UserController } from '../../shared/api/controllers/UserController';
+import { TheirMessage } from '../../shared/ui/TheirMessage';
+import { YourMessage } from '../../shared/ui/YourMessage';
 
 let titleChat = 'Новый чат';
 let searchLogin = '';
 
 let needHide = true;
 const eventBus = new EventBus();
+
+const withMessageWindow = functionConnect(
+  (state: PlainObject) => {
+    const theirMessages = Array.isArray(state.theirMessages) ? [...state.theirMessages] : [];
+    const ownMessages = Array.isArray(state.ownMessages) ? [...state.ownMessages] : [];
+
+    const theirMessagesComponents = theirMessages.map(({ content, time }) => {
+      const formatedTime = new Date(time).toTimeString().split(' ')[0].substring(0, 5);
+      return TheirMessage({ text: content, time: formatedTime, className: 'their-message message-window__their-message' });
+    });
+    const ownMessagesComponents = ownMessages.map(({ content, time }) => {
+      const formatedTime = new Date(time).toTimeString().split(' ')[0].substring(0, 5);
+      return YourMessage({ text: content, time: formatedTime, className: 'your-message message-window__your-message' });
+    });
+
+    return { messages: [...theirMessagesComponents, ...ownMessagesComponents] };
+  },
+);
 
 const withMessageHeader = functionConnect(
   (state: PlainObject) => ({
@@ -123,7 +143,7 @@ const MessagesPage = () => {
       },
     }),
   });
-  const messageWindow = MessageWindow({ header: messageHeader });
+  const messageWindow = withMessageWindow(MessageWindow)({ header: messageHeader });
 
   store.on(StoreEvents.Updated, () => {
     const { currentChat } = store.getState();
