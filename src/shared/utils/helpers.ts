@@ -1,15 +1,7 @@
 import { router } from '../lib/Router';
-import { InputType } from '../lib/Validation/types';
-import { Validation } from '../lib/Validation/Validation';
 import { PlainObject, SortCbType } from './types/types';
 
 export const getInputTarget = (target: EventTarget | null) => (target as HTMLInputElement);
-
-export const validate = (type: InputType) => (evt: Event) => {
-  if (evt.target) {
-    Validation.handleInputEvent(evt.target, type);
-  }
-};
 
 export const queryStringify = (
   data: Record<string, unknown>,
