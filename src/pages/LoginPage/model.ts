@@ -66,7 +66,7 @@ const buttonAuthLink = () => TextButton({
 });
 
 const buttonLinkAuth = () => TextButton({
-  text: 'Авторизация /auth',
+  text: 'Авторизация /sign-up',
   className: 'text-button',
   events: {
     click: linkTo(AUTH_URL),
@@ -74,7 +74,7 @@ const buttonLinkAuth = () => TextButton({
 });
 
 const buttonLinkMessages = () => TextButton({
-  text: 'Сообщения /messages',
+  text: 'Сообщения /messenger',
   className: 'text-button',
   events: {
     click: linkTo(MESSAGE_URL),
@@ -82,7 +82,7 @@ const buttonLinkMessages = () => TextButton({
 });
 
 const buttonLinkProfile = () => TextButton({
-  text: 'Профиль /profile',
+  text: 'Профиль /settings',
   className: 'text-button',
   events: {
     click: linkTo(PROFILE_URL),
