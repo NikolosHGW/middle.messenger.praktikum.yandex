@@ -14,6 +14,7 @@ class MessagesPageComponent extends Block {
     isCreateMode,
     inputTitleChat,
     sendButton,
+    popup,
   }: MessagesPageProps) {
     super('main', {
       profileButton,
@@ -23,6 +24,7 @@ class MessagesPageComponent extends Block {
       isCreateMode,
       inputTitleChat,
       sendButton,
+      popup,
     }, { attributes: { class: className } });
   }
 

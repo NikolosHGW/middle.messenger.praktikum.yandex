@@ -12,6 +12,8 @@ import { Input } from '../../shared/ui/Input';
 import { ChatController } from '../../shared/api/controllers/ChatController';
 import { AuthController } from '../../shared/api/controllers/AuthController';
 import { StoreEvents } from '../../shared/lib/Store/utils';
+import { Popup } from '../../shared/ui/Popup';
+import { Form } from '../../entities/Form';
 
 let titleChat = 'Новый чат';
 
@@ -28,6 +30,7 @@ const MessagesPage = () => {
       element.setAttribute('style', 'display: none');
     }
   });
+  const popup = Popup({ form: Form(), className: 'popup popup_add', events: {} });
 
   return new MessagesPageComponent({
     profileButton: TextButton({
@@ -73,6 +76,7 @@ const MessagesPage = () => {
     chatList: ChatList({}),
     messageWindow,
     className: 'messages',
+    popup,
   });
 };
 
