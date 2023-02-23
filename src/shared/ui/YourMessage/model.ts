@@ -3,7 +3,7 @@ import { YourMessageComponent } from './YourMessageComponent';
 const YourMessage = ({
   text = 'Круто!',
   className = 'your-message',
-  time = '11:56',
+  time = new Date(),
 } = {}) => new YourMessageComponent({
   text, className, time,
 });

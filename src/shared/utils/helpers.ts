@@ -1,7 +1,7 @@
 import { router } from '../lib/Router';
 import { InputType } from '../lib/Validation/types';
 import { Validation } from '../lib/Validation/Validation';
-import { PlainObject } from './types/types';
+import { PlainObject, SortCbType } from './types/types';
 
 export const getInputTarget = (target: EventTarget | null) => (target as HTMLInputElement);
 
@@ -114,3 +114,5 @@ export const debounce = (func: (...args: unknown[]) => void, timeout = 1000) => 
     timer = setTimeout(() => { func.apply(this, args); }, timeout);
   };
 };
+
+export const sortCb: SortCbType = (a, b) => +new Date(a.time) - +new Date(b.time);

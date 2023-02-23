@@ -2,7 +2,7 @@ import { TextButton } from '../../shared/ui/TextButton';
 import { MessagesPageComponent } from './MessagesPageComponent';
 import { ChatList } from '../../features/ChatList';
 import { MessageWindow } from '../../features/MessageWindow';
-import { getInputTarget, linkTo } from '../../shared/utils/helpers';
+import { getInputTarget, linkTo, sortCb } from '../../shared/utils/helpers';
 import { PROFILE_URL, RESOURCE_URL } from '../../shared/utils/constants';
 import { Button } from '../../shared/ui/Button';
 import { store } from '../../shared/lib/Store';
@@ -33,16 +33,22 @@ const withMessageWindow = functionConnect(
     const theirMessages = Array.isArray(state.theirMessages) ? [...state.theirMessages] : [];
     const ownMessages = Array.isArray(state.ownMessages) ? [...state.ownMessages] : [];
 
-    const theirMessagesComponents = theirMessages.map(({ content, time }) => {
-      const formatedTime = new Date(time).toTimeString().split(' ')[0].substring(0, 5);
-      return TheirMessage({ text: content, time: formatedTime, className: 'their-message message-window__their-message' });
-    });
-    const ownMessagesComponents = ownMessages.map(({ content, time }) => {
-      const formatedTime = new Date(time).toTimeString().split(' ')[0].substring(0, 5);
-      return YourMessage({ text: content, time: formatedTime, className: 'your-message message-window__your-message' });
-    });
+    const theirMessagesComponents = theirMessages.map(
+      ({ content, time }) => TheirMessage({
+        text: content,
+        time: new Date(time),
+        className: 'their-message message-window__their-message',
+      }),
+    );
+    const ownMessagesComponents = ownMessages.map(
+      ({ content, time }) => YourMessage({
+        text: content,
+        time: new Date(time),
+        className: 'your-message message-window__your-message',
+      }),
+    );
 
-    return { messages: [...theirMessagesComponents, ...ownMessagesComponents] };
+    return { messages: [...theirMessagesComponents, ...ownMessagesComponents].sort(sortCb) };
   },
 );
 

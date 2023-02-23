@@ -1,3 +1,6 @@
+import { TheirMessageComponent } from '../../ui/TheirMessage/TheirMessageComponent';
+import { YourMessageComponent } from '../../ui/YourMessage/YourMessageComponent';
+
 export type FuncVoid = (...args: unknown[]) => void;
 export type EmptyFunc = () => void;
 export type EventsPropType = Record<string, FuncVoid>;
@@ -21,3 +24,7 @@ export type ChatType = {
   title: string
   unread_count: number
 }
+
+export type SortCbType = (
+  a: TheirMessageComponent | YourMessageComponent, b: TheirMessageComponent | YourMessageComponent
+) => number

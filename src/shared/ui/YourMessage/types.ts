@@ -1,4 +1,4 @@
-type TemplateProps = { text: string, time: string }
+type TemplateProps = { text: string, time: Date }
 
 export type TemplateType = (props: TemplateProps) => string;
 

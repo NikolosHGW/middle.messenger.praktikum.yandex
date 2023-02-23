@@ -5,8 +5,13 @@ import ui from './ui.hbs';
 const yourMessageTemplate = (props: TemplateType) => ui(props);
 
 class YourMessageComponent extends Block {
+  time: Date;
+
   constructor({ text, time, className }: YourMessageProps) {
-    super('p', { text, time }, { attributes: { class: className } });
+    const formatedTime = time.toTimeString().split(' ')[0].substring(0, 5);
+
+    super('p', { text, time: formatedTime }, { attributes: { class: className } });
+    this.time = time;
   }
 
   customRender() {

@@ -49,6 +49,15 @@ const addNewSocketToStore = (userId: number, chatId: number, token: string) => {
       }, { ownMessages: [], theirMessages: [] });
       store.set('theirMessages', theirMessages);
       store.set('ownMessages', ownMessages);
+    } else if (parsedData.type === 'message') {
+      const isOwn = parsedData.user_id === user.id;
+      if (isOwn) {
+        const { ownMessages } = store.getState();
+        store.set('ownMessages', [...ownMessages, parsedData]);
+      } else {
+        const { theirMessages } = store.getState();
+        store.set('theirMessages', [...theirMessages, parsedData]);
+      }
     }
   });
 
