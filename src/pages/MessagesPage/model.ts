@@ -3,7 +3,7 @@ import { MessagesPageComponent } from './MessagesPageComponent';
 import { ChatList } from '../../features/ChatList';
 import { MessageWindow } from '../../features/MessageWindow';
 import { getInputTarget, linkTo } from '../../shared/utils/helpers';
-import { PROFILE_URL } from '../../shared/utils/constants';
+import { PROFILE_URL, RESOURCE_URL } from '../../shared/utils/constants';
 import { Button } from '../../shared/ui/Button';
 import { store } from '../../shared/lib/Store';
 import { functionConnect } from '../../shared/lib/functionConnect';
@@ -14,13 +14,67 @@ import { AuthController } from '../../shared/api/controllers/AuthController';
 import { StoreEvents } from '../../shared/lib/Store/utils';
 import { Popup } from '../../shared/ui/Popup';
 import { Form } from '../../entities/Form';
+import { EventBus } from '../../shared/lib/EventBus';
+import { Avatar } from '../../shared/ui/Avatar';
+import { MessageHeader } from '../../entities/MessageHeader';
 
 let titleChat = 'Новый чат';
+
+let needHide = true;
+const eventBus = new EventBus();
+
+const withMessageHeader = functionConnect(
+  (state: PlainObject) => ({
+    avatar: Avatar({
+      className: 'personal-image message-header__personal-image',
+      withButton: false,
+      img: state.currentChat?.avatar ? `${RESOURCE_URL}${state.currentChat?.avatar}` : undefined,
+    }),
+    name: state.currentChat?.title,
+  }),
+);
 
 const MessagesPage = () => {
   ChatController.getChats();
   AuthController.getUser();
-  const messageWindow = MessageWindow();
+
+  const popup = Popup({
+    form: Form({
+      className: 'popup__form-container',
+      headingClassName: 'popup__form-container__heading',
+      inputs: [Input()],
+      buttons: [Button({ text: 'Добавить', classButton: 'button popup__button' })],
+      title: 'Добавить пользователя',
+    }),
+    className: 'popup popup_add',
+    events: {},
+  });
+
+  const messageHeader = withMessageHeader(MessageHeader)({
+    addUserButton: Button({
+      text: 'Добавить пользователя',
+      ariaLabel: '',
+      classButton: 'add-user',
+      events: {
+        click: () => {
+          popup.open();
+        },
+      },
+    }),
+    menuButton: Button({
+      text: '',
+      ariaLabel: 'menu',
+      classButton: 'menu',
+      events: {
+        click: () => {
+          needHide = !needHide;
+          eventBus.emit('needHide');
+        },
+      },
+    }),
+  });
+  const messageWindow = MessageWindow({ header: messageHeader });
+
   store.on(StoreEvents.Updated, () => {
     const { currentChat } = store.getState();
     const element = messageWindow.getContent();
@@ -30,48 +84,57 @@ const MessagesPage = () => {
       element.setAttribute('style', 'display: none');
     }
   });
-  const popup = Popup({ form: Form(), className: 'popup popup_add', events: {} });
+
+  eventBus.on('needHide', () => messageHeader.setProps({ needHide }));
+
+  const profileButton = TextButton({
+    text: 'Профиль',
+    className: 'text-button text-button_color_gray messages_text-button',
+    events: {
+      click: linkTo(PROFILE_URL),
+    },
+  });
+
+  const createButton = Button({
+    classButton: 'create',
+    text: '+',
+    events: {
+      click: (evt: Event) => {
+        const buttonTarget = (evt.target as HTMLButtonElement);
+        if (buttonTarget.textContent?.trim() === '+') {
+          store.set('chatList.isCreateMode', true);
+          buttonTarget.textContent = 'x';
+        } else {
+          store.set('chatList.isCreateMode', false);
+          buttonTarget.textContent = '+';
+        }
+      },
+    },
+  });
+
+  const inputTitleChat = Input({
+    placeholder: 'Название чата',
+    events: {
+      input: (evt: Event) => {
+        titleChat = getInputTarget(evt.target).value;
+      },
+    },
+  });
+
+  const sendButton = Button({
+    text: 'Создать',
+    events: {
+      click: () => {
+        ChatController.createChat(titleChat);
+      },
+    },
+  });
 
   return new MessagesPageComponent({
-    profileButton: TextButton({
-      text: 'Профиль',
-      className: 'text-button text-button_color_gray messages_text-button',
-      events: {
-        click: linkTo(PROFILE_URL),
-      },
-    }),
-    createButton: Button({
-      classButton: 'create',
-      text: '+',
-      events: {
-        click: (evt: Event) => {
-          const buttonTarget = (evt.target as HTMLButtonElement);
-          if (buttonTarget.textContent?.trim() === '+') {
-            store.set('chatList.isCreateMode', true);
-            buttonTarget.textContent = 'x';
-          } else {
-            store.set('chatList.isCreateMode', false);
-            buttonTarget.textContent = '+';
-          }
-        },
-      },
-    }),
-    inputTitleChat: Input({
-      placeholder: 'Название чата',
-      events: {
-        input: (evt: Event) => {
-          titleChat = getInputTarget(evt.target).value;
-        },
-      },
-    }),
-    sendButton: Button({
-      text: 'Создать',
-      events: {
-        click: () => {
-          ChatController.createChat(titleChat);
-        },
-      },
-    }),
+    profileButton,
+    createButton,
+    inputTitleChat,
+    sendButton,
     isCreateMode: false,
     chatList: ChatList({}),
     messageWindow,

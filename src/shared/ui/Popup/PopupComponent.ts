@@ -23,14 +23,14 @@ class PopupComponent extends Block {
 
   open() {
     this.getContent().classList.add('popup_opened');
-    document.addEventListener('keydown', this.handleEscClose);
-    this.getContent().addEventListener('click', this.closeEvent);
+    document.addEventListener('keydown', this.handleEscClose.bind(this));
+    this.getContent().addEventListener('click', this.closeEvent.bind(this));
   }
 
   close() {
     this.getContent().classList.remove('popup_opened');
-    document.removeEventListener('keydown', this.handleEscClose);
-    this.getContent().removeEventListener('click', this.closeEvent);
+    document.removeEventListener('keydown', this.handleEscClose.bind(this));
+    this.getContent().removeEventListener('click', this.closeEvent.bind(this));
   }
 
   customRender() {

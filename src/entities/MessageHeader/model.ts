@@ -11,9 +11,6 @@ const MessageHeader = ({
     text: 'Добавить пользователя',
     ariaLabel: '',
     classButton: 'add-user',
-    events: {
-      click: () => {},
-    },
   }),
   deleteUserButton = Button({ text: 'Удалить пользователя', ariaLabel: '', classButton: 'delete-user' }),
   needHide = true,
