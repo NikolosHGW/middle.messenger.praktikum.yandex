@@ -5,10 +5,10 @@ const SOCKET_URL = 'wss://ya-praktikum.tech/ws/chats';
 const addNewSocketToStore = (userId: number, chatId: number, token: string) => {
   const socket = new WebSocket(`${SOCKET_URL}/${userId}/${chatId}/${token}`);
 
-  const timerId = setInterval(() => socket.send(JSON.stringify({
-    content: '',
-    type: 'message',
-  })), 6000);
+  // const timerId = setInterval(() => socket.send(JSON.stringify({
+  //   content: '',
+  //   type: 'message',
+  // })), 6000);
 
   socket.addEventListener('open', () => {
     console.log('Соединение установлено');
@@ -29,7 +29,7 @@ const addNewSocketToStore = (userId: number, chatId: number, token: string) => {
     } else {
       console.log('Обрыв соединения');
     }
-    clearInterval(timerId);
+    // clearInterval(timerId);
 
     console.log(`Код: ${event.code} | Причина: ${event.reason}`);
   });

@@ -13,6 +13,12 @@ class ChatUsersAPI {
 
     return parseXMLRequest(result);
   }
+
+  static async delete(users: number[], chatId: number) {
+    const result = await chatApiInstance.delete('/users', { data: { users, chatId } }) as XMLHttpRequest;
+
+    return parseXMLRequest(result);
+  }
 }
 
 export { ChatUsersAPI };

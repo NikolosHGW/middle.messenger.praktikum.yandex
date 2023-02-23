@@ -37,43 +37,49 @@ const withMessageHeader = functionConnect(
   }),
 );
 
+const getAsyncListenerPopupButton = async (evt: Event) => {
+  const text = (evt.target as HTMLButtonElement).textContent;
+  await UserController.searchUser({ login: searchLogin });
+  const { searchedUsers } = store.getState();
+  const { currentChat } = store.getState();
+  if (searchedUsers.length > 0 && currentChat) {
+    if (text?.trim() === 'Удалить') {
+      ChatUsersController.deleteUsersFromChat([searchedUsers[0].id], currentChat.id);
+    } else {
+      ChatUsersController.addUsersToChat([searchedUsers[0].id], currentChat.id);
+    }
+    (evt.target as HTMLButtonElement).closest('.popup')?.dispatchEvent(new Event('click'));
+    ChatUsersController.getUsers(currentChat.id);
+  }
+};
+
 const MessagesPage = () => {
   ChatController.getChats();
   AuthController.getUser();
 
+  const popupButton = Button({
+    text: 'Добавить',
+    classButton: 'button popup__button',
+  });
+
+  const popupForm = Form({
+    className: 'popup__form-container',
+    headingClassName: 'popup__form-container__heading',
+    inputs: [
+      Input({
+        events: {
+          input: (evt: Event) => {
+            searchLogin = getInputTarget(evt.target).value;
+          },
+        },
+      }),
+    ],
+    buttons: [popupButton],
+    title: 'Добавить пользователя',
+  });
+
   const popup = Popup({
-    form: Form({
-      className: 'popup__form-container',
-      headingClassName: 'popup__form-container__heading',
-      inputs: [
-        Input({
-          events: {
-            input: (evt: Event) => {
-              searchLogin = getInputTarget(evt.target).value;
-            },
-          },
-        }),
-      ],
-      buttons: [
-        Button({
-          text: 'Добавить',
-          classButton: 'button popup__button',
-          events: {
-            click: async (evt: Event) => {
-              await UserController.searchUser({ login: searchLogin });
-              const { searchedUsers } = store.getState();
-              const { currentChat } = store.getState();
-              if (searchedUsers.length > 0 && currentChat) {
-                ChatUsersController.addUsersToChat([searchedUsers[0].id], currentChat.id);
-                (evt.target as HTMLButtonElement).closest('.popup')?.dispatchEvent(new Event('click'));
-                ChatUsersController.getUsers(currentChat.id);
-              }
-            },
-          },
-        }),
-      ],
-      title: 'Добавить пользователя',
-    }),
+    form: popupForm,
     className: 'popup popup_add',
     events: {},
   });
@@ -85,6 +91,22 @@ const MessagesPage = () => {
       classButton: 'add-user',
       events: {
         click: () => {
+          popupButton.getContent().removeEventListener('click', getAsyncListenerPopupButton);
+          popupForm.setProps({ title: 'Добавить пользователя' });
+          popupButton.setProps({ text: 'Добавить', events: { click: getAsyncListenerPopupButton } });
+          popup.open();
+        },
+      },
+    }),
+    deleteUserButton: Button({
+      text: 'Удалить пользователя',
+      ariaLabel: '',
+      classButton: 'delete-user',
+      events: {
+        click: () => {
+          popupButton.getContent().removeEventListener('click', getAsyncListenerPopupButton);
+          popupForm.setProps({ title: 'Удалить пользователя' });
+          popupButton.setProps({ text: 'Удалить', events: { click: getAsyncListenerPopupButton } });
           popup.open();
         },
       },

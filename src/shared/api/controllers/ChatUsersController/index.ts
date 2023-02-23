@@ -15,6 +15,11 @@ class ChatUsersController {
   public static async addUsersToChat(userIds: number[], chatId: number) {
     await ChatUsersAPI.update(userIds, chatId);
   }
+
+  @handleError
+  public static async deleteUsersFromChat(userIds: number[], chatId: number) {
+    await ChatUsersAPI.delete(userIds, chatId);
+  }
 }
 
 export { ChatUsersController };
