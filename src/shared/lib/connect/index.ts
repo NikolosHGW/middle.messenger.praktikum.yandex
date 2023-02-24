@@ -4,7 +4,7 @@ import { Component } from '../Block/types';
 import { store } from '../Store';
 import { StoreEvents } from '../Store/utils';
 
-const connect = (
+export const connect = (
   mapStateToProps: (state: PlainObject) => PlainObject,
 ) => (Block: new (...args: unknown[]) => Component) => class <Props> extends Block {
   constructor(props: Props) {
@@ -22,5 +22,3 @@ const connect = (
     });
   }
 };
-
-export { connect };
