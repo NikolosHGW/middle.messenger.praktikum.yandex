@@ -23,7 +23,6 @@ import { AuthController } from '../../shared/api/controllers/AuthController';
 import { store } from '../../shared/lib/Store';
 import { UserData } from '../../shared/utils/types/types';
 import { UserController } from '../../shared/api/controllers/UserController';
-import { StoreEvents } from '../../shared/lib/Store/utils';
 import { withAvatar } from '../../shared/utils/connectors';
 import avatarDefault from '../../shared/images/avatar.min.svg';
 
@@ -37,21 +36,6 @@ const resultForm = {
 };
 
 let avatar = '';
-
-const addListenerForResultForm = () => {
-  store.on(StoreEvents.Updated, () => {
-    const userData = store.getState().user;
-
-    resultForm.email = userData?.email ?? '';
-    resultForm.login = userData?.login ?? '';
-    resultForm.first_name = userData?.first_name ?? '';
-    resultForm.second_name = userData?.second_name ?? '';
-    resultForm.display_name = userData?.display_name ?? '';
-    resultForm.phone = userData?.phone ?? '';
-
-    avatar = userData?.avatar ? `${RESOURCE_URL}${userData.avatar}` : '';
-  });
-};
 
 const emailInput = (value = '') => withEmailInput(Input)({
   inputId: 'email-input',
@@ -194,7 +178,6 @@ const profileContainer = (
 });
 
 const EditProfilePage = () => {
-  addListenerForResultForm();
   const userDataFromStore = store.getState().user;
   if (userDataFromStore?.id) {
     delete userDataFromStore.id;
