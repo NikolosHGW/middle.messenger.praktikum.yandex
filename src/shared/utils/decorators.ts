@@ -10,13 +10,13 @@ export const handleError = <Target = unknown>(
     try {
       await originalMethod(...args);
     } catch (err) {
-      console.log(err, 'Привет Дривэ');
+      console.log(err);
     }
   };
 };
 
-export function protectRoute(
-  _target: any,
+export function protectRoute<Target = unknown>(
+  _target: Target,
   _key: string,
   descriptor: PropertyDescriptor,
 ) {
