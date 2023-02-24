@@ -3,8 +3,6 @@ import { Component } from '../Block/types';
 import { Route } from '../Route';
 
 class Router {
-  public static instance: Router;
-
   private currentRoute: Route<Component> | null;
 
   public routes: Record<string, Route<Component>>;
@@ -14,16 +12,10 @@ class Router {
   public rootQuery: string;
 
   constructor(rootQuery: string) {
-    if (Router.instance) {
-      return Router.instance;
-    }
-
     this.routes = {};
     this.history = window.history;
     this.currentRoute = null;
     this.rootQuery = rootQuery;
-
-    Router.instance = this;
   }
 
   use(pathname: string, block: () => Component) {
@@ -73,6 +65,4 @@ class Router {
   }
 }
 
-const router = new Router('#root');
-
-export { router };
+export const router = new Router('#root');
