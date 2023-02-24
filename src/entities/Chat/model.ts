@@ -1,5 +1,5 @@
 import { Avatar } from '../../shared/ui/Avatar';
-import { ChatComponent } from './ChatComponent';
+import { ChatComponentBuilder } from './ChatComponentBuilder';
 
 const Chat = ({
   avatar = Avatar({ className: 'personal-image chat__personal-image', withButton: false }),
@@ -10,15 +10,15 @@ const Chat = ({
   counter = '3',
   events = {},
   chatId = 0,
-} = {}) => new ChatComponent({
-  avatar,
-  title,
-  lastMessage,
-  time,
-  counter,
-  className,
-  events,
-  chatId,
-});
+} = {}) => new ChatComponentBuilder()
+  .setAvatar(avatar)
+  .setTitle(title)
+  .setLastMessage(lastMessage)
+  .setClassName(className)
+  .setTime(time)
+  .setCounter(counter)
+  .setEvents(events)
+  .setChatId(chatId)
+  .build();
 
 export { Chat };
