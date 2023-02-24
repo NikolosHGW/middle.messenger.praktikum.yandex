@@ -4,11 +4,11 @@ import { Component } from '../Block/types';
 import { store } from '../Store';
 import { StoreEvents } from '../Store/utils';
 
-function functionConnect(mapStateToProps: (state: PlainObject) => PlainObject) {
-  function withHOC<TComponent extends Component>(
+const functionConnect = (mapStateToProps: (state: PlainObject) => PlainObject) => {
+  const withHOC = <TComponent extends Component>(
     funcComponent: (props?: PlainObject) => TComponent,
-  ) {
-    function newFuncComponent(props?: PlainObject) {
+  ) => {
+    const newFuncComponent = (props?: PlainObject) => {
       let state = { ...props } as PlainObject;
 
       const objectComponent = funcComponent(props);
@@ -24,12 +24,12 @@ function functionConnect(mapStateToProps: (state: PlainObject) => PlainObject) {
       });
 
       return objectComponent;
-    }
+    };
 
     return newFuncComponent;
-  }
+  };
 
   return withHOC;
-}
+};
 
 export { functionConnect };
