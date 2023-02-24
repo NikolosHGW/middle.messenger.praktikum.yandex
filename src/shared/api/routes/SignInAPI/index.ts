@@ -10,8 +10,10 @@ class SignInAPI {
     return parseXMLRequest(result);
   }
 
-  static read() {
-    return authApiInstance.get('/user');
+  static async read() {
+    const result = await authApiInstance.get('/user') as XMLHttpRequest;
+
+    return parseXMLRequest(result);
   }
 }
 

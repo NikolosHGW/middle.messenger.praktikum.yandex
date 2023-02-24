@@ -1,7 +1,7 @@
 import { SignInAPI } from '../../routes/SignInAPI';
 import { LogoutAPI } from '../../routes/LogoutAPI';
 import { store } from '../../../lib/Store';
-import { linkTo, parseXMLRequest } from '../../../utils/helpers';
+import { linkTo } from '../../../utils/helpers';
 import { handleError } from '../../../utils/decorators';
 import { LOGIN_URL, MESSAGE_URL } from '../../../utils/constants';
 import { LoginData, SignupData } from '../../types';
@@ -10,9 +10,8 @@ import { SignupAPI } from '../../routes/SignupAPI';
 class AuthController {
   @handleError
   public static async getUser() {
-    SignInAPI.read()
-      .then(parseXMLRequest)
-      .then((data) => store.set('user', data));
+    const user = await SignInAPI.read();
+    store.set('user', user);
   }
 
   @handleError
@@ -31,7 +30,7 @@ class AuthController {
 
   @handleError
   public static async logout() {
-    LogoutAPI.create();
+    await LogoutAPI.create();
     localStorage.clear();
     linkTo(LOGIN_URL)();
   }
