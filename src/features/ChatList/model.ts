@@ -34,13 +34,10 @@ const withChats = functionConnect(
             }
             store.set('currentChat', { ...chat });
             await ChatUsersController.getUsers(chat.id);
-            const { currentChatUsers } = store.getState();
-            if (currentChatUsers?.length > 1) {
-              await ChatController.getToken(chat.id);
-              const { token } = store.getState();
-              const userId = store.getState().user?.id;
-              addNewSocketToStore(userId, chat.id, token);
-            }
+            await ChatController.getToken(chat.id);
+            const { token } = store.getState();
+            const userId = store.getState().user?.id;
+            addNewSocketToStore(userId, chat.id, token);
           },
         },
       })
