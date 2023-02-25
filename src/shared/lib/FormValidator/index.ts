@@ -104,7 +104,6 @@ class FormValidator {
   enableValidation() {
     this.initVariables();
     this.setEventListeners();
-    this.toggleButtonState();
   }
 }
 

@@ -89,6 +89,7 @@ const passwordInput = () => Input({
   inputId: 'password-input',
   placeholder: 'Пароль',
   inputName: 'password',
+  inputType: 'password',
   pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
@@ -101,6 +102,7 @@ const secondPassword = () => Input({
   inputId: 'second-password-input',
   placeholder: 'Пароль (ещё раз)',
   inputName: 'password',
+  inputType: 'password',
   pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
