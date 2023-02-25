@@ -17,14 +17,21 @@ import {
   PROFILE_URL,
 } from '../shared/utils/constants';
 import './index.scss';
+import { AuthController } from '../shared/api/controllers/AuthController';
 
-router
-  .use(LOGIN_URL, LoginPage)
-  .use(AUTH_URL, AuthPage)
-  .use(MESSAGE_URL, MessagesPage)
-  .use(PROFILE_URL, ProfilePage)
-  .use(EDIT_PROFILE_URL, EditProfilePage)
-  .use(EDIT_PASSWORD_URL, EditPasswordPage)
-  .use(NOT_FOUND_URL, () => ErrorPage({ title: '404', subtitle: 'Не туда попали' }))
-  .use(ERROR_URL, () => ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' }))
-  .start();
+const initApp = async () => {
+  await AuthController.getUser();
+
+  router
+    .use(LOGIN_URL, LoginPage)
+    .use(AUTH_URL, AuthPage)
+    .use(MESSAGE_URL, MessagesPage)
+    .use(PROFILE_URL, ProfilePage)
+    .use(EDIT_PROFILE_URL, EditProfilePage)
+    .use(EDIT_PASSWORD_URL, EditPasswordPage)
+    .use(NOT_FOUND_URL, () => ErrorPage({ title: '404', subtitle: 'Не туда попали' }))
+    .use(ERROR_URL, () => ErrorPage({ title: '500', subtitle: 'Мы уже фиксим' }))
+    .start();
+};
+
+initApp();

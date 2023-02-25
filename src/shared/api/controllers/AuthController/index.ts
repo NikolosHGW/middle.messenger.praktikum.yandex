@@ -17,21 +17,21 @@ class AuthController {
   @handleError
   public static async login(data: LoginData) {
     await SignInAPI.create(data);
-    localStorage.setItem('isLoggedIn', 'true');
+    await AuthController.getUser();
     linkTo(MESSAGE_URL)();
   }
 
   @handleError
   public static async signup(data: SignupData) {
     await SignupAPI.create(data);
-    localStorage.setItem('isLoggedIn', 'true');
+    await AuthController.getUser();
     linkTo(MESSAGE_URL)();
   }
 
   @handleError
   public static async logout() {
     await LogoutAPI.create();
-    localStorage.clear();
+    store.restState();
     linkTo(LOGIN_URL)();
   }
 }

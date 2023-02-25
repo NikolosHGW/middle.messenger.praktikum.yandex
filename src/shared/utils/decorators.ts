@@ -1,3 +1,4 @@
+import { store } from '../lib/Store';
 import { AUTH_URL, LOGIN_URL, MESSAGE_URL } from './constants';
 
 export const handleError = <Target = unknown>(
@@ -22,9 +23,9 @@ export function protectRoute<Target = unknown>(
 ) {
   const originalMethod = descriptor.value;
   descriptor.value = function newMethod(pathname: string) {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const { user } = store.getState();
     const isAuthPathname = [LOGIN_URL, AUTH_URL].includes(pathname);
-    if (isLoggedIn) {
+    if (user) {
       originalMethod.call(this, isAuthPathname ? MESSAGE_URL : pathname);
     } else {
       originalMethod.call(this, isAuthPathname ? pathname : LOGIN_URL);

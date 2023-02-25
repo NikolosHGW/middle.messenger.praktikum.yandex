@@ -18,6 +18,10 @@ class Store extends EventBus {
 
     this.emit(Store.EVENTS.UPDATED);
   }
+
+  public restState() {
+    this.state = {};
+  }
 }
 
 export const store = new Store();
