@@ -198,6 +198,7 @@ const MessagesPage = () => {
   });
 
   const sendButton = Button({
+    classButton: 'send-button',
     text: 'Создать',
     events: {
       click: () => {
