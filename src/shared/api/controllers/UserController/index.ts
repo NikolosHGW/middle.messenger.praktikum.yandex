@@ -1,27 +1,25 @@
 import { store } from '../../../lib/Store';
 import { handleError } from '../../../utils/decorators';
 import { UserData } from '../../../utils/types/types';
-import { EditAvatarAPI } from '../../routes/EditAvatarAPI';
-import { EditPasswordAPI } from '../../routes/EditPasswordAPI';
-import { EditProfileAPI } from '../../routes/EditProfileAPI';
+import { ProfileAPI } from '../../routes/ProfileAPI';
 import { SearchUserAPI } from '../../routes/SearchUserAPI';
 
 class UserController {
   @handleError
   public static async editUser(data: UserData) {
-    const newUserData = await EditProfileAPI.update(data);
+    const newUserData = await ProfileAPI.updateProfile(data);
 
     store.set('user', newUserData);
   }
 
   @handleError
   public static async editPassword(data: { oldPassword: string, newPassword: string }) {
-    await EditPasswordAPI.update(data);
+    await ProfileAPI.updatePassword(data);
   }
 
   @handleError
   public static async editAvatar(data: FormData) {
-    const newUserData = await EditAvatarAPI.update(data) as { avatar: string };
+    const newUserData = await ProfileAPI.updateAvatar(data) as { avatar: string };
 
     store.set('user.avatar', newUserData.avatar);
   }
