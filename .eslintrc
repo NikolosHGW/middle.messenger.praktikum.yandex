@@ -8,8 +8,11 @@
   },
   "rules": {
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "warn",
+    "no-constructor-return": "off",
     "no-use-before-define": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",

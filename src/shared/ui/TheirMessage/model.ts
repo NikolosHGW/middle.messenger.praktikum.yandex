@@ -12,7 +12,7 @@ const bigText = `Привет! Смотри, тут всплыл интерес�
 const TheirMessage = ({
   text = bigText,
   className = 'their-message',
-  time = '11:56',
+  time = new Date(),
 } = {}) => new TheirMessageComponent({
   text, className, time,
 });

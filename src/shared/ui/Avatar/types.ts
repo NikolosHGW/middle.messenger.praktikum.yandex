@@ -1,11 +1,13 @@
+import { EventsPropType } from '../../utils/types/types';
+
 export type AvatarAttributes = {
-  type: string,
   name: string,
   class: string,
-  'aria-label': string,
 }
 
 export type AvatarProps = {
-  text: string,
+  img: string,
+  events: EventsPropType,
+  withButton: boolean,
   attributes: AvatarAttributes
 }

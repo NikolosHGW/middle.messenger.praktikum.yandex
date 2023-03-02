@@ -12,11 +12,13 @@ class ChatComponent extends Block {
     className,
     time,
     counter,
+    events,
+    chatId,
   }: ChatProps) {
     super(
       'li',
       {
-        title, lastMessage, avatar, time, counter,
+        title, lastMessage, avatar, time, counter, events, chatId,
       },
       { attributes: { class: className } },
     );

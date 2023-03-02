@@ -5,6 +5,9 @@ type TemplateProps = {
   avatar: AvatarComponent;
   name: string;
   menuButton: ButtonComponent;
+  addUserButton: ButtonComponent;
+  deleteUserButton: ButtonComponent;
+  needHide: boolean,
 }
 
 export type TemplateType = (props: TemplateProps) => string

@@ -5,8 +5,8 @@ import ui from './ui.hbs';
 const searchInputTemplate = () => ui();
 
 class SearchInputComponent extends Block {
-  constructor({ className }: SearchInputProps) {
-    super('label', {}, { attributes: { class: className } });
+  constructor({ className, events }: SearchInputProps) {
+    super('label', { events }, { attributes: { class: className } });
   }
 
   customRender() {

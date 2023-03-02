@@ -6,6 +6,27 @@
   height: 100vh;
 }
 
+.messages__buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.create {
+  padding: 0;
+  outline: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+  background-color: var(--color-secondary-primary);
+  border-radius: 50%;
+  color: var(--color-white);
+  margin-left: 10px;
+}
+
 .messages__chats {
   max-width: 310px;
   width: 100%;
@@ -19,4 +40,43 @@
 .messages_text-button {
   align-self: flex-end;
   margin: 23px 10px 23px 0;
+}
+
+.messages__create-container {
+  margin: 10px 0;
+  display: none;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.empty {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-secondary-gray);
+  font-family: var(--font-family);
+}
+
+.send-button {
+  height: 37px;
+  min-width: 70px;
+  background-color: var(--color-secondary-primary);
+  color: var(--color-white);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  font-family: var(--font-family);
+  border: 0;
+  border-radius: 8px;
+  outline: 0;
+  padding: 0;
+  transition: opacity 0.4s linear;
+  margin-left: 5px;
+}
+
+.send-button:hover {
+  opacity: 0.5;
 }

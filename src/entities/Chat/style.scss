@@ -10,7 +10,24 @@
   padding: 12px 0;
 }
 
-.chat__avatar {
+.chat__button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgba($color: var(--color-secondary-primary), $alpha: 0%);
+  border: 0;
+  padding: 0;
+  outline: 0;
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+  font-family: var(--font-family);
+}
+
+.chat__button:hover {
+  opacity: 0.5;
+}
+
+.chat__personal-image {
   width: 47px;
   height: 47px;
 }

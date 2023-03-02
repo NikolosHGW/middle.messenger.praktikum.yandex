@@ -3,8 +3,9 @@ import { ProfileContainer } from '../../entities/ProfileContainer';
 import { Avatar } from '../../shared/ui/Avatar';
 import { Button } from '../../shared/ui/Button';
 import { EditPasswordPageComponent } from './EditPasswordPageComponent';
-import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
-import { Validation } from '../../shared/lib/Validation/Validation';
+import { getInputTarget } from '../../shared/utils/helpers';
+import { passwordRegex } from '../../shared/utils/constants';
+import { UserController } from '../../shared/api/controllers/UserController';
 
 const resultForm = {
   oldPassword: '',
@@ -21,12 +22,11 @@ const oldPasswordInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
       resultForm.oldPassword = getInputTarget(evt.target).value;
     },
-    focus: validate('old_password'),
-    blur: validate('old_password'),
   },
 });
 
@@ -39,12 +39,11 @@ const newPasswordInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
       resultForm.newPassword = getInputTarget(evt.target).value;
     },
-    focus: validate('new_password'),
-    blur: validate('new_password'),
   },
 });
 
@@ -57,12 +56,11 @@ const repeatPasswordInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
       resultForm.repeatNewPassword = getInputTarget(evt.target).value;
     },
-    focus: validate('repeat_password'),
-    blur: validate('repeat_password'),
   },
 });
 
@@ -81,8 +79,8 @@ const profileContainer = () => ProfileContainer({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      logObjectToConsole(resultForm);
-      Validation.handleSubmit(evt);
+      const { oldPassword, newPassword } = resultForm;
+      UserController.editPassword({ oldPassword, newPassword });
     },
   },
 });

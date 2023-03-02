@@ -3,17 +3,24 @@ import { AuthPageComponent } from './AuthPageComponent';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 import { TextButton } from '../../shared/ui/TextButton';
-import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
-import { Validation } from '../../shared/lib/Validation/Validation';
+import {
+  getInputTarget,
+  linkTo,
+} from '../../shared/utils/helpers';
+import {
+  emailRegex, loginRegexString, LOGIN_URL, nameRegex, passwordRegex, phoneRegex,
+} from '../../shared/utils/constants';
+import { FormValidator } from '../../shared/lib/FormValidator';
+import { AuthController } from '../../shared/api/controllers/AuthController';
 
 const resultForm = {
   email: '',
   login: '',
-  firstName: '',
-  secondName: '',
+  first_name: '',
+  second_name: '',
   phone: '',
   password: '',
-  secondPassword: '',
+  second_password: '',
 };
 
 const emailInput = () => Input({
@@ -21,12 +28,11 @@ const emailInput = () => Input({
   placeholder: 'Почта',
   inputName: 'email',
   inputType: 'email',
+  pattern: emailRegex.source,
   events: {
     change: (evt: Event) => {
       resultForm.email = getInputTarget(evt.target).value;
     },
-    focus: validate('email'),
-    blur: validate('email'),
   },
 });
 
@@ -34,12 +40,11 @@ const loginInput = () => Input({
   inputId: 'login-input',
   placeholder: 'Логин',
   inputName: 'login',
+  pattern: loginRegexString,
   events: {
     change: (evt: Event) => {
       resultForm.login = getInputTarget(evt.target).value;
     },
-    focus: validate('login'),
-    blur: validate('login'),
   },
 });
 
@@ -47,12 +52,11 @@ const nameInput = () => Input({
   inputId: 'name-input',
   placeholder: 'Имя',
   inputName: 'first_name',
+  pattern: nameRegex,
   events: {
     change: (evt: Event) => {
-      resultForm.firstName = getInputTarget(evt.target).value;
+      resultForm.first_name = getInputTarget(evt.target).value;
     },
-    focus: validate('first_name'),
-    blur: validate('first_name'),
   },
 });
 
@@ -60,12 +64,11 @@ const secondNameInput = () => Input({
   inputId: 'second-name-input',
   placeholder: 'Фамилия',
   inputName: 'second_name',
+  pattern: nameRegex,
   events: {
     change: (evt: Event) => {
-      resultForm.secondName = getInputTarget(evt.target).value;
+      resultForm.second_name = getInputTarget(evt.target).value;
     },
-    focus: validate('second_name'),
-    blur: validate('second_name'),
   },
 });
 
@@ -74,12 +77,11 @@ const phoneInput = () => Input({
   placeholder: 'Телефон',
   inputName: 'phone',
   inputType: 'phone',
+  pattern: phoneRegex.source,
   events: {
     change: (evt: Event) => {
       resultForm.phone = getInputTarget(evt.target).value;
     },
-    focus: validate('phone'),
-    blur: validate('phone'),
   },
 });
 
@@ -87,12 +89,12 @@ const passwordInput = () => Input({
   inputId: 'password-input',
   placeholder: 'Пароль',
   inputName: 'password',
+  inputType: 'password',
+  pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
       resultForm.password = getInputTarget(evt.target).value;
     },
-    focus: validate('password'),
-    blur: validate('password'),
   },
 });
 
@@ -100,12 +102,12 @@ const secondPassword = () => Input({
   inputId: 'second-password-input',
   placeholder: 'Пароль (ещё раз)',
   inputName: 'password',
+  inputType: 'password',
+  pattern: passwordRegex.source,
   events: {
     change: (evt: Event) => {
-      resultForm.secondPassword = getInputTarget(evt.target).value;
+      resultForm.second_password = getInputTarget(evt.target).value;
     },
-    focus: validate('password'),
-    blur: validate('password'),
   },
 });
 
@@ -114,7 +116,9 @@ const buttonLogin = () => Button({ text: 'Зарегистрироваться',
 const buttonAuthLink = () => TextButton({
   text: 'Войти',
   className: 'text-button form__text-button',
-  href: '/',
+  events: {
+    click: linkTo(LOGIN_URL),
+  },
 });
 
 const getInputs = () => [
@@ -127,19 +131,32 @@ const getInputs = () => [
   secondPassword(),
 ];
 
-const form = () => Form({
-  title: 'Регистрация',
-  formName: 'auth',
-  inputs: getInputs(),
-  buttons: [buttonLogin(), buttonAuthLink()],
-  events: {
-    submit: (evt: Event) => {
-      evt.preventDefault();
-      logObjectToConsole(resultForm);
-      Validation.handleSubmit(evt);
+const form = () => {
+  const formObject = Form({
+    title: 'Регистрация',
+    formName: 'auth',
+    inputs: getInputs(),
+    buttons: [buttonLogin(), buttonAuthLink()],
+    events: {
+      submit: (evt: Event) => {
+        evt.preventDefault();
+        AuthController.signup(resultForm);
+      },
     },
-  },
-});
+  });
+
+  const authFormValid = new FormValidator({
+    inputSelector: '.label__input',
+    submitButtonSelector: '.button',
+    inactiveButtonClass: 'button_disabled',
+    inputErrorClass: 'label__input_type_error',
+    errorClass: 'error-span_active',
+  }, formObject.getContent().querySelector('.form') as HTMLFormElement);
+
+  authFormValid.enableValidation();
+
+  return formObject;
+};
 
 const AuthPage = () => new AuthPageComponent({ Form: form() });
 

@@ -1,10 +1,10 @@
-import { ProfileContainerComponent } from '../../entities/ProfileContainer/ProfileContainerComponent';
+import { Component } from '../../shared/lib/Block/types';
 
 export type TemplateType = (
-  { ProfileContainer }: { ProfileContainer: ProfileContainerComponent }
+  { ProfileContainer }: { ProfileContainer: Component }
 ) => string;
 
 export type ProfilePagePropsType = {
   attributes?: Record<string, string>,
-  ProfileContainer: ProfileContainerComponent
+  ProfileContainer: Component
 }

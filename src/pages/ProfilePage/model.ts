@@ -3,8 +3,21 @@ import { TextButton } from '../../shared/ui/TextButton';
 import { ProfileContainer } from '../../entities/ProfileContainer';
 import { ProfilePageComponent } from './ProfilePageComponent';
 import { Avatar } from '../../shared/ui/Avatar';
+import { linkTo } from '../../shared/utils/helpers';
+import { EDIT_PASSWORD_URL, EDIT_PROFILE_URL } from '../../shared/utils/constants';
+import { AuthController } from '../../shared/api/controllers/AuthController';
+import {
+  withDisplayNameInput,
+  withEmailInput,
+  withFirstNameInput,
+  withLoginInput,
+  withPhoneInput,
+  withSecondNameInput,
+  withTitle,
+} from './connectors';
+import { withAvatar } from '../../shared/utils/connectors';
 
-const emailInput = () => Input({
+const emailInput = () => withEmailInput(Input)({
   inputId: 'email-input',
   placeholder: 'Почта',
   inputName: 'email',
@@ -13,9 +26,10 @@ const emailInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
-const loginInput = () => Input({
+const loginInput = () => withLoginInput(Input)({
   inputId: 'login-input',
   placeholder: 'Логин',
   inputName: 'login',
@@ -23,9 +37,10 @@ const loginInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
-const nameInput = () => Input({
+const nameInput = () => withFirstNameInput(Input)({
   inputId: 'name-input',
   placeholder: 'Имя',
   inputName: 'first_name',
@@ -33,9 +48,10 @@ const nameInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
-const secondNameInput = () => Input({
+const secondNameInput = () => withSecondNameInput(Input)({
   inputId: 'second-name-input',
   placeholder: 'Фамилия',
   inputName: 'second_name',
@@ -43,9 +59,10 @@ const secondNameInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
-const displayNameInput = () => Input({
+const displayNameInput = () => withDisplayNameInput(Input)({
   inputId: 'display-name-input',
   placeholder: 'Имя в чате',
   inputName: 'display_name',
@@ -54,9 +71,10 @@ const displayNameInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
-const phoneInput = () => Input({
+const phoneInput = () => withPhoneInput(Input)({
   inputId: 'phone-input',
   placeholder: 'Телефон',
   inputName: 'phone',
@@ -65,19 +83,28 @@ const phoneInput = () => Input({
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  disabled: true,
 });
 
 const editTextButton = () => TextButton({
-  text: 'Изменить Данные', href: 'edit',
+  text: 'Изменить Данные',
+  events: {
+    click: linkTo(EDIT_PROFILE_URL),
+  },
 });
 
 const editPasswordTextButton = () => TextButton({
-  text: 'Изменить пароль', href: 'password',
+  text: 'Изменить пароль',
+  events: {
+    click: linkTo(EDIT_PASSWORD_URL),
+  },
 });
 
 const exitPasswordTextButton = () => TextButton({
   text: 'Выйти',
-  href: 'messages',
+  events: {
+    click: () => AuthController.logout(),
+  },
   className: 'text-button form__text-button text-button_color_red',
 });
 
@@ -96,14 +123,17 @@ const getButtons = () => [
   exitPasswordTextButton(),
 ];
 
-const profileContainer = () => ProfileContainer({
-  avatar: Avatar(),
-  title: 'Иван',
+const profileContainer = () => withTitle(ProfileContainer)({
+  avatar: withAvatar(Avatar)({ className: 'personal-image personal-image_big-size' }),
+  title: '',
   formName: 'profile',
   inputs: getInputs(),
   buttons: getButtons(),
 });
 
-const ProfilePage = () => new ProfilePageComponent({ ProfileContainer: profileContainer() });
+const ProfilePage = () => {
+  AuthController.getUser();
+  return new ProfilePageComponent({ ProfileContainer: profileContainer() });
+};
 
 export { ProfilePage };

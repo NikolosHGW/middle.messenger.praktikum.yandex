@@ -3,149 +3,194 @@ import { ProfileContainer } from '../../entities/ProfileContainer';
 import { EditProfilePageComponent } from './EditProfilePageComponent';
 import { Avatar } from '../../shared/ui/Avatar';
 import { Button } from '../../shared/ui/Button';
-import { getInputTarget, logObjectToConsole, validate } from '../../shared/utils/helpers';
-import { Validation } from '../../shared/lib/Validation/Validation';
+import { getInputTarget } from '../../shared/utils/helpers';
+import {
+  emailRegex,
+  loginRegexString,
+  nameRegex,
+  phoneRegex,
+  RESOURCE_URL,
+} from '../../shared/utils/constants';
+import {
+  withDisplayNameInput,
+  withEmailInput,
+  withFirstNameInput,
+  withLoginInput,
+  withPhoneInput,
+  withSecondNameInput,
+} from './connectors';
+import { AuthController } from '../../shared/api/controllers/AuthController';
+import { store } from '../../shared/lib/Store';
+import { UserData } from '../../shared/utils/types/types';
+import { UserController } from '../../shared/api/controllers/UserController';
+import { withAvatar } from '../../shared/utils/connectors';
+import avatarDefault from '../../shared/images/avatar.min.svg';
 
 const resultForm = {
   email: '',
   login: '',
-  firstName: '',
-  secondName: '',
-  displayName: '',
+  first_name: '',
+  second_name: '',
+  display_name: '',
   phone: '',
 };
 
-const emailInput = () => Input({
+let avatar = '';
+
+const emailInput = (value = '') => withEmailInput(Input)({
   inputId: 'email-input',
-  placeholder: 'Почта',
+  placeholder: '',
   inputName: 'email',
   inputType: 'email',
   spanText: 'Почта',
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: emailRegex.source,
+  value,
   events: {
     change: (evt: Event) => {
       resultForm.email = getInputTarget(evt.target).value;
     },
-    focus: validate('email'),
-    blur: validate('email'),
   },
 });
 
-const loginInput = () => Input({
+const loginInput = (value = '') => withLoginInput(Input)({
   inputId: 'login-input',
-  placeholder: 'Логин',
+  placeholder: '',
   inputName: 'login',
   spanText: 'Логин',
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: loginRegexString,
+  value,
   events: {
     change: (evt: Event) => {
       resultForm.login = getInputTarget(evt.target).value;
     },
-    focus: validate('login'),
-    blur: validate('login'),
   },
 });
 
-const nameInput = () => Input({
+const nameInput = (value = '') => withFirstNameInput(Input)({
   inputId: 'name-input',
-  placeholder: 'Имя',
+  placeholder: '',
   inputName: 'first_name',
   spanText: 'Имя',
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: nameRegex,
+  value,
   events: {
     change: (evt: Event) => {
-      resultForm.firstName = getInputTarget(evt.target).value;
+      resultForm.first_name = getInputTarget(evt.target).value;
     },
-    focus: validate('first_name'),
-    blur: validate('first_name'),
   },
 });
 
-const secondNameInput = () => Input({
+const secondNameInput = (value = '') => withSecondNameInput(Input)({
   inputId: 'second-name-input',
-  placeholder: 'Фамилия',
+  placeholder: '',
   inputName: 'second_name',
   spanText: 'Фамилия',
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: nameRegex,
+  value,
   events: {
     change: (evt: Event) => {
-      resultForm.secondName = getInputTarget(evt.target).value;
+      resultForm.second_name = getInputTarget(evt.target).value;
     },
-    focus: validate('second_name'),
-    blur: validate('second_name'),
   },
 });
 
-const displayNameInput = () => Input({
+const displayNameInput = (value = '') => withDisplayNameInput(Input)({
   inputId: 'display-name-input',
-  placeholder: 'Имя в чате',
+  placeholder: '',
   inputName: 'display_name',
   inputType: 'text',
   spanText: 'Имя в чате',
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: nameRegex,
+  value,
   events: {
     change: (evt: Event) => {
-      resultForm.displayName = getInputTarget(evt.target).value;
+      resultForm.display_name = getInputTarget(evt.target).value;
     },
-    focus: validate('display_name'),
-    blur: validate('display_name'),
   },
 });
 
-const phoneInput = () => Input({
+const phoneInput = (value = '') => withPhoneInput(Input)({
   inputId: 'phone-input',
-  placeholder: 'Телефон',
+  placeholder: '',
   inputName: 'phone',
   inputType: 'phone',
   spanText: 'Телефон',
   withEditSpan: true,
   className: 'edit-label',
   inputClassName: 'edit-label__input',
+  pattern: phoneRegex.source,
+  value,
   events: {
     change: (evt: Event) => {
       resultForm.phone = getInputTarget(evt.target).value;
     },
-    focus: validate('phone'),
-    blur: validate('phone'),
   },
 });
 
-const getInputs = () => [
-  emailInput(),
-  loginInput(),
-  nameInput(),
-  secondNameInput(),
-  displayNameInput(),
-  phoneInput(),
+const getInputs = (data: UserData) => [
+  emailInput(data.email),
+  loginInput(data.login),
+  nameInput(data.first_name),
+  secondNameInput(data.second_name),
+  displayNameInput(data.display_name),
+  phoneInput(data.phone),
 ];
 
-const profileContainer = () => ProfileContainer({
-  avatar: Avatar(),
+const profileContainer = (
+  { userData, avatarImg }: { userData: UserData, avatarImg: string },
+) => ProfileContainer({
+  avatar: withAvatar(Avatar)({
+    className: 'personal-image personal-image_big-size',
+    img: avatarImg,
+    events: {
+      input: (evt: Event) => {
+        const form = new FormData();
+        form.append('avatar', getInputTarget(evt.target).files![0]);
+        UserController.editAvatar(form);
+      },
+    },
+  }),
   title: '',
   formName: 'profile',
-  inputs: getInputs(),
+  inputs: getInputs(userData),
   buttons: [Button({ text: 'Сохранить', buttonType: 'submit' })],
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      logObjectToConsole(resultForm);
-      Validation.handleSubmit(evt);
+      UserController.editUser(userData);
     },
   },
 });
 
-const EditProfilePage = () => new EditProfilePageComponent({
-  ProfileContainer: profileContainer(),
-});
+const EditProfilePage = () => {
+  const userDataFromStore = store.getState().user;
+  if (userDataFromStore?.id) {
+    delete userDataFromStore.id;
+    avatar = userDataFromStore.avatar ? `${RESOURCE_URL}${userDataFromStore.avatar}` : avatarDefault;
+    delete userDataFromStore.avatar;
+    Object.assign(resultForm, userDataFromStore);
+  } else {
+    AuthController.getUser();
+  }
+
+  return new EditProfilePageComponent({
+    ProfileContainer: profileContainer({ userData: resultForm, avatarImg: avatar }),
+  });
+};
 
 export { EditProfilePage };

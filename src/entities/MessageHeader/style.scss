@@ -1,9 +1,34 @@
+@use "../../shared/ui/mixins.scss";
+
+%extend-button {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  width: 180px;
+  background-color: rgba($color: var(--color-black), $alpha: 100%);
+  border: 0;
+  color: var(--color-black);
+  padding: 0 0 0 20px;
+
+  @include mixins.middle-font;
+
+  font-size: 13px;
+  border-radius: 8px;
+  outline: 0;
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+  font-family: var(--font-family);
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
 .message-header {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
-.message-header__avatar {
+.message-header__personal-image {
   width: 47px;
   height: 47px;
 }
@@ -25,15 +50,70 @@
 .menu {
   padding: 0;
   outline: none;
-  width: 3px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   border: 0;
+  border-radius: 50%;
   cursor: pointer;
-  transition: opacity 0.4s linear;
+  transition: background-color 0.4s linear;
   align-self: center;
   background-image: url("../../shared/images/dots.min.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba($color: var(--color-black), $alpha: 0%);
 }
 
 .menu:hover {
-  opacity: 0.7;
+  background-color: var(--color-some-third-gray);
+}
+
+.message-header__menu {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  position: absolute;
+  right: 0;
+  top: 70px;
+  padding: 0;
+  border-radius: 12px;
+  width: 210px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-header__menu_display_none {
+  display: none;
+}
+
+.message-header__ul {
+  margin: 0;
+  padding: 0;
+}
+
+.message-header__li {
+  list-style: none;
+}
+
+.message-header__li:first-of-type {
+  margin-bottom: 15px;
+}
+
+.add-user {
+  @extend %extend-button;
+
+  background-image: url("../../shared/images/plus.min.svg");
+}
+
+.add-user:hover {
+  opacity: 0.5;
+}
+
+.delete-user {
+  @extend %extend-button;
+
+  background-image: url("../../shared/images/delete.min.svg");
+}
+
+.delete-user:hover {
+  opacity: 0.5;
 }

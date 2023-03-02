@@ -7,11 +7,25 @@ const messagesPageTemplate: TemplateType = (props) => ui(props);
 class MessagesPageComponent extends Block {
   constructor({
     profileButton,
+    createButton,
     chatList,
     messageWindow,
     className,
+    isCreateMode,
+    inputTitleChat,
+    sendButton,
+    popup,
   }: MessagesPageProps) {
-    super('main', { profileButton, chatList, messageWindow }, { attributes: { class: className } });
+    super('main', {
+      profileButton,
+      chatList,
+      messageWindow,
+      createButton,
+      isCreateMode,
+      inputTitleChat,
+      sendButton,
+      popup,
+    }, { attributes: { class: className } });
   }
 
   customRender() {

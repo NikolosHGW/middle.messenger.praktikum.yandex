@@ -1,5 +1,16 @@
 <section class="messages__chats">
-  {{{profileButton}}}
+  <div class="messages__buttons-container">
+    {{{createButton}}}
+    {{{profileButton}}}
+  </div>
+  <div style="{{#if isCreateMode}}display:flex{{/if}}" class="messages__create-container">
+    {{{inputTitleChat}}}
+    {{{sendButton}}}
+  </div>
   {{{chatList}}}
 </section>
 {{{messageWindow}}}
+{{#if withoutCurrentChat}}
+  <section class="empty">Выберите чат чтобы отправить сообщение</section>
+{{/if}}
+{{{popup}}}

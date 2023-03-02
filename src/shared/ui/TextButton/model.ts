@@ -3,9 +3,17 @@ import { TextButtonComponent } from './TextButtonComponent';
 const TextButton = ({
   text = 'Нет аккаунта?',
   className = 'text-button form__text-button',
-  href = '',
+  buttonType = 'button',
+  ariaLabel = 'link',
+  events = {},
 } = {}) => new TextButtonComponent({
-  text, attributes: { class: className, href },
+  text,
+  events,
+  attributes: {
+    class: className,
+    'aria-label': ariaLabel,
+    type: buttonType,
+  },
 });
 
 export { TextButton };

@@ -19,6 +19,11 @@
   font-family: var(--font-family);
 }
 
+.button_disabled {
+  background-color: var(--color-secondary-gray);
+  opacity: 0.3;
+}
+
 .button:hover {
   opacity: 0.5;
 }
