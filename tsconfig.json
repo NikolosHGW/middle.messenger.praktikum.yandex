@@ -1,6 +1,12 @@
 {
+  "include": [
+    "src",
+    "hbs.d.ts"
+  ],
   "compilerOptions": {
     "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
     "lib": ["esnext", "dom"],
     "noImplicitAny": true,
     "noUnusedLocals": true,
@@ -8,5 +14,6 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "experimentalDecorators": true
-  }
+  },
+  "files": ["src/app/index.ts"]
 }

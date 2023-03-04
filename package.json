@@ -1,13 +1,16 @@
 {
-  "name": "middle.messenger.praktikum.yandex",
+  "name": "my-webpack-project",
   "version": "1.0.0",
-  "description": "---",
+  "description": "My webpack project",
   "source": "src/index.html",
   "scripts": {
-    "dev": "parcel src/index.html --no-cache",
-    "build": "parcel build src/index.html",
     "start": "npm run build && node server.js",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -21,18 +24,32 @@
   },
   "homepage": "https://github.com/NikolosHGW/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "@parcel/transformer-sass": "2.8.2",
     "@types/uuid": "9.0.0",
     "@typescript-eslint/eslint-plugin": "5.48.2",
     "@typescript-eslint/parser": "5.48.2",
+    "ajv": "8.12.0",
+    "autoprefixer": "10.4.13",
+    "css-loader": "6.7.3",
     "eslint": "8.32.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-import": "2.27.5",
-    "parcel": "2.8.2",
-    "parcel-transformer-hbs": "1.0.4",
+    "handlebars": "4.7.7",
+    "handlebars-loader": "1.7.3",
+    "html-webpack-plugin": "5.5.0",
+    "mini-css-extract-plugin": "2.7.2",
+    "postcss": "8.4.21",
+    "postcss-loader": "7.0.2",
+    "prettier": "2.8.4",
+    "sass": "1.58.3",
+    "sass-loader": "13.2.0",
+    "style-loader": "3.3.1",
     "stylelint": "14.16.1",
     "stylelint-config-standard-scss": "6.1.0",
-    "typescript": "4.9.4"
+    "ts-loader": "9.4.2",
+    "typescript": "4.9.4",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1",
+    "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
     "express": "4.18.2",

@@ -100,7 +100,7 @@ export const parseXMLRequest = (result: XMLHttpRequest) => new Promise<unknown>(
 );
 
 export const debounce = (func: (...args: unknown[]) => void, timeout = 1000) => {
-  let timer: number;
+  let timer: ReturnType<typeof setTimeout>;
   return (...args: unknown[]) => {
     clearTimeout(timer);
     timer = setTimeout(() => { func.apply(this, args); }, timeout);
