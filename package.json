@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "My webpack project",
   "source": "src/index.html",
-  "type": "module",
   "scripts": {
     "start": "npm run build && node server.js",
     "lint": "npx eslint .",
@@ -13,7 +12,7 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "prepare": "husky install",
-    "test": "./node_modules/.bin/mocha"
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --require ts-node/register --require ./mochaSetup.js src/**/*.test.ts"
   },
   "repository": {
     "type": "git",
