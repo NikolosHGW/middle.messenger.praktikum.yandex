@@ -4,7 +4,11 @@
   "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+    "globalThis": false
   },
   "rules": {
     "no-unused-vars": "off",
@@ -25,7 +29,8 @@
       }
    ],
    "no-param-reassign": [2, { "props": false }],
-   "class-methods-use-this": ["off"]
+   "class-methods-use-this": ["off"],
+   "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
   },
   "settings": {
     "import/resolver": {
