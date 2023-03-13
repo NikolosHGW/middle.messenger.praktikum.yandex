@@ -137,6 +137,17 @@ const MessagesPage = () => {
         },
       },
     }),
+    deleteChatButton: Button({
+      text: 'Удалить чат',
+      ariaLabel: '',
+      classButton: 'delete-user',
+      events: {
+        click: () => {
+          const { currentChat } = store.getState();
+          ChatController.deleteChat(currentChat.id);
+        },
+      },
+    }),
     menuButton: Button({
       text: '',
       ariaLabel: 'menu',

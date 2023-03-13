@@ -22,6 +22,13 @@ class ChatController {
     const data = await TokenChatAPI.create(chatId) as { token: string };
     store.set('token', data.token);
   }
+
+  @handleError
+  public static async deleteChat(chatId: number) {
+    await ChatAPI.delete(chatId);
+    store.set('currentChat', null);
+    ChatController.getChats();
+  }
 }
 
 export { ChatController };
