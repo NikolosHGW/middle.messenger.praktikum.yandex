@@ -1,6 +1,8 @@
 import { router } from '../lib/Router';
 import { store } from '../lib/Store';
-import { AUTH_URL, LOGIN_URL, MESSAGE_URL } from './constants';
+import {
+  AUTH_URL, ERROR_URL, LOGIN_URL, MESSAGE_URL,
+} from './constants';
 
 export const handleError = <Target = unknown>(
   _target: Target,
@@ -12,7 +14,9 @@ export const handleError = <Target = unknown>(
     try {
       await originalMethod(...args);
     } catch (err) {
-      console.log(err);
+      if (!err.message.includes('Нет события:')) {
+        router.go(ERROR_URL);
+      }
     }
   };
 };
