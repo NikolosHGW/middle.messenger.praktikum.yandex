@@ -14,6 +14,7 @@ const MessageHeader = ({
   }),
   deleteUserButton = Button({ text: 'Удалить пользователя', ariaLabel: '', classButton: 'delete-user' }),
   needHide = true,
+  deleteChatButton = Button({ text: 'Удалить чат', ariaLabel: '', classButton: 'delete-user' }),
 } = {}) => new MessageHeaderComponent({
   avatar,
   name,
@@ -22,6 +23,7 @@ const MessageHeader = ({
   addUserButton,
   deleteUserButton,
   needHide,
+  deleteChatButton,
 });
 
 export { MessageHeader };

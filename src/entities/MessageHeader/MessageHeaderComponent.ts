@@ -13,11 +13,12 @@ class MessageHeaderComponent extends Block {
     addUserButton,
     deleteUserButton,
     needHide,
+    deleteChatButton,
   }: MessageFooterProps) {
     super(
       'header',
       {
-        avatar, name, menuButton, addUserButton, deleteUserButton, needHide,
+        avatar, name, menuButton, addUserButton, deleteUserButton, needHide, deleteChatButton,
       },
       { attributes: { class: className } },
     );

@@ -1,5 +1,8 @@
+import { router } from '../lib/Router';
 import { store } from '../lib/Store';
-import { AUTH_URL, LOGIN_URL, MESSAGE_URL } from './constants';
+import {
+  AUTH_URL, ERROR_URL, LOGIN_URL, MESSAGE_URL,
+} from './constants';
 
 export const handleError = <Target = unknown>(
   _target: Target,
@@ -11,7 +14,9 @@ export const handleError = <Target = unknown>(
     try {
       await originalMethod(...args);
     } catch (err) {
-      console.log(err);
+      if (!err.message.includes('Нет события:')) {
+        router.go(ERROR_URL);
+      }
     }
   };
 };
@@ -26,9 +31,15 @@ export function protectRoute<Target = unknown>(
     const { user } = store.getState();
     const isAuthPathname = [LOGIN_URL, AUTH_URL].includes(pathname);
     if (user) {
-      originalMethod.call(this, isAuthPathname ? MESSAGE_URL : pathname);
+      if (isAuthPathname) {
+        router.go(MESSAGE_URL);
+      } else {
+        originalMethod.call(this, pathname);
+      }
+    } else if (isAuthPathname) {
+      originalMethod.call(this, pathname);
     } else {
-      originalMethod.call(this, isAuthPathname ? pathname : LOGIN_URL);
+      router.go(LOGIN_URL);
     }
   };
 }

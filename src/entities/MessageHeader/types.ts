@@ -8,6 +8,7 @@ type TemplateProps = {
   addUserButton: ButtonComponent;
   deleteUserButton: ButtonComponent;
   needHide: boolean,
+  deleteChatButton: ButtonComponent;
 }
 
 export type TemplateType = (props: TemplateProps) => string

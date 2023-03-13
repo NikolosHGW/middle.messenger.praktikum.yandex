@@ -10,6 +10,7 @@
     "dist/*",
     "node_modules/*",
     "parcel-cache/*",
-    "src/app/styles/normalize.scss"
+    "src/app/styles/normalize.scss",
+    "Dockerfile"
   ]
 }
